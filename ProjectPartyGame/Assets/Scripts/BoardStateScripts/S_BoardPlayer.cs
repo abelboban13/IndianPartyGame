@@ -66,6 +66,11 @@ public class S_BoardPlayer : MonoBehaviour
         _currentSpace = S_BoardManager.Instance.startingSpace;
     }
 
+    private void IsTurn()
+    {
+        //all player turn options go here
+    }
+
     IEnumerator MoveToNextSpace(int spaces)
     {
         _isMove = true;

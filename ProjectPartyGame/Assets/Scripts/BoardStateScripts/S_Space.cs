@@ -8,7 +8,7 @@ public class S_Space : MonoBehaviour
 
     [SerializeField] protected int value;
 
-    [SerializeField] private S_Space nextSpace;
+    [SerializeField] private List<S_Space> _nextSpace = new List<S_Space>();
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +18,7 @@ public class S_Space : MonoBehaviour
             S_BoardManager.Instance.startingSpace = this;
         }
 
+        /*  for switching colors
         switch (_spaceType)
         {
             case SpaceType.Start:
@@ -32,7 +33,7 @@ public class S_Space : MonoBehaviour
                 //set color to green
                 break;
         }
-
+        */
     }
 
     // Update is called once per frame
@@ -45,7 +46,12 @@ public class S_Space : MonoBehaviour
     /// </summary>
     public virtual S_Space GiveNextSpace()
     {
-        return nextSpace;
+        if(_nextSpace.Count > 1)
+        {
+            return null;
+        }
+        else
+            return _nextSpace[0];
     }
 
 
@@ -71,6 +77,8 @@ public class S_Space : MonoBehaviour
 
         player.EndTurn();
     }
+
+    
 }
 
 public enum SpaceType
