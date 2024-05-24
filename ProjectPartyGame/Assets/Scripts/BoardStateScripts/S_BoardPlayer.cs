@@ -23,10 +23,10 @@ public class S_BoardPlayer : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
+    { 
+        if(_isTurn)
         {
-            RollDice();
+            IsTurn();
         }
     }
 
@@ -69,6 +69,10 @@ public class S_BoardPlayer : MonoBehaviour
     private void IsTurn()
     {
         //all player turn options go here
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            RollDice();
+        }
     }
 
     IEnumerator MoveToNextSpace(int spaces)
@@ -91,6 +95,12 @@ public class S_BoardPlayer : MonoBehaviour
         _currentSpace = targetSpace;
         _currentSpace.SpaceLandedOn(this);
         _isMove = false;
+        yield return null;
+    }
+
+    IEnumerator PlayerTurn()
+    {
+        //move all player input to this
         yield return null;
     }
 }

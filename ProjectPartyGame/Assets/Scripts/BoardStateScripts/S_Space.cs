@@ -79,6 +79,8 @@ public class S_Space : MonoBehaviour
     }
 
     
+
+    
 }
 
 public enum SpaceType
