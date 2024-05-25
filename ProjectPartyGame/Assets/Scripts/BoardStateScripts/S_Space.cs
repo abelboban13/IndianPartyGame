@@ -11,12 +11,20 @@ public class S_Space : MonoBehaviour
     [Tooltip("place the object you want to path to from a left input first")]
     [SerializeField] private S_Space[] _nextSpace = new S_Space[2];
 
+    private MeshRenderer _renderer;
+
     public int NextSpaceNum 
     {
         get
         {
             return _nextSpace.Length;
         }
+    }
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+        _renderer = GetComponent<MeshRenderer>();
     }
 
     // Start is called before the first frame update
@@ -48,7 +56,10 @@ public class S_Space : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(S_GameManager.Instance.GameType != S_GameManager.GameMode.Board)
+            _renderer.enabled = false;
+        else
+            _renderer.enabled = true;
     }
     /// <summary>
     /// returns the next connected space

@@ -6,7 +6,7 @@ public class S_BoardPlayer : MonoBehaviour
 {
     [SerializeField] private float _travelDelay = .5f; 
 
-    private S_Space _currentSpace;
+    public S_Space _currentSpace { get; private set; }
 
     private bool _isTurn = false;
 
@@ -16,10 +16,15 @@ public class S_BoardPlayer : MonoBehaviour
 
     private S_InputController _inputController;
 
+
+    private MeshRenderer _meshRenderer;
+
     private void Awake()
     {
         S_BoardManager.Instance._players.Add(this);
+        DontDestroyOnLoad(this);
         _inputController = GetComponent<S_InputController>();
+        _meshRenderer = GetComponent<MeshRenderer>();
     }
     // Start is called before the first frame update
     void Start()
@@ -75,11 +80,22 @@ public class S_BoardPlayer : MonoBehaviour
     private void IsTurn()
     {
         //all player turn options go here
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (_inputController.IsConfirm)
         {
             RollDice();
         }
     }
+
+    public void OnReloadBoard()
+    {
+        _meshRenderer.enabled = true;
+    }
+
+    public void OnUnloadBoard()
+    {
+        _meshRenderer.enabled = false;
+    }
+
 
     IEnumerator MoveToNextSpace(int spaces)
     {
@@ -116,9 +132,5 @@ public class S_BoardPlayer : MonoBehaviour
 
     
 
-    IEnumerator PlayerTurn()
-    {
-        //move all player input to this
-        yield return null;
-    }
+
 }

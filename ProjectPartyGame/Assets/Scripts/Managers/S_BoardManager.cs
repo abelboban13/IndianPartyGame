@@ -34,7 +34,6 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void TurnEnd()
@@ -59,9 +58,21 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         _players[0].StartTurn();
     }
 
+    public void UnloadBoard()
+    {
+        foreach(S_BoardPlayer player in _players)
+        {
+            player.OnUnloadBoard();
+        }
+    }
+
     public void LoadBoard()
     {
-        //will load the board at its previous state
+        foreach (S_BoardPlayer player in _players)
+        {
+            player.OnReloadBoard();
+        }
     }
+
 
 }

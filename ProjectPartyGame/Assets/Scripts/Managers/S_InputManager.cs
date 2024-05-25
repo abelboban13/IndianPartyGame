@@ -20,7 +20,7 @@ public class S_InputManager : S_Singleton<S_InputManager>
 
 
     private void OnEnable() => _actions.Enable();
-    private void OnDisable() => _actions.Disable();
+    //private void OnDisable() => _actions.Disable();
 
 
     /* not currently nessacary but might be later

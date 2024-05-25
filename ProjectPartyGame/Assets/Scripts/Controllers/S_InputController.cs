@@ -21,5 +21,9 @@ public class S_InputController : MonoBehaviour
     void Update()
     {
         MoveInput = S_InputManager.Move.ReadValue<Vector2>();
+
+        IsConfirm = S_InputManager.Confirm.triggered;
+
+        IsDeny = S_InputManager.Deny.triggered;
     }
 }
