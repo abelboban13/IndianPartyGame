@@ -8,7 +8,16 @@ public class S_Space : MonoBehaviour
 
     [SerializeField] protected int value;
 
-    [SerializeField] private List<S_Space> _nextSpace = new List<S_Space>();
+    [Tooltip("place the object you want to path to from a left input first")]
+    [SerializeField] private S_Space[] _nextSpace = new S_Space[2];
+
+    public int NextSpaceNum 
+    {
+        get
+        {
+            return _nextSpace.Length;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -44,14 +53,9 @@ public class S_Space : MonoBehaviour
     /// <summary>
     /// returns the next connected space
     /// </summary>
-    public virtual S_Space GiveNextSpace()
+    public virtual S_Space GiveNextSpace(S_BoardPlayer player, int direction = 0)
     {
-        if(_nextSpace.Count > 1)
-        {
-            return null;
-        }
-        else
-            return _nextSpace[0];
+        return _nextSpace[direction];    
     }
 
 

@@ -11,9 +11,15 @@ public class S_BoardPlayer : MonoBehaviour
     private bool _isTurn = false;
 
     private bool _isMove = false;
+
+    private S_Space targetSpace;
+
+    private S_InputController _inputController;
+
     private void Awake()
     {
         S_BoardManager.Instance._players.Add(this);
+        _inputController = GetComponent<S_InputController>();
     }
     // Start is called before the first frame update
     void Start()
@@ -79,10 +85,20 @@ public class S_BoardPlayer : MonoBehaviour
     {
         _isMove = true;
         //Debug.Log(_currentSpace.GiveNextSpace());
-        S_Space targetSpace = _currentSpace.GiveNextSpace();
+        targetSpace = _currentSpace.GiveNextSpace(this);
         for(int i = 0; i < spaces; i++)
         {
-            targetSpace = _currentSpace.GiveNextSpace();
+            if(_currentSpace.NextSpaceNum >= 2)
+            {
+                Debug.Log("awaiting player input");
+                yield return new WaitUntil(() => _inputController.MoveInput.x != 0);
+                targetSpace = _currentSpace.GiveNextSpace(this, _inputController.MoveInput.x > 0 ? 1 :0);
+            }
+            else
+            {
+                targetSpace = _currentSpace.GiveNextSpace(this);
+            }
+            
             while ((Mathf.Round(transform.position.x) != Mathf.Round(targetSpace.transform.position.x)) || (Mathf.Round(transform.position.z) != Mathf.Round(targetSpace.transform.position.z)))
             {
                 MovePlayer(targetSpace);
@@ -97,6 +113,8 @@ public class S_BoardPlayer : MonoBehaviour
         _isMove = false;
         yield return null;
     }
+
+    
 
     IEnumerator PlayerTurn()
     {
