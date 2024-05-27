@@ -13,12 +13,14 @@ public class S_GameManager : S_Singleton<S_GameManager>
         private set { _numberOfPlayers = value; }
     }
 
+    public GameObject currentMiniGame;
+
     public GameMode GameType { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
         numberOfPlayers = 4;
-        S_BoardManager.Instance.StartGame();
+       // S_BoardManager.Instance.StartGame();
     }
 
     // Update is called once per frame

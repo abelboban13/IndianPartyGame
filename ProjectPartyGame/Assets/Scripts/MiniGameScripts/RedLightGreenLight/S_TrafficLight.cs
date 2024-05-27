@@ -8,8 +8,14 @@ public class S_TrafficLight : MonoBehaviour
     [SerializeField] private Material _redMaterial;
     [SerializeField] private Material _greenMaterial;
     [SerializeField] private  S_MiniGame _miniGame;
+
+    [HideInInspector] public List<S_RedLightPlayer> _players;
     private bool _isActive = false;
 
+    private void Awake()
+    {
+        S_GameManager.Instance.currentMiniGame = this.gameObject;
+    }
 
     // Start is called before the first frame update
     void Start()
