@@ -498,7 +498,7 @@ GameObject:
   - component: {fileID: 1211144931}
   - component: {fileID: 1211144935}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: TrafficLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -718,7 +718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1674325757
 Transform:
   m_ObjectHideFlags: 0
@@ -752,7 +752,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1674325757}
+  - {fileID: 1211144934}
   - {fileID: 1380702195}
   - {fileID: 902820653}
   - {fileID: 812972011}
-  - {fileID: 1211144934}

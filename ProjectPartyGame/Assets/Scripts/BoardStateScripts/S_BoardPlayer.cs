@@ -29,7 +29,7 @@ public class S_BoardPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        S_BoardManager.Instance._players.Add(this);
     }
 
     // Update is called once per frame

@@ -9,7 +9,7 @@ public class S_RedLightPlayer : MonoBehaviour
     private S_InputController _input;
     private void Awake()
     {
-        S_GameManager.Instance.currentMiniGame.GetComponent<S_TrafficLight>()._players.Add(this);
+        //S_GameManager.Instance.currentMiniGame.GetComponent<S_TrafficLight>()._players.Add(this);
         _input = GetComponent<S_InputController>();
         _rb = GetComponent<Rigidbody>();
     }
@@ -18,6 +18,7 @@ public class S_RedLightPlayer : MonoBehaviour
     {
         //player._rb.velocity = new Vector2(input.MoveInput.x * player.settings.movementSpeed, player._rb.velocity.y);
         _rb.velocity = new Vector3(_input.MoveInput.x * _speed, 0, _input.MoveInput.y * _speed);
+
     }
 
     

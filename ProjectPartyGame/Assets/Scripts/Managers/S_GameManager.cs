@@ -20,7 +20,9 @@ public class S_GameManager : S_Singleton<S_GameManager>
     void Start()
     {
         numberOfPlayers = 4;
-       // S_BoardManager.Instance.StartGame();
+
+        if(GameType == GameMode.Board)
+            S_BoardManager.Instance.StartGame();
     }
 
     // Update is called once per frame
