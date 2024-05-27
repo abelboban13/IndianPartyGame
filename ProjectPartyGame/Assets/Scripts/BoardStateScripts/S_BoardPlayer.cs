@@ -35,7 +35,7 @@ public class S_BoardPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        if(_isTurn)
+        if(_isTurn && S_GameManager.Instance.GameType == S_GameManager.GameMode.Board)
         {
             IsTurn();
         }

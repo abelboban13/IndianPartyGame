@@ -88,6 +88,9 @@ public class S_Space : MonoBehaviour
             case SpaceType.Reward:
                 Debug.Log("get reward!");
                 break;
+            case SpaceType.Minigame:
+                S_GameManager.Instance.LoadMiniGame("SC_MiniGameGym");
+                break;
         }
 
         player.EndTurn();
@@ -103,5 +106,6 @@ public enum SpaceType
     Positive,
     Negative,
     Reward,
-    Start
+    Start,
+    Minigame
 }
