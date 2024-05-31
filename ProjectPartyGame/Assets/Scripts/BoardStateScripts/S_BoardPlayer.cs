@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class S_BoardPlayer : MonoBehaviour
 {
-    [SerializeField] private float _travelDelay = .5f; 
+    [SerializeField] private float _travelDelay = .5f;
+
+    [SerializeField] private float _speed = 5f;
 
     public S_Space _currentSpace { get; private set; }
 
@@ -66,7 +68,7 @@ public class S_BoardPlayer : MonoBehaviour
 
     public void MovePlayer(S_Space targetSpace)
     {
-        var step = 500f * Time.deltaTime; // calculate distance to move
+        var step = _speed * Time.deltaTime; // calculate distance to move
         transform.position = Vector3.MoveTowards(transform.position,new Vector3(targetSpace.transform.position.x , transform.position.y, targetSpace.transform.position.z), step);
        // transform.Translate(new Vector3(targetSpace.transform.position.x - transform.position.x, 0, targetSpace.transform.position.z - transform.position.z) * .5f);
     }
@@ -117,6 +119,7 @@ public class S_BoardPlayer : MonoBehaviour
             
             while ((Mathf.Round(transform.position.x) != Mathf.Round(targetSpace.transform.position.x)) || (Mathf.Round(transform.position.z) != Mathf.Round(targetSpace.transform.position.z)))
             {
+                yield return new WaitForFixedUpdate();
                 MovePlayer(targetSpace);
                 yield return new WaitForSeconds(.1f);
                 //Debug.Log(targetSpace);
