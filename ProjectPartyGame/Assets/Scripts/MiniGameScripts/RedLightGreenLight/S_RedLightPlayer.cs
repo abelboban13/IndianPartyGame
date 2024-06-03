@@ -9,7 +9,7 @@ public class S_RedLightPlayer : MonoBehaviour
     private S_InputController _input;
     private void Awake()
     {
-        //S_GameManager.Instance.currentMiniGame.GetComponent<S_TrafficLight>()._players.Add(this);
+       // S_GameManager.Instance.currentMiniGame.GetComponent<S_TrafficLight>()._players.Add(this);
         _input = GetComponent<S_InputController>();
         _rb = GetComponent<Rigidbody>();
     }
@@ -21,5 +21,9 @@ public class S_RedLightPlayer : MonoBehaviour
 
     }
 
+    public bool IsMoving()
+    {
+        return _input.MoveInput.magnitude != 0;
+    }
     
 }

@@ -587,7 +587,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.7, z: -19.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -604,10 +604,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a364912a7b02461418513f507772dcc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _redMaterial: {fileID: 0}
-  _greenMaterial: {fileID: 0}
+  _redMaterial: {fileID: 2100000, guid: e2e5b3bc63125344fa7f06200d031a27, type: 2}
+  _greenMaterial: {fileID: 2100000, guid: c965bdb7cb7e88a4fa382fada9f3d858, type: 2}
   _miniGame: {fileID: 0}
-  _players: []
+  _maxTime: 20
+  _players:
+  - {fileID: 902820649}
 --- !u!1 &1380702193
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,7 +720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1674325757
 Transform:
   m_ObjectHideFlags: 0
@@ -746,7 +748,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c029692aecd038242a86919030dd580e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMiniGame: {fileID: 1211144929}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
