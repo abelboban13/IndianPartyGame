@@ -6,16 +6,19 @@ using UnityEngine.InputSystem;
 public class S_InputManager : S_Singleton<S_InputManager>
 {
     private InputActionSystem _actions;
-
+    private PlayerInputManager playerInputManager;
 
     public static InputAction Move => Instance._actions.Player.Movement;
     public static InputAction Confirm => Instance._actions.Player.Confirm;
-    public static InputAction Deny => Instance._actions.Player.BackDeny;
+    public static InputAction Deny => Instance._actions.Player.Back;
+
+    public static InputAction Start => Instance._actions.Player.Start;
 
     protected override void OnAwake()
     {
        // Initialize();
         _actions = new InputActionSystem();
+        playerInputManager = GetComponent<PlayerInputManager>();
     }
 
 

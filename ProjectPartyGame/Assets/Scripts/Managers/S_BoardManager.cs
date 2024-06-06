@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class S_BoardManager : S_Singleton<S_BoardManager>
 {
     public S_Space startingSpace;
@@ -11,6 +11,8 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     public List<S_BoardPlayer> _players;
     private int _playerIndex = 0; // the player whos turn it is
+
+    private PlayerInputManager _playerInputManager;
     public float playerSpeed 
     { 
         get
@@ -23,12 +25,20 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         }
     }
 
+    public int coins { get; private set; }
+
     public S_GameEvent boardStartEvent;
+
+    [HideInInspector] public bool _joining = false;
+
+    private bool _playerJoinedEvent = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
-       // StartGame();
+        // StartGame();
+        _playerInputManager = GetComponent<PlayerInputManager>();
     }
 
     // Update is called once per frame
@@ -42,6 +52,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
             _playerIndex = 0;
         else
             _playerIndex++;
+        Debug.Log($"player {_playerIndex + 1}'s turn");
         _players[_playerIndex].StartTurn();    
     }
 
@@ -50,12 +61,12 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     /// </summary>
     public void StartGame()
     {
-        for(int i = 0; i < S_GameManager.Instance.numberOfPlayers; i++)
-        {
-            Instantiate(_player);
-        }
-        boardStartEvent.Raise();
-        _players[0].StartTurn();
+        _joining = true;    
+
+        _playerInputManager.EnableJoining();
+
+
+        StartCoroutine(PlayerJoin());
     }
 
     public void UnloadBoard()
@@ -72,6 +83,43 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         {
             player.OnReloadBoard();
         }
+    }
+
+
+    public void OnPlayerJoin()
+    {
+        _playerJoinedEvent = true;
+    }
+    IEnumerator PlayerJoin()
+    {
+        int playerNum = 1;
+        while (_joining)
+        {
+            if(playerNum > 4)
+                EndJoin();
+
+
+            Debug.Log($"player {playerNum} press Start(start on controller, enter on keyboard)");
+
+
+            yield return new WaitUntil(() => _playerJoinedEvent == true );
+            _playerJoinedEvent = false;
+            playerNum++;
+        }
+
+        S_GameManager.Instance.SetPlayers(_players.Count);
+        _playerInputManager.DisableJoining();
+        yield return null;
+    }
+
+    public void EndJoin()
+    {
+        _joining = false;
+        StopCoroutine(PlayerJoin());
+        S_GameManager.Instance.SetPlayers(_players.Count);
+        _playerInputManager.DisableJoining();
+        boardStartEvent.Raise();
+        _players[0].StartTurn();
     }
 
 

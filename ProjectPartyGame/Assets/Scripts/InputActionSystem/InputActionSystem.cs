@@ -37,7 +37,7 @@ public partial class @InputActionSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Back/Deny"",
+                    ""name"": ""Back"",
                     ""type"": ""Button"",
                     ""id"": ""d42ae922-fcd5-47ae-891b-1e7184efbbde"",
                     ""expectedControlType"": ""Button"",
@@ -53,13 +53,22 @@ public partial class @InputActionSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf3310ae-8ff5-4d7f-850a-5b9c8430c89b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""c070a099-de7f-4b96-8a1a-566b44c2d937"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -85,7 +94,7 @@ public partial class @InputActionSystem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Back/Deny"",
+                    ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -96,7 +105,7 @@ public partial class @InputActionSystem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Back/Deny"",
+                    ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -209,6 +218,28 @@ public partial class @InputActionSystem: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84d308de-406e-4a52-8b1f-e48eab052e29"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aacd4abb-a7dc-425b-834a-935272cf9bae"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -218,8 +249,9 @@ public partial class @InputActionSystem: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Confirm = m_Player.FindAction("Confirm", throwIfNotFound: true);
-        m_Player_BackDeny = m_Player.FindAction("Back/Deny", throwIfNotFound: true);
+        m_Player_Back = m_Player.FindAction("Back", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_Start = m_Player.FindAction("Start", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -282,15 +314,17 @@ public partial class @InputActionSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Confirm;
-    private readonly InputAction m_Player_BackDeny;
+    private readonly InputAction m_Player_Back;
     private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_Start;
     public struct PlayerActions
     {
         private @InputActionSystem m_Wrapper;
         public PlayerActions(@InputActionSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Confirm => m_Wrapper.m_Player_Confirm;
-        public InputAction @BackDeny => m_Wrapper.m_Player_BackDeny;
+        public InputAction @Back => m_Wrapper.m_Player_Back;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @Start => m_Wrapper.m_Player_Start;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -303,12 +337,15 @@ public partial class @InputActionSystem: IInputActionCollection2, IDisposable
             @Confirm.started += instance.OnConfirm;
             @Confirm.performed += instance.OnConfirm;
             @Confirm.canceled += instance.OnConfirm;
-            @BackDeny.started += instance.OnBackDeny;
-            @BackDeny.performed += instance.OnBackDeny;
-            @BackDeny.canceled += instance.OnBackDeny;
+            @Back.started += instance.OnBack;
+            @Back.performed += instance.OnBack;
+            @Back.canceled += instance.OnBack;
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Start.started += instance.OnStart;
+            @Start.performed += instance.OnStart;
+            @Start.canceled += instance.OnStart;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -316,12 +353,15 @@ public partial class @InputActionSystem: IInputActionCollection2, IDisposable
             @Confirm.started -= instance.OnConfirm;
             @Confirm.performed -= instance.OnConfirm;
             @Confirm.canceled -= instance.OnConfirm;
-            @BackDeny.started -= instance.OnBackDeny;
-            @BackDeny.performed -= instance.OnBackDeny;
-            @BackDeny.canceled -= instance.OnBackDeny;
+            @Back.started -= instance.OnBack;
+            @Back.performed -= instance.OnBack;
+            @Back.canceled -= instance.OnBack;
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Start.started -= instance.OnStart;
+            @Start.performed -= instance.OnStart;
+            @Start.canceled -= instance.OnStart;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -342,7 +382,8 @@ public partial class @InputActionSystem: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnConfirm(InputAction.CallbackContext context);
-        void OnBackDeny(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
     }
 }

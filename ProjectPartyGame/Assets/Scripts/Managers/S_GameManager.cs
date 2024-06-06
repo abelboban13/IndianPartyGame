@@ -54,6 +54,10 @@ public class S_GameManager : S_Singleton<S_GameManager>
         GameType = GameMode.Board;
     }
 
+    public void SetPlayers(int num)
+    {
+        numberOfPlayers = num;
+    }
 
     public enum GameMode
     {

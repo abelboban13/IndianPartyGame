@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class S_BoardPlayer : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class S_BoardPlayer : MonoBehaviour
     [SerializeField] private float _speed = 5f;
 
     public S_Space _currentSpace { get; private set; }
+
+    private PlayerInput _playerInput;
 
     private bool _isTurn = false;
 
@@ -31,15 +34,22 @@ public class S_BoardPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        S_BoardManager.Instance._players.Add(this);
+       
     }
 
     // Update is called once per frame
     void Update()
     { 
-        if(_isTurn && S_GameManager.Instance.GameType == S_GameManager.GameMode.Board)
+        if(_isTurn == true && S_GameManager.Instance.GameType == S_GameManager.GameMode.Board)
         {
             IsTurn();
+        }
+        if(S_BoardManager.Instance._joining == true)
+        {
+            if(_inputController.IsConfirm)
+            {
+                S_BoardManager.Instance.EndJoin();
+            }
         }
     }
 
@@ -97,6 +107,8 @@ public class S_BoardPlayer : MonoBehaviour
     {
         _meshRenderer.enabled = false;
     }
+
+    
 
 
     IEnumerator MoveToNextSpace(int spaces)
