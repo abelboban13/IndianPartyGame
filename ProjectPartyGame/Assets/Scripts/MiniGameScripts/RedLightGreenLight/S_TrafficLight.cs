@@ -43,7 +43,6 @@ public class S_TrafficLight : MonoBehaviour
                 }
             }
         }
-
         else
             _renderer.material = _greenMaterial;
 

@@ -53,7 +53,9 @@ public class S_BoardPlayer : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// rolls a "1d6" and moves the player that many spaces
+    /// </summary>
     private void RollDice()
     {
         if (_isTurn && !_isMove)
@@ -76,6 +78,11 @@ public class S_BoardPlayer : MonoBehaviour
         S_BoardManager.Instance.TurnEnd();
     }
 
+
+    /// <summary>
+    /// moves the player towards a space based on their speed
+    /// </summary>
+    /// <param name="targetSpace"></param>
     public void MovePlayer(S_Space targetSpace)
     {
         var step = _speed * Time.deltaTime; // calculate distance to move
@@ -83,12 +90,16 @@ public class S_BoardPlayer : MonoBehaviour
        // transform.Translate(new Vector3(targetSpace.transform.position.x - transform.position.x, 0, targetSpace.transform.position.z - transform.position.z) * .5f);
     }
 
+    /// <summary>
+    /// sets the players space and transform to the starting space
+    /// </summary>
     public void GameStart()
     {
         transform.position = new Vector3(S_BoardManager.Instance.startingSpace.transform.position.x, transform.position.y, S_BoardManager.Instance.startingSpace.transform.position.z);
         _currentSpace = S_BoardManager.Instance.startingSpace;
     }
 
+    //handles the players turn
     private void IsTurn()
     {
         //all player turn options go here
@@ -110,7 +121,7 @@ public class S_BoardPlayer : MonoBehaviour
 
     
 
-
+    //handles the player moving a number of spaces
     IEnumerator MoveToNextSpace(int spaces)
     {
         _isMove = true;
@@ -128,7 +139,7 @@ public class S_BoardPlayer : MonoBehaviour
             {
                 targetSpace = _currentSpace.GiveNextSpace(this);
             }
-            
+            //handles the actual movement of the player. rounded so that its not trying to get to an infinitly pricice position
             while ((Mathf.Round(transform.position.x) != Mathf.Round(targetSpace.transform.position.x)) || (Mathf.Round(transform.position.z) != Mathf.Round(targetSpace.transform.position.z)))
             {
                 yield return new WaitForFixedUpdate();

@@ -13,6 +13,9 @@ public class S_Space : MonoBehaviour
 
     private MeshRenderer _renderer;
 
+    /// <summary>
+    /// returns the number of spaces connected to this one
+    /// </summary>
     public int NextSpaceNum 
     {
         get
@@ -35,22 +38,6 @@ public class S_Space : MonoBehaviour
             S_BoardManager.Instance.startingSpace = this;
         }
 
-        /*  for switching colors
-        switch (_spaceType)
-        {
-            case SpaceType.Start:
-                break;
-            case SpaceType.Positive:
-                Debug.Log($"gain {value}");
-                break;
-            case SpaceType.Negative:
-                Debug.Log($"lose {value}");
-                break;
-            case SpaceType.Reward:
-                //set color to green
-                break;
-        }
-        */
     }
 
     // Update is called once per frame
