@@ -1,3 +1,5 @@
+
+/*  depricated input now only goes through S_InputController on the player prefab
 using System;
 
 using UnityEngine;
@@ -40,5 +42,6 @@ public class S_InputManager : S_Singleton<S_InputManager>
 
         instance.name = "Managers.InputManager (Singleton)";
     }
-    */
+    
 }
+   */

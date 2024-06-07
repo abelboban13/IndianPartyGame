@@ -99,7 +99,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
                 EndJoin();
 
 
-            Debug.Log($"player {playerNum} press Start(start on controller, enter on keyboard)");
+            Debug.Log($"player {playerNum} press Start(Start on controller, Enter on keyboard) if no more players wish to join press Confirm(A on controller, Space on keyboard)");
 
 
             yield return new WaitUntil(() => _playerJoinedEvent == true );
