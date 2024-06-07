@@ -13,7 +13,7 @@ public class S_GameManager : S_Singleton<S_GameManager>
         private set { _numberOfPlayers = value; }
     }
 
-   // public GameObject currentMiniGame;
+    public S_MiniGame currentMiniGame;
 
     public GameMode GameType { get; private set; }
     // Start is called before the first frame update
@@ -57,6 +57,11 @@ public class S_GameManager : S_Singleton<S_GameManager>
     public void SetPlayers(int num)
     {
         numberOfPlayers = num;
+    }
+
+    public void SetGameType(GameMode gameMode)
+    {
+        GameType = gameMode;
     }
 
     public enum GameMode

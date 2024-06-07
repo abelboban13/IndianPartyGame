@@ -10,15 +10,6 @@ public class S_InputController : MonoBehaviour
     private InputActionAsset _inputActions;
     private InputActionMap _inputMap;
 
-    private InputAction _move;
-
-    private InputAction _confirm;
-
-    private InputAction _back;
-
-    private InputAction _start;
-
-
     public Vector2 MoveInput { get; private set; }
 
     public bool IsConfirm { get; private set; } 
@@ -46,4 +37,17 @@ public class S_InputController : MonoBehaviour
 
         IsStart = _inputMap.FindAction("Start").triggered;
     }
+
+    public void RecieveInputData(InputActionAsset asset, InputActionMap map)
+    {
+        _inputActions = asset;
+        _inputMap = map;
+    }
+
+    public void GiveInputData(S_InputController controller)
+    {
+        controller.RecieveInputData(_inputActions, _inputMap);
+    }
+
+
 }

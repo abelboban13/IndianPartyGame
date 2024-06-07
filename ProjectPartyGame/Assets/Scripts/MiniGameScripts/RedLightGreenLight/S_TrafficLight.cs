@@ -10,7 +10,8 @@ public class S_TrafficLight : MonoBehaviour
     [SerializeField] private  S_MiniGame _miniGame;
     [SerializeField] private float _maxTime = 20;
 
-     public List<S_RedLightPlayer> _players;
+    public List<S_RedLightPlayer> players;
+    private S_RedLightGame _game;
     private bool _isActive = false;
     private MeshRenderer _renderer;
     private float _gameTimer = 0;
@@ -26,6 +27,7 @@ public class S_TrafficLight : MonoBehaviour
     {
         _gameTimer = _maxTime;
         _switchTimer = Random.Range(3, 5);
+
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class S_TrafficLight : MonoBehaviour
         if(_isActive == false)
         {
             _renderer.material = _redMaterial;
-            foreach(var player in _players)
+            foreach(var player in players)
             {
                 if(player.IsMoving())
                 {

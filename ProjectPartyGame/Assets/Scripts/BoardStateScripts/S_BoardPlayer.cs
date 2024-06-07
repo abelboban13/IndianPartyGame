@@ -9,7 +9,9 @@ public class S_BoardPlayer : MonoBehaviour
 
     [SerializeField] private float _speed = 5f;
 
-    public S_Space _currentSpace { get; private set; }
+
+
+    public S_Space currentSpace { get; private set; }
 
     private PlayerInput _playerInput;
 
@@ -87,7 +89,6 @@ public class S_BoardPlayer : MonoBehaviour
     {
         var step = _speed * Time.deltaTime; // calculate distance to move
         transform.position = Vector3.MoveTowards(transform.position,new Vector3(targetSpace.transform.position.x , transform.position.y, targetSpace.transform.position.z), step);
-       // transform.Translate(new Vector3(targetSpace.transform.position.x - transform.position.x, 0, targetSpace.transform.position.z - transform.position.z) * .5f);
     }
 
     /// <summary>
@@ -96,7 +97,7 @@ public class S_BoardPlayer : MonoBehaviour
     public void GameStart()
     {
         transform.position = new Vector3(S_BoardManager.Instance.startingSpace.transform.position.x, transform.position.y, S_BoardManager.Instance.startingSpace.transform.position.z);
-        _currentSpace = S_BoardManager.Instance.startingSpace;
+        currentSpace = S_BoardManager.Instance.startingSpace;
     }
 
     //handles the players turn
@@ -126,18 +127,18 @@ public class S_BoardPlayer : MonoBehaviour
     {
         _isMove = true;
         //Debug.Log(_currentSpace.GiveNextSpace());
-        targetSpace = _currentSpace.GiveNextSpace(this);
+        targetSpace = currentSpace.GiveNextSpace(this);
         for(int i = 0; i < spaces; i++)
         {
-            if(_currentSpace.NextSpaceNum >= 2)
+            if(currentSpace.NextSpaceNum >= 2)
             {
                 Debug.Log("awaiting player input");
                 yield return new WaitUntil(() => _inputController.MoveInput.x != 0);
-                targetSpace = _currentSpace.GiveNextSpace(this, _inputController.MoveInput.x > 0 ? 1 :0);
+                targetSpace = currentSpace.GiveNextSpace(this, _inputController.MoveInput.x > 0 ? 1 :0);
             }
             else
             {
-                targetSpace = _currentSpace.GiveNextSpace(this);
+                targetSpace = currentSpace.GiveNextSpace(this);
             }
             //handles the actual movement of the player. rounded so that its not trying to get to an infinitly pricice position
             while ((Mathf.Round(transform.position.x) != Mathf.Round(targetSpace.transform.position.x)) || (Mathf.Round(transform.position.z) != Mathf.Round(targetSpace.transform.position.z)))
@@ -147,11 +148,11 @@ public class S_BoardPlayer : MonoBehaviour
                 yield return new WaitForSeconds(.1f);
                 //Debug.Log(targetSpace);
             }
-            _currentSpace = targetSpace;
+            currentSpace = targetSpace;
             yield return new WaitForSeconds(_travelDelay);
         }
-        _currentSpace = targetSpace;
-        _currentSpace.SpaceLandedOn(this);
+        currentSpace = targetSpace;
+        currentSpace.SpaceLandedOn(this);
         _isMove = false;
         yield return null;
     }
