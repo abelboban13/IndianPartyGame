@@ -7,7 +7,7 @@ public class S_RedLightGame : S_MiniGame
 {
     [SerializeField] GameObject _playerPrefab;
 
-    private List<S_RedLightPlayer> _players;
+    [HideInInspector] public List<S_RedLightPlayer> players;
 
     public S_TrafficLight trafficLight;
 
@@ -23,6 +23,21 @@ public class S_RedLightGame : S_MiniGame
             newPlayer.transform.position = _spawns[0].position;
             player.GetComponent<S_InputController>().GiveInputData(newPlayer.GetComponent<S_InputController>());
             playerIndex++;
+        }
+    }
+
+    public void PlayerKnockedOut()
+    {
+        int playersOut = 0;
+        foreach(S_RedLightPlayer player in players)
+        {
+            if (player.isOut)
+                playersOut++;
+            
+        }
+        if (playersOut >= players.Count)
+        {
+            Debug.Log("all players out");
         }
     }
 }

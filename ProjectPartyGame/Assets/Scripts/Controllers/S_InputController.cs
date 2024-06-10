@@ -21,8 +21,12 @@ public class S_InputController : MonoBehaviour
     {
         player = GetComponent<S_BoardPlayer>();
         //set which controller will control this player
-        _inputActions = this.GetComponent<PlayerInput>().actions;
-        _inputMap = _inputActions.FindActionMap("Player");
+        if(S_GameManager.Instance.GameType != S_GameManager.GameMode.Minigame)
+        {
+            _inputActions = this.GetComponent<PlayerInput>().actions;
+            _inputMap = _inputActions.FindActionMap("Player");
+        }
+
     }
 
 

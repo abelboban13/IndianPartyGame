@@ -16,7 +16,7 @@ public class S_MiniGame : MonoBehaviour
 
     protected virtual void Start()
     {
-        
+        StartGame(); //move to different function later
     }
     public virtual void StartGame()
     {

@@ -7,17 +7,19 @@ public class S_RedLightPlayer : MonoBehaviour
     [SerializeField] private float _speed = 5;
     private Rigidbody _rb;
     private S_InputController _input;
+
+    [HideInInspector] public bool isOut { get; private set; }
     private void Awake()
     {
-        S_GameManager.Instance.currentMiniGame.GetComponent<S_TrafficLight>().players.Add(this);
+        S_GameManager.Instance.currentMiniGame.GetComponent<S_RedLightGame>().players.Add(this);
         _input = GetComponent<S_InputController>();
         _rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        //player._rb.velocity = new Vector2(input.MoveInput.x * player.settings.movementSpeed, player._rb.velocity.y);
-        _rb.velocity = new Vector3(_input.MoveInput.x * _speed, 0, _input.MoveInput.y * _speed);
+        if (!isOut)
+            _rb.velocity = new Vector3(_input.MoveInput.x * _speed, 0, _input.MoveInput.y * _speed);
 
     }
 
@@ -28,6 +30,11 @@ public class S_RedLightPlayer : MonoBehaviour
     public bool IsMoving()
     {
         return _input.MoveInput.magnitude != 0;
+    }
+
+    public void KnockOut()
+    {
+        isOut = true;
     }
     
 }

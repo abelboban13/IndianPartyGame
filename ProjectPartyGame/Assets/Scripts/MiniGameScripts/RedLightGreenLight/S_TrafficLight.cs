@@ -7,10 +7,10 @@ public class S_TrafficLight : MonoBehaviour
 
     [SerializeField] private Material _redMaterial;
     [SerializeField] private Material _greenMaterial;
-    [SerializeField] private  S_MiniGame _miniGame;
+    [SerializeField] private  S_RedLightGame _miniGame;
     [SerializeField] private float _maxTime = 20;
 
-    public List<S_RedLightPlayer> players;
+    //public List<S_RedLightPlayer> players;
     private S_RedLightGame _game;
     private bool _isActive = false;
     private MeshRenderer _renderer;
@@ -18,7 +18,7 @@ public class S_TrafficLight : MonoBehaviour
     private float _switchTimer = 0;
     private void Awake()
     {
-       // S_GameManager.Instance.currentMiniGame = this.gameObject;
+        _miniGame = S_GameManager.Instance.currentMiniGame.GetComponent<S_RedLightGame>();
         _renderer = GetComponent<MeshRenderer>();
     }
 
@@ -36,11 +36,13 @@ public class S_TrafficLight : MonoBehaviour
         if(_isActive == false)
         {
             _renderer.material = _redMaterial;
-            foreach(var player in players)
+            foreach(var player in _miniGame.players)
             {
                 if(player.IsMoving())
                 {
                     Debug.Log(player.name + " is out");
+                    player.KnockOut();
+                    _miniGame.PlayerKnockedOut();
                     S_GameManager.Instance.LoadBoard();//temporary
                 }
             }
