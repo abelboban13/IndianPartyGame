@@ -13,15 +13,16 @@ public class S_RedLightGame : S_MiniGame
 
     [SerializeField] private List<Transform> _spawns;
 
-    public override void StartGame()
+    public override void LoadGame()
     {
-        base.StartGame();
+        base.LoadGame();
         int playerIndex = 0;
         foreach (var player in S_BoardManager.Instance._players) 
         {
             GameObject newPlayer = Instantiate(_playerPrefab);
             newPlayer.transform.position = _spawns[0].position;
             player.GetComponent<S_InputController>().GiveInputData(newPlayer.GetComponent<S_InputController>());
+            newPlayer.GetComponent<S_RedLightPlayer>().playerIndex = playerIndex; 
             playerIndex++;
         }
     }
@@ -38,6 +39,32 @@ public class S_RedLightGame : S_MiniGame
         if (playersOut >= players.Count)
         {
             Debug.Log("all players out");
+            EndGame();
         }
+    }
+
+    public void SetUpCamera()
+    {
+        switch (players.Count)
+        {
+        case 1:
+
+            break;
+
+        case 2:
+
+            break;
+
+        case 3:
+
+            break;
+
+        case 4:
+
+            break;
+
+        }
+
+        
     }
 }

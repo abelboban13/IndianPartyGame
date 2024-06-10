@@ -9,7 +9,7 @@ public class S_BoardPlayer : MonoBehaviour
 
     [SerializeField] private float _speed = 5f;
 
-
+    public Transform cameraSocket;
 
     public S_Space currentSpace { get; private set; }
 
@@ -88,7 +88,9 @@ public class S_BoardPlayer : MonoBehaviour
     public void MovePlayer(S_Space targetSpace)
     {
         var step = _speed * Time.deltaTime; // calculate distance to move
+        
         transform.position = Vector3.MoveTowards(transform.position,new Vector3(targetSpace.transform.position.x , transform.position.y, targetSpace.transform.position.z), step);
+        transform.LookAt(new Vector3(targetSpace.transform.position.x, transform.position.y, targetSpace.transform.position.z));
     }
 
     /// <summary>

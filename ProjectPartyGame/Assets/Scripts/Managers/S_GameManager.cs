@@ -6,20 +6,12 @@ using UnityEngine;
 public class S_GameManager : S_Singleton<S_GameManager>
 {
 
-    private int _numberOfPlayers;
-    public int numberOfPlayers
-    {
-        get { return _numberOfPlayers; }
-        private set { _numberOfPlayers = value; }
-    }
-
     public S_MiniGame currentMiniGame;
 
     public GameMode GameType { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
-        numberOfPlayers = 4;
 
         if(GameType == GameMode.Board)
             S_BoardManager.Instance.StartGame();
@@ -54,10 +46,6 @@ public class S_GameManager : S_Singleton<S_GameManager>
         GameType = GameMode.Board;
     }
 
-    public void SetPlayers(int num)
-    {
-        numberOfPlayers = num;
-    }
 
     public void SetGameType(GameMode gameMode)
     {

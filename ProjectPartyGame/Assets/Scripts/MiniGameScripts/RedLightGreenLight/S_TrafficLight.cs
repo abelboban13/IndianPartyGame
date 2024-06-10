@@ -6,25 +6,24 @@ public class S_TrafficLight : MonoBehaviour
 {
 
     [SerializeField] private Material _redMaterial;
+    [SerializeField] private Material _yelllowMaterial;
     [SerializeField] private Material _greenMaterial;
     [SerializeField] private  S_RedLightGame _miniGame;
     [SerializeField] private float _maxTime = 20;
 
-    //public List<S_RedLightPlayer> players;
-    private S_RedLightGame _game;
     private bool _isActive = false;
     private MeshRenderer _renderer;
     private float _gameTimer = 0;
     private float _switchTimer = 0;
     private void Awake()
     {
-        _miniGame = S_GameManager.Instance.currentMiniGame.GetComponent<S_RedLightGame>();
         _renderer = GetComponent<MeshRenderer>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        _miniGame = S_GameManager.Instance.currentMiniGame.GetComponent<S_RedLightGame>();
         _gameTimer = _maxTime;
         _switchTimer = Random.Range(3, 5);
 
@@ -43,23 +42,28 @@ public class S_TrafficLight : MonoBehaviour
                     Debug.Log(player.name + " is out");
                     player.KnockOut();
                     _miniGame.PlayerKnockedOut();
-                    S_GameManager.Instance.LoadBoard();//temporary
                 }
             }
         }
         else
             _renderer.material = _greenMaterial;
 
-        _gameTimer -= Time.deltaTime;
-
-        _switchTimer -= Time.deltaTime;
-
-        if(_gameTimer <= 0)
+        if(_miniGame.gameRunning)
         {
-            S_GameManager.Instance.LoadBoard();//temporary
+            _gameTimer -= Time.deltaTime;
+
+            _switchTimer -= Time.deltaTime;
+
+            if (_gameTimer <= 0)
+            {
+                _miniGame.EndGame();
+            }
+            if (_switchTimer <= 0)
+                SwitchColor();
         }
-        if(_switchTimer <= 0)
-            SwitchColor();
+        
+
+        
 
         
 

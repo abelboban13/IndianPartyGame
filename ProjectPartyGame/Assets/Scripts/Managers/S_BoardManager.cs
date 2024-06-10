@@ -8,9 +8,10 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     [SerializeField] private float _playerSpeed = 5f;
     [SerializeField] private GameObject _player;
+    [SerializeField] private S_BoardCameraController _camera;
 
     public List<S_BoardPlayer> _players;
-    private int _playerIndex = 0; // the player whos turn it is
+    private int _playerIndex = 0; //the player whos turn it is
 
     private PlayerInputManager _playerInputManager;
     public float playerSpeed 
@@ -46,6 +47,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     {
     }
 
+    //Ends the current players turn and sets the next one
     public void TurnEnd()
     {
         if(_playerIndex >= _players.Count - 1)
@@ -53,7 +55,8 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         else
             _playerIndex++;
         Debug.Log($"player {_playerIndex + 1}'s turn");
-        _players[_playerIndex].StartTurn();    
+        _players[_playerIndex].StartTurn();
+        _camera.FollowPLayer(_players[_playerIndex]);
     }
 
     /// <summary>
@@ -107,7 +110,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
             playerNum++;
         }
 
-        S_GameManager.Instance.SetPlayers(_players.Count);
+
         _playerInputManager.DisableJoining();
         yield return null;
     }
@@ -116,10 +119,10 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     {
         _joining = false;
         StopCoroutine(PlayerJoin());
-        S_GameManager.Instance.SetPlayers(_players.Count);
         _playerInputManager.DisableJoining();
         boardStartEvent.Raise();
         _players[0].StartTurn();
+        _camera.FollowPLayer(_players[0]);
     }
 
 

@@ -14,9 +14,14 @@ public class S_MiniGame : MonoBehaviour
         S_GameManager.Instance.SetGameType(S_GameManager.GameMode.Minigame);
     }
 
+    public virtual void LoadGame()
+    {
+        gameRunning = true;
+    }
+
     protected virtual void Start()
     {
-        StartGame(); //move to different function later
+        LoadGame(); //move to different function later
     }
     public virtual void StartGame()
     {
