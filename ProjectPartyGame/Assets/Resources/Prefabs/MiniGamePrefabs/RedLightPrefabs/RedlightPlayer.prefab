@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  playerIndex: 0
 --- !u!114 &4288289424338780843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,4 +255,4 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7592262278211221387}
-  m_Enabled: 1
+  m_Enabled: 0

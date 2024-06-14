@@ -20,11 +20,12 @@ public class S_RedLightGame : S_MiniGame
         foreach (var player in S_BoardManager.Instance._players) 
         {
             GameObject newPlayer = Instantiate(_playerPrefab);
-            newPlayer.transform.position = _spawns[0].position;
+            newPlayer.transform.position = _spawns[playerIndex].position;
             player.GetComponent<S_InputController>().GiveInputData(newPlayer.GetComponent<S_InputController>());
             newPlayer.GetComponent<S_RedLightPlayer>().playerIndex = playerIndex; 
             playerIndex++;
         }
+        SetUpCamera();
     }
 
     public void PlayerKnockedOut()
@@ -52,16 +53,22 @@ public class S_RedLightGame : S_MiniGame
             break;
 
         case 2:
-
+            players[0].playerCamera.rect = new Rect(0, 0, .5f,1);
+            players[1].playerCamera.rect = new Rect(.5f, 0, .5f, 1);
             break;
 
         case 3:
-
-            break;
+                players[0].playerCamera.rect = new Rect(0, .5f, .5f, .5f);
+                players[1].playerCamera.rect = new Rect(.5f, 0, .5f, .5f);
+                players[2].playerCamera.rect = new Rect(0, 0, .5f, .5f);
+                break;
 
         case 4:
-
-            break;
+                players[0].playerCamera.rect = new Rect(0, .5f, .5f, .5f);
+                players[1].playerCamera.rect = new Rect(.5f, 0, .5f, .5f);
+                players[2].playerCamera.rect = new Rect(0, 0, .5f, .5f);
+                players[2].playerCamera.rect = new Rect(.5f, 0, .5f, .5f);
+                break;
 
         }
 

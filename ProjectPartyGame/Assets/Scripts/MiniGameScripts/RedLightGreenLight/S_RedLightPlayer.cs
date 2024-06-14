@@ -8,7 +8,7 @@ public class S_RedLightPlayer : MonoBehaviour
     private Rigidbody _rb;
     private S_InputController _input;
     private S_RedLightGame _miniGame;
-    private Camera _camera;
+    public Camera playerCamera { get; private set; }
     [HideInInspector] public int playerIndex;
 
     [HideInInspector] public bool isOut { get; private set; }
@@ -18,7 +18,7 @@ public class S_RedLightPlayer : MonoBehaviour
         _miniGame.players.Add(this);
         _input = GetComponent<S_InputController>();
         _rb = GetComponent<Rigidbody>();
-        _camera = GetComponentInChildren<Camera>();
+        playerCamera = GetComponentInChildren<Camera>();
     }
 
     private void FixedUpdate()
