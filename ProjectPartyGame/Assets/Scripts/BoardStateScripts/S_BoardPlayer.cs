@@ -83,7 +83,10 @@ public class S_BoardPlayer : MonoBehaviour
     public void StartTurn()
     {
         if(turnSkipped)
+        {
+            Debug.Log($"player{index + 1}'s turn is skipped");
             EndTurn();
+        }
         else
         {
             _isTurn = true;

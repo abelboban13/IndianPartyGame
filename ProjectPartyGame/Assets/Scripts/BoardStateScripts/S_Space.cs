@@ -89,7 +89,7 @@ public class S_Space : MonoBehaviour
 
                 break;
             case SpaceType.Skip:
-                
+                player.turnSkipped = true;
                 break;
         }
 
