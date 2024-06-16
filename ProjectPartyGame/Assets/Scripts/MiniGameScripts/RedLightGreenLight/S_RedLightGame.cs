@@ -70,8 +70,12 @@ public class S_RedLightGame : S_MiniGame
                 players[2].playerCamera.rect = new Rect(.5f, 0, .5f, .5f);
                 break;
 
-        }
+        }  
+    }
 
-        
+    public override void EndGame()
+    {
+        S_BoardManager.Instance.ChangeTurnOrder(trafficLight.CreatePodium(players));
+        base.EndGame();
     }
 }

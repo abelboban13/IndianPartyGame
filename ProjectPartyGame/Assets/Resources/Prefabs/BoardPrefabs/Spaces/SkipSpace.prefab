@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8949188759452958627}
   - component: {fileID: 7066975294495863439}
   m_Layer: 0
-  m_Name: MiniGameSpace
+  m_Name: SkipSpace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9470bd6ec5a8f4184d4838cd9c21d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spaceType: 4
+  _spaceType: 5
   value: 0
   _nextSpace:
   - {fileID: 0}

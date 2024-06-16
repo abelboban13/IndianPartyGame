@@ -13,6 +13,14 @@ public class S_BoardPlayer : MonoBehaviour
 
     public S_Space currentSpace { get; private set; }
 
+    public int coins { get; private set; }
+
+    public int mangos { get; private set; }
+
+    public bool turnSkipped = false;
+
+    public int index;
+
     private PlayerInput _playerInput;
 
     private bool _isTurn = false;
@@ -29,6 +37,7 @@ public class S_BoardPlayer : MonoBehaviour
     private void Awake()
     {
         S_BoardManager.Instance._players.Add(this);
+        index = S_BoardManager.Instance._players.Count;
         DontDestroyOnLoad(this);
         _inputController = GetComponent<S_InputController>();
         _meshRenderer = GetComponent<MeshRenderer>();
@@ -71,7 +80,10 @@ public class S_BoardPlayer : MonoBehaviour
 
     public void StartTurn()
     {
-        _isTurn = true;
+        if(turnSkipped)
+            EndTurn();
+        else
+            _isTurn = true;
     }
     
     public void EndTurn()
@@ -122,7 +134,15 @@ public class S_BoardPlayer : MonoBehaviour
         _meshRenderer.enabled = false;
     }
 
-    
+    public void ChangeCoins(int num)
+    {
+        coins += num;
+    }
+
+    public void ChangeMangos(int num)
+    {
+        mangos += num;
+    }
 
     //handles the player moving a number of spaces
     IEnumerator MoveToNextSpace(int spaces)

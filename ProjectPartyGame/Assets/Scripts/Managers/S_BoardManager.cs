@@ -88,6 +88,16 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         }
     }
 
+    public void ChangeTurnOrder(List<int> newIndexs)
+    {
+        List<S_BoardPlayer> newOrder = new List<S_BoardPlayer>();
+        foreach (int newIndex in newIndexs)
+        {
+            newOrder.Add(_players.Find(x => x.index == newIndex));
+        }
+        _players = newOrder;
+    }
+
 
     public void OnPlayerJoin()
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class S_TrafficLight : MonoBehaviour
 {
@@ -61,12 +62,28 @@ public class S_TrafficLight : MonoBehaviour
             if (_switchTimer <= 0)
                 SwitchColor();
         }
-        
+    }
 
-        
+    public List<int> CreatePodium(List<S_RedLightPlayer> players)
+    {
+        List<int> results = new List<int>();
+        players.OrderBy(o => (transform.position - o.transform.position));
 
-        
+        foreach(S_RedLightPlayer player in players) //moves players that are out to the end of the list
+        {
+            if(player.isOut)
+            {
+                players.Remove(player);
+                players.Add(player);
+            }
+        }
+        Debug.Log($"game results: {results}");
 
+        foreach(S_RedLightPlayer player in players)
+        {
+            results.Add(player.playerIndex);
+        }
+        return results;
     }
 
     public void SwitchColor()

@@ -6,7 +6,7 @@ public class S_Space : MonoBehaviour
 {
     [SerializeField] protected SpaceType _spaceType;
 
-    [SerializeField] protected int value;
+    [SerializeField] protected int value = 3;
 
     [Tooltip("place the object you want to path to from a left input first")]
     [SerializeField] private S_Space[] _nextSpace = new S_Space[2];
@@ -67,16 +67,29 @@ public class S_Space : MonoBehaviour
             case SpaceType.Start:
                 break;
             case SpaceType.Positive:
-                Debug.Log($"gain {value}");
+                player.ChangeCoins(value);
+                Debug.Log($"player{player.index} gains {value} coins");
                 break;
             case SpaceType.Negative:
-                Debug.Log($"lose {value}");
+                player.ChangeCoins(-value);
+                Debug.Log($"player{player.index} loses {value} coins");
                 break;
             case SpaceType.Reward:
-                Debug.Log("get reward!");
+                if(player.coins >= 30)
+                {
+                    player.ChangeCoins(-30);
+                    player.ChangeMangos(1);
+                    Debug.Log($"player{player.index} gets a mango!");
+                }
+                else
+                {
+                    player.ChangeCoins(30);
+                    Debug.Log($"player{player.index} gains {30} coins");
+                }
+
                 break;
-            case SpaceType.Minigame:
-                S_GameManager.Instance.LoadMiniGame("SC_MiniGameGym");
+            case SpaceType.Skip:
+                
                 break;
         }
 
@@ -94,5 +107,6 @@ public enum SpaceType
     Negative,
     Reward,
     Start,
-    Minigame
+    Minigame,
+    Skip
 }
