@@ -8,7 +8,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     [SerializeField] private float _playerSpeed = 5f;
     [SerializeField] private GameObject _player;
-    [SerializeField] private S_BoardCameraController _camera;
+    [HideInInspector] public S_BoardCameraController camera;
 
     public List<S_BoardPlayer> _players;
     private int _playerIndex = 0; //the player whos turn it is
@@ -58,7 +58,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         else
             _playerIndex++;
         _players[_playerIndex].StartTurn();
-        _camera.FollowPLayer(_players[_playerIndex]);
+        camera.FollowPLayer(_players[_playerIndex]);
     }
 
     /// <summary>
@@ -137,7 +137,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         _playerInputManager.DisableJoining();
         boardStartEvent.Raise();
         _players[0].StartTurn();
-        _camera.FollowPLayer(_players[0]);
+        camera.FollowPLayer(_players[0]);
     }
 
 
