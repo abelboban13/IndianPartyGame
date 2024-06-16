@@ -37,7 +37,7 @@ public class S_BoardPlayer : MonoBehaviour
     private void Awake()
     {
         S_BoardManager.Instance._players.Add(this);
-        index = S_BoardManager.Instance._players.Count;
+        index = S_BoardManager.Instance._players.Count -1;
         DontDestroyOnLoad(this);
         _inputController = GetComponent<S_InputController>();
         _meshRenderer = GetComponent<MeshRenderer>();
@@ -62,6 +62,8 @@ public class S_BoardPlayer : MonoBehaviour
                 S_BoardManager.Instance.EndJoin();
             }
         }
+
+
     }
 
     /// <summary>
@@ -83,7 +85,10 @@ public class S_BoardPlayer : MonoBehaviour
         if(turnSkipped)
             EndTurn();
         else
+        {
             _isTurn = true;
+            Debug.Log($"player{index + 1}'s turn");
+        }
     }
     
     public void EndTurn()
@@ -131,6 +136,9 @@ public class S_BoardPlayer : MonoBehaviour
 
     public void OnUnloadBoard()
     {
+        if (cameraSocket.GetComponentInChildren<S_BoardCameraController>() != null)
+            cameraSocket.GetComponentInChildren<S_BoardCameraController>().DisconnectFromPlayer();
+
         _meshRenderer.enabled = false;
     }
 

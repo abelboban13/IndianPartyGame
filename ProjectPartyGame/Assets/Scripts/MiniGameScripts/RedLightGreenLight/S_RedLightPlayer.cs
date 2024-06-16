@@ -25,6 +25,8 @@ public class S_RedLightPlayer : MonoBehaviour
     {
         if (!isOut && _miniGame.gameRunning)
             _rb.velocity = new Vector3(_input.MoveInput.x * _speed, 0, _input.MoveInput.y * _speed);
+        else
+            _rb.velocity = Vector3.zero;
 
     }
 
@@ -34,7 +36,10 @@ public class S_RedLightPlayer : MonoBehaviour
     /// <returns></returns>
     public bool IsMoving()
     {
-        return _input.MoveInput.magnitude != 0;
+        if(!isOut)
+            return _input.MoveInput.magnitude != 0;
+        else
+            return false;
     }
 
     public void KnockOut()

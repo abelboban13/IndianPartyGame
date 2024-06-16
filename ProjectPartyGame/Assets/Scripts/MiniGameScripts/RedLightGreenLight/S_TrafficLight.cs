@@ -33,24 +33,27 @@ public class S_TrafficLight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_isActive == false)
+        if (_miniGame.gameRunning)
         {
-            _renderer.material = _redMaterial;
-            foreach(var player in _miniGame.players)
+            if (_isActive == false)
             {
-                if(player.IsMoving())
+                _renderer.material = _redMaterial;
+                foreach (var player in _miniGame.players)
                 {
-                    Debug.Log(player.name + " is out");
-                    player.KnockOut();
-                    _miniGame.PlayerKnockedOut();
+                    if (player.IsMoving())
+                    {
+                        Debug.Log($"player{player.playerIndex +1} is out");
+                        player.KnockOut();
+                        _miniGame.PlayerKnockedOut();
+                        if(!_miniGame.gameRunning)
+                            break;
+                    }
                 }
             }
-        }
-        else
-            _renderer.material = _greenMaterial;
+            else
+                _renderer.material = _greenMaterial;
 
-        if(_miniGame.gameRunning)
-        {
+
             _gameTimer -= Time.deltaTime;
 
             _switchTimer -= Time.deltaTime;
@@ -61,27 +64,31 @@ public class S_TrafficLight : MonoBehaviour
             }
             if (_switchTimer <= 0)
                 SwitchColor();
-        }
+        }        
     }
 
-    public List<int> CreatePodium(List<S_RedLightPlayer> players)
+    public List<int> CreatePodium(List<S_RedLightPlayer> players, bool allOut)
     {
         List<int> results = new List<int>();
-        players.OrderBy(o => (transform.position - o.transform.position));
+        players = players.OrderBy( x => Vector2.Distance(this.transform.position, x.transform.position)).ToList();
 
-        foreach(S_RedLightPlayer player in players) //moves players that are out to the end of the list
+        if(!allOut)
         {
-            if(player.isOut)
+            foreach (S_RedLightPlayer player in players.FindAll(x => x.isOut)) //moves players that are out to the end of the list
             {
                 players.Remove(player);
                 players.Add(player);
             }
         }
-        Debug.Log($"game results: {results}");
+        
+        Debug.Log("game results:");
 
         foreach(S_RedLightPlayer player in players)
         {
+            int position = 1;
+            Debug.Log($"{position}: player{player.playerIndex}");
             results.Add(player.playerIndex);
+            position++;
         }
         return results;
     }

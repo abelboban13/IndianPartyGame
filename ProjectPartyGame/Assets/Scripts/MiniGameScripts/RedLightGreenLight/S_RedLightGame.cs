@@ -13,6 +13,9 @@ public class S_RedLightGame : S_MiniGame
 
     [SerializeField] private List<Transform> _spawns;
 
+    private int _playersOut;
+    private bool _allOut = false;
+
     public override void LoadGame()
     {
         base.LoadGame();
@@ -26,6 +29,7 @@ public class S_RedLightGame : S_MiniGame
             playerIndex++;
         }
         SetUpCamera();
+        gameRunning = true;
     }
 
     public void PlayerKnockedOut()
@@ -33,13 +37,13 @@ public class S_RedLightGame : S_MiniGame
         int playersOut = 0;
         foreach(S_RedLightPlayer player in players)
         {
-            if (player.isOut)
+            if(player.isOut)
                 playersOut++;
-            
         }
         if (playersOut >= players.Count)
         {
-            Debug.Log("all players out");
+            _allOut = true;
+            gameRunning = false;
             EndGame();
         }
     }
@@ -75,7 +79,8 @@ public class S_RedLightGame : S_MiniGame
 
     public override void EndGame()
     {
-        S_BoardManager.Instance.ChangeTurnOrder(trafficLight.CreatePodium(players));
+        gameRunning = false;
+        S_BoardManager.Instance.ChangeTurnOrder(trafficLight.CreatePodium(players, _allOut));
         base.EndGame();
     }
 }

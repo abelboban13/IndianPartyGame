@@ -5,7 +5,7 @@ using UnityEngine;
 public class S_BoardCameraController : MonoBehaviour
 {
 
-    private S_BoardPlayer _trackedPLayer;
+    private S_BoardPlayer _trackedPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,15 +15,20 @@ public class S_BoardCameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(_trackedPlayer != null)
+            transform.position = new Vector3(_trackedPlayer.transform.position.x, transform.position.y, _trackedPlayer.transform.position.z);
     }
 
     public void FollowPLayer(S_BoardPlayer player)
     {
         //center camera on player
-        _trackedPLayer = player;
+        _trackedPlayer = player;
 
-        transform.position = player.cameraSocket.position;
-        transform.SetParent(player.cameraSocket);
+
+    }
+
+    public void DisconnectFromPlayer()
+    {
+        _trackedPlayer = null;
     }
 }

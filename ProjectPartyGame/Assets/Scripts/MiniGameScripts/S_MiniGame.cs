@@ -6,7 +6,9 @@ public class S_MiniGame : MonoBehaviour
 {
     [SerializeField] protected int _reward;
 
-    public bool gameRunning { get; private set; }
+    public bool gameRunning;
+
+    
 
     private void Awake()
     {
@@ -16,7 +18,7 @@ public class S_MiniGame : MonoBehaviour
 
     public virtual void LoadGame()
     {
-        gameRunning = true;
+       // gameRunning = true;
     }
 
     protected virtual void Start()

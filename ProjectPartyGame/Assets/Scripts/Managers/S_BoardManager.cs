@@ -51,10 +51,12 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     public void TurnEnd()
     {
         if(_playerIndex >= _players.Count - 1)
+        {
             _playerIndex = 0;
+            S_GameManager.Instance.LoadMiniGame("SC_MiniGameGym");
+        }
         else
             _playerIndex++;
-        Debug.Log($"player {_playerIndex + 1}'s turn");
         _players[_playerIndex].StartTurn();
         _camera.FollowPLayer(_players[_playerIndex]);
     }
@@ -86,6 +88,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         {
             player.OnReloadBoard();
         }
+        _players[0].StartTurn();
     }
 
     public void ChangeTurnOrder(List<int> newIndexs)
@@ -95,6 +98,8 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         {
             newOrder.Add(_players.Find(x => x.index == newIndex));
         }
+        foreach (S_BoardPlayer player in newOrder)
+            Debug.Log(player.index);
         _players = newOrder;
     }
 
