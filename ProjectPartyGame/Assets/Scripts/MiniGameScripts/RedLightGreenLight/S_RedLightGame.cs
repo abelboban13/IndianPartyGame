@@ -13,6 +13,8 @@ public class S_RedLightGame : S_MiniGame
 
     [SerializeField] private List<Transform> _spawns;
 
+    // var order list
+
     private int _playersOut;
     private bool _allOut = false;
 
@@ -20,13 +22,15 @@ public class S_RedLightGame : S_MiniGame
     {
         base.LoadGame();
         int playerIndex = 0;
-        foreach (var player in S_BoardManager.Instance._players) 
+
+        for (int i = 0; i < S_BoardManager.Instance._players.Count; i++)
         {
-            GameObject newPlayer = Instantiate(_playerPrefab);
-            newPlayer.transform.position = _spawns[playerIndex].position;
-            player.GetComponent<S_InputController>().GiveInputData(newPlayer.GetComponent<S_InputController>());
-            newPlayer.GetComponent<S_RedLightPlayer>().playerIndex = playerIndex; 
-            playerIndex++;
+           S_InputController input = S_BoardManager.Instance._players.Find(x => x.index == playerIndex).GetComponent<S_InputController>();
+           GameObject newPlayer = Instantiate(_playerPrefab);
+           newPlayer.transform.position = _spawns[playerIndex].position;
+           input.GiveInputData(newPlayer.GetComponent<S_InputController>());
+           newPlayer.GetComponent<S_RedLightPlayer>().playerIndex = playerIndex;
+           playerIndex++;
         }
         SetUpCamera();
         gameRunning = true;

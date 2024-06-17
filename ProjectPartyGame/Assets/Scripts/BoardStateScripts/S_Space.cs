@@ -13,6 +13,8 @@ public class S_Space : MonoBehaviour
 
     private MeshRenderer _renderer;
 
+    public List<S_BoardPlayer> _playersOnSpace = new List<S_BoardPlayer>();
+
     /// <summary>
     /// returns the number of spaces connected to this one
     /// </summary>
@@ -62,6 +64,8 @@ public class S_Space : MonoBehaviour
     /// </summary>
     public virtual void SpaceLandedOn(S_BoardPlayer player)
     {
+        _playersOnSpace.Add(player);
+
         switch(_spaceType)
         {
             case SpaceType.Start:
@@ -92,6 +96,14 @@ public class S_Space : MonoBehaviour
                 player.turnSkipped = true;
                 break;
         }
+        if(_playersOnSpace.Count > 1)
+        {
+            // offset players so they dont overlap
+            foreach(S_BoardPlayer playerOnSpace in _playersOnSpace)
+            {
+                //move player random vector
+            }
+        }
 
         player.EndTurn();
     }
@@ -107,6 +119,6 @@ public enum SpaceType
     Negative,
     Reward,
     Start,
-    Minigame,
+    Item,
     Skip
 }

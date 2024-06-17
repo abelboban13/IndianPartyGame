@@ -9,7 +9,7 @@ public class S_InputController : MonoBehaviour
 
     private InputActionAsset _inputActions;
     private InputActionMap _inputMap;
-
+    private PlayerInput input;
     public Vector2 MoveInput { get; private set; }
 
     public bool IsConfirm { get; private set; } 
@@ -20,10 +20,11 @@ public class S_InputController : MonoBehaviour
     void Awake()
     {
         player = GetComponent<S_BoardPlayer>();
+        input = GetComponent<PlayerInput>();
         //set which controller will control this player
         if(S_GameManager.Instance.GameType != S_GameManager.GameMode.Minigame)
         {
-            _inputActions = this.GetComponent<PlayerInput>().actions;
+            _inputActions = input.actions;
             _inputMap = _inputActions.FindActionMap("Player");
         }
 

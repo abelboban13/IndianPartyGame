@@ -481,7 +481,7 @@ MonoBehaviour:
   startingSpace: {fileID: 793780022}
   _playerSpeed: 5
   _player: {fileID: 1530164648068187519, guid: 9c0b90d7990f52b468e8154780da4e4d, type: 3}
-  camera: {fileID: 0}
+  boardCamera: {fileID: 0}
   _players: []
   boardStartEvent: {fileID: 11400000, guid: 4faf81a60d7be164f800a7a4b1940a96, type: 2}
   _joining: 0
@@ -909,7 +909,7 @@ PrefabInstance:
       objectReference: {fileID: 554398549}
     - target: {fileID: 7915748849220344920, guid: 40739063c287d6b4e854e76cd35dd79a, type: 3}
       propertyPath: m_Name
-      value: SkipSpace
+      value: ItemSpace
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

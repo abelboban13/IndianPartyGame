@@ -7,6 +7,7 @@ menu scenes
 turn/round limit
 minigame lose pop up
 3 player splitscreen fourth camera space
+players offset on shared spaces
 
 systems that need to be changed/optimized:
 player movement

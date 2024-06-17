@@ -9,6 +9,8 @@ public class S_BoardPlayer : MonoBehaviour
 
     [SerializeField] private float _speed = 5f;
 
+    public List<S_Item> inventory {  get; private set; }
+
     public Transform cameraSocket;
 
     public S_Space currentSpace { get; private set; }
@@ -21,8 +23,6 @@ public class S_BoardPlayer : MonoBehaviour
 
     public int index;
 
-    private PlayerInput _playerInput;
-
     private bool _isTurn = false;
 
     private bool _isMove = false;
@@ -30,7 +30,6 @@ public class S_BoardPlayer : MonoBehaviour
     private S_Space targetSpace;
 
     private S_InputController _inputController;
-
 
     private MeshRenderer _meshRenderer;
 
@@ -155,6 +154,20 @@ public class S_BoardPlayer : MonoBehaviour
         mangos += num;
     }
 
+    //adds items to players inventory 
+    //if player already has that item it adds to the stored items amount instead
+    public void AddItem(S_Item itemToAdd)
+    {
+        foreach(S_Item item in inventory)
+        {
+            if(item.GetType() == itemToAdd.GetType())
+            {
+                item.amount++;
+                return; ;
+            }
+        }
+        inventory.Add(itemToAdd);
+    }
     //handles the player moving a number of spaces
     IEnumerator MoveToNextSpace(int spaces)
     {
@@ -189,8 +202,4 @@ public class S_BoardPlayer : MonoBehaviour
         _isMove = false;
         yield return null;
     }
-
-    
-
-
 }
