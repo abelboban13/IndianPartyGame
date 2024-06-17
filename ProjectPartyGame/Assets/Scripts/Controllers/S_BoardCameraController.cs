@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class S_BoardCameraController : MonoBehaviour
 {
-    [SerializeField] private float _zOffSet = 5f;
+
+    [Tooltip("the distance the camera stays away from the tracked player on the z axis")][SerializeField] private float _zOffSet = 5f; 
     private S_BoardPlayer _trackedPlayer;
 
     private void Awake()
     {
-        S_BoardManager.Instance.camera = this;
+        S_BoardManager.Instance.boardCamera = this;
     }
     // Start is called before the first frame update
     void Start()
@@ -28,8 +29,6 @@ public class S_BoardCameraController : MonoBehaviour
     {
         //center camera on player
         _trackedPlayer = player;
-
-
     }
 
     public void DisconnectFromPlayer()

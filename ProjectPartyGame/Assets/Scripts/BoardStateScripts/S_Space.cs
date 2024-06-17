@@ -8,7 +8,7 @@ public class S_Space : MonoBehaviour
 
     [SerializeField] protected int value = 3;
 
-    [Tooltip("place the object you want to path to from a left input first")]
+    [Tooltip("place the object you want to path to. a left input first")]
     [SerializeField] private S_Space[] _nextSpace = new S_Space[2];
 
     private MeshRenderer _renderer;

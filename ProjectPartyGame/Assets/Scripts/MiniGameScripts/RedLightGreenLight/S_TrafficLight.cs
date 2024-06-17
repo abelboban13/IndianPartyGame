@@ -67,6 +67,8 @@ public class S_TrafficLight : MonoBehaviour
         }        
     }
 
+
+    //returns a list of the player indexs in order from closest to furthest
     public List<int> CreatePodium(List<S_RedLightPlayer> players, bool allOut)
     {
         List<int> results = new List<int>();
@@ -83,7 +85,7 @@ public class S_TrafficLight : MonoBehaviour
         
         Debug.Log("game results:");
 
-        foreach(S_RedLightPlayer player in players)
+        foreach(S_RedLightPlayer player in players) //prints players in order of placement
         {
             int position = 1;
             Debug.Log($"{position}: player{player.playerIndex}");

@@ -73,7 +73,6 @@ public class S_RedLightGame : S_MiniGame
                 players[2].playerCamera.rect = new Rect(0, 0, .5f, .5f);
                 players[2].playerCamera.rect = new Rect(.5f, 0, .5f, .5f);
                 break;
-
         }  
     }
 

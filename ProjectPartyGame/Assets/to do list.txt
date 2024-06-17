@@ -1,0 +1,15 @@
+ToDo:
+systems that need to be implimented:
+traps
+winning
+UI
+menu scenes
+turn/round limit
+minigame lose pop up
+3 player splitscreen fourth camera space
+
+systems that need to be changed/optimized:
+player movement
+minigames need start timer/delay
+make minigame setup more dynamic to prevent repeating code
+

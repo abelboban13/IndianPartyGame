@@ -8,7 +8,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     [SerializeField] private float _playerSpeed = 5f;
     [SerializeField] private GameObject _player;
-    [HideInInspector] public S_BoardCameraController camera;
+    [HideInInspector] public S_BoardCameraController boardCamera;
 
     public List<S_BoardPlayer> _players;
     private int _playerIndex = 0; //the player whos turn it is
@@ -53,12 +53,13 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         if(_playerIndex >= _players.Count - 1)
         {
             _playerIndex = 0;
-            S_GameManager.Instance.LoadMiniGame("SC_MiniGameGym");
+            S_GameManager.Instance.LoadMiniGame();
         }
         else
             _playerIndex++;
+        
         _players[_playerIndex].StartTurn();
-        camera.FollowPLayer(_players[_playerIndex]);
+        boardCamera.FollowPLayer(_players[_playerIndex]);
     }
 
     /// <summary>
@@ -91,6 +92,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         _players[0].StartTurn();
     }
 
+    //sets the turn order based on indexs
     public void ChangeTurnOrder(List<int> newIndexs)
     {
         List<S_BoardPlayer> newOrder = new List<S_BoardPlayer>();
@@ -137,7 +139,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         _playerInputManager.DisableJoining();
         boardStartEvent.Raise();
         _players[0].StartTurn();
-        camera.FollowPLayer(_players[0]);
+        boardCamera.FollowPLayer(_players[0]);
     }
 
 
