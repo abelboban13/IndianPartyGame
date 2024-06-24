@@ -44,7 +44,7 @@ public class S_BoardPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        GameStart();
     }
 
     // Update is called once per frame

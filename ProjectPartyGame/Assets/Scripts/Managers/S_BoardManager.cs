@@ -34,6 +34,11 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     private bool _playerJoinedEvent = false;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        _playerInputManager = GetComponent<PlayerInputManager>();
+    }
 
     // Start is called before the first frame update
     void Start()

@@ -28,7 +28,7 @@ public class S_Space : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
+        
         _renderer = GetComponent<MeshRenderer>();
     }
 
@@ -39,7 +39,7 @@ public class S_Space : MonoBehaviour
         {
             S_BoardManager.Instance.startingSpace = this;
         }
-
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
@@ -102,6 +102,7 @@ public class S_Space : MonoBehaviour
             foreach(S_BoardPlayer playerOnSpace in _playersOnSpace)
             {
                 //move player random vector
+                playerOnSpace.transform.position = playerOnSpace.transform.position + new Vector3(Random.Range(.5f, 1), 0, Random.Range(.5f, 1));
             }
         }
 

@@ -22,7 +22,7 @@ public class S_BoardCameraController : MonoBehaviour
     void Update()
     {
         if(_trackedPlayer != null)
-            transform.position = new Vector3(_trackedPlayer.transform.position.x, transform.position.y, _trackedPlayer.transform.position.z - _zOffSet);
+            transform.position = new Vector3(_trackedPlayer.transform.position.x, transform.position.y, _trackedPlayer.transform.position.z + _zOffSet);
     }
 
     public void FollowPLayer(S_BoardPlayer player)
