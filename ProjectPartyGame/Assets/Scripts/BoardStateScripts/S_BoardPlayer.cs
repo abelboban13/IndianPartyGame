@@ -19,6 +19,8 @@ public class S_BoardPlayer : MonoBehaviour
 
     public int mangos { get; private set; }
 
+    public int numberOfTraps = 0;
+
     public bool turnSkipped = false;
 
     public int index;

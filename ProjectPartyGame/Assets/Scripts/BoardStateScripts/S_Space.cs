@@ -78,6 +78,10 @@ public class S_Space : MonoBehaviour
                 player.ChangeCoins(-value);
                 Debug.Log($"player{player.index} loses {value} coins");
                 break;
+            case SpaceType.Item:
+                player.numberOfTraps++;
+                Debug.Log($"player{player.index} found a trap!");
+                break;
             case SpaceType.Reward:
                 if(player.coins >= 30)
                 {
