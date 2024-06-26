@@ -30,6 +30,7 @@ public class S_Space : MonoBehaviour
     {
         
         _renderer = GetComponent<MeshRenderer>();
+        SetColorBasedOnSpaceType();
     }
 
     // Start is called before the first frame update
@@ -106,13 +107,56 @@ public class S_Space : MonoBehaviour
             }
         }
 
+
+
         player.EndTurn();
     }
 
-    
+    /// <summary>
+    /// Sets the color of the space based on the space type.
+    /// </summary>
+    private void SetColorBasedOnSpaceType()
+    {
+        if (_renderer != null)
+        {
+            switch (_spaceType)
+            {
+                case SpaceType.Start:
+                    _renderer.material.color = Color.white;
+                    break;
+                case SpaceType.Positive:
+                    _renderer.material.color = Color.blue;
+                    break;
+                case SpaceType.Negative:
+                    _renderer.material.color = Color.red;
+                    break;
+                case SpaceType.Reward:
+                    _renderer.material.color = Color.yellow;
+                    break;
+                case SpaceType.Skip:
+                    _renderer.material.color = Color.gray;
+                    break;
+                case SpaceType.Item:
+                    _renderer.material.color = Color.green;
+                    break;
+                default:
+                    _renderer.material.color = Color.black;
+                    break;
+            }
+        }
+    }
+
+    // This method is called when the script is loaded or a value changes in the inspector (editor only)
+    private void OnValidate()
+    {
+        _renderer = GetComponent<MeshRenderer>();
+        SetColorBasedOnSpaceType();
+    }
+}
+
 
     
-}
+
 
 public enum SpaceType
 {
