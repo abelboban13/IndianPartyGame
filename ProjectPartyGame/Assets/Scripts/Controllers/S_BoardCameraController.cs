@@ -15,7 +15,7 @@ public class S_BoardCameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.position = new Vector3(S_BoardManager.Instance.startingSpace.transform.position.x, transform.position.y, S_BoardManager.Instance.startingSpace.transform.position.z + _zOffSet);
     }
 
     // Update is called once per frame

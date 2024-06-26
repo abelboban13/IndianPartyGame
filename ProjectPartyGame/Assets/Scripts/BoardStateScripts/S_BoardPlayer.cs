@@ -124,7 +124,7 @@ public class S_BoardPlayer : MonoBehaviour
     /// </summary>
     public void GameStart()
     {
-        transform.position = new Vector3(S_BoardManager.Instance.startingSpace.transform.position.x, transform.position.y, S_BoardManager.Instance.startingSpace.transform.position.z);
+        transform.position = S_BoardManager.Instance.startingSpace.transform.position;//new Vector3(S_BoardManager.Instance.startingSpace.transform.position.x, transform.position.y, S_BoardManager.Instance.startingSpace.transform.position.z);
         currentSpace = S_BoardManager.Instance.startingSpace;
     }
 
@@ -140,15 +140,18 @@ public class S_BoardPlayer : MonoBehaviour
 
     public void OnReloadBoard()
     {
-        _meshRenderer.enabled = true;
+        foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())
+        {
+            mesh.enabled = true;
+        }
     }
 
     public void OnUnloadBoard()
     {
-        if (cameraSocket.GetComponentInChildren<S_BoardCameraController>() != null)
-            cameraSocket.GetComponentInChildren<S_BoardCameraController>().DisconnectFromPlayer();
-
-        _meshRenderer.enabled = false;
+        foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())
+        {
+            mesh.enabled = false;
+        }
     }
 
     public void ChangeCoins(int num)
@@ -179,7 +182,7 @@ public class S_BoardPlayer : MonoBehaviour
     IEnumerator MoveToNextSpace(int spaces)
     {
         _isMove = true;
-        //Debug.Log(_currentSpace.GiveNextSpace());
+        Debug.Log(currentSpace.GiveNextSpace(this));
         targetSpace = currentSpace.GiveNextSpace(this);
         for(int i = 0; i < spaces; i++)
         {
