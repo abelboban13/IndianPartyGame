@@ -8,9 +8,11 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     [SerializeField] private float _playerSpeed = 5f;
     [SerializeField] private GameObject _player;
+    
     [HideInInspector] public S_BoardCameraController boardCamera;
 
     public List<S_BoardPlayer> _players;
+    public List<GameObject> playerModels;
     private int _playerIndex = 0; //the player whos turn it is
 
     private PlayerInputManager _playerInputManager;
@@ -34,6 +36,11 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     private bool _playerJoinedEvent = false;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        _playerInputManager = GetComponent<PlayerInputManager>();
+    }
 
     // Start is called before the first frame update
     void Start()

@@ -28,8 +28,9 @@ public class S_Space : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
         _renderer = GetComponent<MeshRenderer>();
+        SetColorBasedOnSpaceType();
+        transform.SetParent(null);
     }
 
     // Start is called before the first frame update
@@ -39,7 +40,7 @@ public class S_Space : MonoBehaviour
         {
             S_BoardManager.Instance.startingSpace = this;
         }
-
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
@@ -59,9 +60,8 @@ public class S_Space : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// triggered when player lands on the space
-    /// </summary>
+
+    // triggered when player lands on the space
     public virtual void SpaceLandedOn(S_BoardPlayer player)
     {
         _playersOnSpace.Add(player);
@@ -77,6 +77,10 @@ public class S_Space : MonoBehaviour
             case SpaceType.Negative:
                 player.ChangeCoins(-value);
                 Debug.Log($"player{player.index} loses {value} coins");
+                break;
+            case SpaceType.Item:
+                player.numberOfTraps++;
+                Debug.Log($"player{player.index} found a trap!");
                 break;
             case SpaceType.Reward:
                 if(player.coins >= 30)
@@ -102,16 +106,61 @@ public class S_Space : MonoBehaviour
             foreach(S_BoardPlayer playerOnSpace in _playersOnSpace)
             {
                 //move player random vector
+                playerOnSpace.transform.position = playerOnSpace.transform.position + new Vector3(Random.Range(.5f, 1), 0, Random.Range(.5f, 1));
             }
         }
+
+
 
         player.EndTurn();
     }
 
-    
+    // Sets the color of the space based on the space type.
+    private void SetColorBasedOnSpaceType()
+    {
+        if (_renderer != null)
+        {
+            switch (_spaceType)
+            {
+                case SpaceType.Start:
+                    _renderer.sharedMaterial.color = Color.white;
+                    break;
+                case SpaceType.Positive:
+                    _renderer.sharedMaterial.color = Color.blue;
+                    break;
+                case SpaceType.Negative:
+                    _renderer.sharedMaterial.color = Color.red;
+                    break;
+                case SpaceType.Reward:
+                    _renderer.sharedMaterial.color = Color.yellow;
+                    break;
+                case SpaceType.Skip:
+                    _renderer.sharedMaterial.color = Color.gray;
+                    break;
+                case SpaceType.Item:
+                    _renderer.sharedMaterial.color = Color.green;
+                    break;
+                case SpaceType.Default:
+                    _renderer.sharedMaterial.color = Color.white;
+                    break;
+                default:
+                    _renderer.sharedMaterial.color = Color.black;
+                    break;
+            }
+        }
+    }
+
+    // This method is called when the script is loaded or a value changes in the inspector (editor only)
+    private void OnValidate()
+    {
+        _renderer = GetComponent<MeshRenderer>();
+        SetColorBasedOnSpaceType();
+    }
+}
+
 
     
-}
+
 
 public enum SpaceType
 {
@@ -120,5 +169,6 @@ public enum SpaceType
     Reward,
     Start,
     Item,
-    Skip
+    Skip,
+    Default
 }

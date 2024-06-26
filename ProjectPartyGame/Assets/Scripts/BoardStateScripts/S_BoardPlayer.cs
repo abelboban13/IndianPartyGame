@@ -19,9 +19,13 @@ public class S_BoardPlayer : MonoBehaviour
 
     public int mangos { get; private set; }
 
+    public int numberOfTraps = 0;
+
     public bool turnSkipped = false;
 
     public int index;
+
+    public GameObject model;
 
     private bool _isTurn = false;
 
@@ -37,6 +41,9 @@ public class S_BoardPlayer : MonoBehaviour
     {
         S_BoardManager.Instance._players.Add(this);
         index = S_BoardManager.Instance._players.Count -1;
+        model = Instantiate(S_BoardManager.Instance.playerModels[index]);
+        model.transform.parent = transform;
+        model.transform.position = transform.position;
         DontDestroyOnLoad(this);
         _inputController = GetComponent<S_InputController>();
         _meshRenderer = GetComponent<MeshRenderer>();
@@ -44,7 +51,7 @@ public class S_BoardPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        GameStart();
     }
 
     // Update is called once per frame
@@ -117,7 +124,7 @@ public class S_BoardPlayer : MonoBehaviour
     /// </summary>
     public void GameStart()
     {
-        transform.position = new Vector3(S_BoardManager.Instance.startingSpace.transform.position.x, transform.position.y, S_BoardManager.Instance.startingSpace.transform.position.z);
+        transform.position = S_BoardManager.Instance.startingSpace.transform.position;//new Vector3(S_BoardManager.Instance.startingSpace.transform.position.x, transform.position.y, S_BoardManager.Instance.startingSpace.transform.position.z);
         currentSpace = S_BoardManager.Instance.startingSpace;
     }
 
@@ -133,15 +140,18 @@ public class S_BoardPlayer : MonoBehaviour
 
     public void OnReloadBoard()
     {
-        _meshRenderer.enabled = true;
+        foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())
+        {
+            mesh.enabled = true;
+        }
     }
 
     public void OnUnloadBoard()
     {
-        if (cameraSocket.GetComponentInChildren<S_BoardCameraController>() != null)
-            cameraSocket.GetComponentInChildren<S_BoardCameraController>().DisconnectFromPlayer();
-
-        _meshRenderer.enabled = false;
+        foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())
+        {
+            mesh.enabled = false;
+        }
     }
 
     public void ChangeCoins(int num)
@@ -172,7 +182,7 @@ public class S_BoardPlayer : MonoBehaviour
     IEnumerator MoveToNextSpace(int spaces)
     {
         _isMove = true;
-        //Debug.Log(_currentSpace.GiveNextSpace());
+        Debug.Log(currentSpace.GiveNextSpace(this));
         targetSpace = currentSpace.GiveNextSpace(this);
         for(int i = 0; i < spaces; i++)
         {
