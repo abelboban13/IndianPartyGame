@@ -23,6 +23,8 @@ public class S_BoardPlayer : MonoBehaviour
 
     public int index;
 
+    public GameObject model;
+
     private bool _isTurn = false;
 
     private bool _isMove = false;
@@ -37,6 +39,9 @@ public class S_BoardPlayer : MonoBehaviour
     {
         S_BoardManager.Instance._players.Add(this);
         index = S_BoardManager.Instance._players.Count -1;
+        model = Instantiate(S_BoardManager.Instance.playerModels[index]);
+        model.transform.parent = transform;
+        model.transform.position = transform.position;
         DontDestroyOnLoad(this);
         _inputController = GetComponent<S_InputController>();
         _meshRenderer = GetComponent<MeshRenderer>();

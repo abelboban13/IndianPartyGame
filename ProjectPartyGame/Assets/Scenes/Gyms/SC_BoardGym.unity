@@ -360,6 +360,7 @@ MonoBehaviour:
   _nextSpace:
   - {fileID: 1545443108}
   - {fileID: 793780022}
+  _playersOnSpace: []
 --- !u!136 &554398550
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -483,6 +484,9 @@ MonoBehaviour:
   _player: {fileID: 1530164648068187519, guid: 9c0b90d7990f52b468e8154780da4e4d, type: 3}
   boardCamera: {fileID: 0}
   _players: []
+  playerModels:
+  - {fileID: 919132149155446097, guid: f60d110dd8414434f99b2a171961c819, type: 3}
+  - {fileID: 919132149155446097, guid: d478239b63b63744a96b893a9794c831, type: 3}
   boardStartEvent: {fileID: 11400000, guid: 4faf81a60d7be164f800a7a4b1940a96, type: 2}
   _joining: 0
 --- !u!4 &762635596
@@ -720,6 +724,7 @@ MonoBehaviour:
   value: 10
   _nextSpace:
   - {fileID: 851034972}
+  _playersOnSpace: []
 --- !u!136 &1025066254
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -952,6 +957,7 @@ MonoBehaviour:
   value: 10
   _nextSpace:
   - {fileID: 793780022}
+  _playersOnSpace: []
 --- !u!136 &1545443109
 CapsuleCollider:
   m_ObjectHideFlags: 0
