@@ -28,9 +28,9 @@ public class S_Space : MonoBehaviour
 
     private void Awake()
     {
-        
         _renderer = GetComponent<MeshRenderer>();
         SetColorBasedOnSpaceType();
+        transform.SetParent(null);
     }
 
     // Start is called before the first frame update
@@ -136,6 +136,9 @@ public class S_Space : MonoBehaviour
                 case SpaceType.Item:
                     _renderer.sharedMaterial.color = Color.green;
                     break;
+                case SpaceType.Default:
+                    _renderer.sharedMaterial.color = Color.white;
+                    break;
                 default:
                     _renderer.sharedMaterial.color = Color.black;
                     break;
@@ -162,5 +165,6 @@ public enum SpaceType
     Reward,
     Start,
     Item,
-    Skip
+    Skip,
+    Default
 }
