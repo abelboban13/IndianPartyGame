@@ -60,9 +60,8 @@ public class S_Space : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// triggered when player lands on the space
-    /// </summary>
+
+    // triggered when player lands on the space
     public virtual void SpaceLandedOn(S_BoardPlayer player)
     {
         _playersOnSpace.Add(player);
@@ -112,9 +111,7 @@ public class S_Space : MonoBehaviour
         player.EndTurn();
     }
 
-    /// <summary>
-    /// Sets the color of the space based on the space type.
-    /// </summary>
+    // Sets the color of the space based on the space type.
     private void SetColorBasedOnSpaceType()
     {
         if (_renderer != null)
@@ -122,25 +119,25 @@ public class S_Space : MonoBehaviour
             switch (_spaceType)
             {
                 case SpaceType.Start:
-                    _renderer.material.color = Color.white;
+                    _renderer.sharedMaterial.color = Color.white;
                     break;
                 case SpaceType.Positive:
-                    _renderer.material.color = Color.blue;
+                    _renderer.sharedMaterial.color = Color.blue;
                     break;
                 case SpaceType.Negative:
-                    _renderer.material.color = Color.red;
+                    _renderer.sharedMaterial.color = Color.red;
                     break;
                 case SpaceType.Reward:
-                    _renderer.material.color = Color.yellow;
+                    _renderer.sharedMaterial.color = Color.yellow;
                     break;
                 case SpaceType.Skip:
-                    _renderer.material.color = Color.gray;
+                    _renderer.sharedMaterial.color = Color.gray;
                     break;
                 case SpaceType.Item:
-                    _renderer.material.color = Color.green;
+                    _renderer.sharedMaterial.color = Color.green;
                     break;
                 default:
-                    _renderer.material.color = Color.black;
+                    _renderer.sharedMaterial.color = Color.black;
                     break;
             }
         }
