@@ -136,6 +136,10 @@ public class S_BoardPlayer : MonoBehaviour
         {
             RollDice();
         }
+        else if(_inputController.IsBack)
+        {
+            //use item
+        }
     }
 
     public void OnReloadBoard()

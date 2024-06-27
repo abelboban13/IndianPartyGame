@@ -47,9 +47,21 @@ public class S_Space : MonoBehaviour
     void Update()
     {
         if(S_GameManager.Instance.GameType != S_GameManager.GameMode.Board)
-            _renderer.enabled = false;
+        {
+            foreach(MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>())
+            {
+                renderer.enabled = false;
+            }
+        }
+            
         else
-            _renderer.enabled = true;
+        {
+            foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>())
+            {
+                _renderer.enabled = true;
+            }
+        }
+
     }
     /// <summary>
     /// returns the next connected space
