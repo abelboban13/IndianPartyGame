@@ -16,6 +16,7 @@ public class S_RedLightGame : S_MiniGame
 
     [SerializeField] private TextMeshProUGUI _timer;
 
+
     // var order list
 
     private int _playersOut;
