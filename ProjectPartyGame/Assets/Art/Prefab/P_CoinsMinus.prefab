@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: e5f637dff74df674fa004a7655655a6f, type: 2}
     - target: {fileID: 919132149155446097, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_Name
-      value: CoinsMinus
+      value: P_CoinsMinus
       objectReference: {fileID: 0}
     - target: {fileID: 8414140065852599530, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -88,6 +88,5 @@ MonoBehaviour:
   _spaceType: 1
   value: 3
   _nextSpace:
-  - {fileID: 0}
   - {fileID: 0}
   _playersOnSpace: []

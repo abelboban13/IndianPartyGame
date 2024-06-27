@@ -89,5 +89,4 @@ MonoBehaviour:
   value: 3
   _nextSpace:
   - {fileID: 0}
-  - {fileID: 0}
   _playersOnSpace: []
