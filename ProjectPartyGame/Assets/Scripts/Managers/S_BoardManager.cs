@@ -14,6 +14,9 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     public List<S_BoardPlayer> _players;
     public List<GameObject> playerModels;
     private int _playerIndex = 0; //the player whos turn it is
+    private int _turnNumber;
+    private int _turnCount;
+    [SerializeField] private S_GameEvent _endGame;
 
     private PlayerInputManager _playerInputManager;
     public float playerSpeed 
@@ -91,6 +94,10 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         foreach (S_BoardPlayer player in _players)
         {
             player.OnReloadBoard();
+        }
+        if(_turnNumber >= S_GameManager.Instance.turnLimit)
+        {
+            _endGame.Raise(_players);
         }
         _players[0].StartTurn();
     }

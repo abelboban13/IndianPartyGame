@@ -86,7 +86,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spaceType: 2
+  mango: {fileID: 0}
   value: 3
   _nextSpace:
   - {fileID: 0}
   _playersOnSpace: []
+  matList:
+  - {fileID: 2100000, guid: 3271e40207aff9344a1a3decb425d6a3, type: 2}
+  - {fileID: 2100000, guid: e5f637dff74df674fa004a7655655a6f, type: 2}
+  - {fileID: 2100000, guid: 77779a1b97cd26e4489827b6b78a131b, type: 2}
+  - {fileID: 2100000, guid: 67309e78585b5de42b0323a3346b55ec, type: 2}
+  - {fileID: 2100000, guid: 9db0e00be071ac44baed65c9464eda9b, type: 2}

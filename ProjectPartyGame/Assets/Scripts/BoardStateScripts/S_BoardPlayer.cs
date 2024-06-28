@@ -9,6 +9,8 @@ public class S_BoardPlayer : MonoBehaviour
 
     [SerializeField] private float _speed = 5f;
 
+    [SerializeField] private S_GameEvent _addEvent;
+
     public List<S_Item> inventory {  get; private set; }
 
     public Transform cameraSocket;
@@ -37,6 +39,8 @@ public class S_BoardPlayer : MonoBehaviour
 
     private MeshRenderer _meshRenderer;
 
+    private bool _paused;
+
     private void Awake()
     {
         S_BoardManager.Instance._players.Add(this);
@@ -47,6 +51,7 @@ public class S_BoardPlayer : MonoBehaviour
         DontDestroyOnLoad(this);
         _inputController = GetComponent<S_InputController>();
         _meshRenderer = GetComponent<MeshRenderer>();
+        _addEvent.Raise();
     }
     // Start is called before the first frame update
     void Start()
@@ -58,7 +63,7 @@ public class S_BoardPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        if(_isTurn == true && S_GameManager.Instance.GameType == S_GameManager.GameMode.Board)
+        if(_isTurn == true && S_GameManager.Instance.GameType == S_GameManager.GameMode.Board && !_paused)
         {
             IsTurn();
         }
@@ -218,4 +223,5 @@ public class S_BoardPlayer : MonoBehaviour
         _isMove = false;
         yield return null;
     }
+
 }

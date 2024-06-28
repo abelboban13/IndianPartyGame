@@ -13,6 +13,8 @@ public class S_GameManager : S_Singleton<S_GameManager>
     public GameMode GameType { get; private set; }
 
     [SerializeField] private List<SceneAsset> _minigames;
+    [SerializeField] private int _turnLimit = 10;
+    public int turnLimit { get { return _turnLimit; } }
     // Start is called before the first frame update
     void Start()
     {
