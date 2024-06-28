@@ -113,6 +113,5 @@ public class S_TrafficLight : MonoBehaviour
                 _switchTimer = Random.Range(1, 5);
                 break;
         }
-        Debug.Log(_state);
     }
 }

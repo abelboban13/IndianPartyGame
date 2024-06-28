@@ -51,12 +51,14 @@ public class S_MiniGame : MonoBehaviour
     {
         startPhase = true;
         Debug.Log($"Game starts in: {_startTime}");
-        for(int i = 0; i <= _startTime; i++)
+        for(int i = 1; i < _startTime; i++)
         {
             yield return new WaitForSeconds(1);
             Debug.Log(_startTime -i);
         }
+        yield return new WaitForSeconds(1);
         startPhase = false;
+        Debug.Log("Go!");
         yield return null;
     }
 }

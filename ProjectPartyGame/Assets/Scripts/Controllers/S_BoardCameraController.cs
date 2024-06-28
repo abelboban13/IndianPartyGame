@@ -10,12 +10,18 @@ public class S_BoardCameraController : MonoBehaviour
 
     private void Awake()
     {
-        S_BoardManager.Instance.boardCamera = this;
+        if(S_BoardManager.Instance.boardCamera == null)
+        {
+            DontDestroyOnLoad(this);
+            S_BoardManager.Instance.boardCamera = this;
+        }
+        else
+            Destroy(gameObject);
     }
     // Start is called before the first frame update
-    void Start()
+    public void StartTracking(GameObject trackedObject)
     {
-        transform.position = new Vector3(S_BoardManager.Instance.startingSpace.transform.position.x, transform.position.y, S_BoardManager.Instance.startingSpace.transform.position.z + _zOffSet);
+        transform.position = new Vector3(trackedObject.transform.position.x, transform.position.y, trackedObject.transform.position.z + _zOffSet);
     }
 
     // Update is called once per frame
@@ -34,5 +40,10 @@ public class S_BoardCameraController : MonoBehaviour
     public void DisconnectFromPlayer()
     {
         _trackedPlayer = null;
+    }
+
+    public void SetActive()
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
     }
 }
