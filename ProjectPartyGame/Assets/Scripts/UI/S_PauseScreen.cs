@@ -16,6 +16,7 @@ public class S_PauseScreen : MonoBehaviour
 
     public void Resume()
     {
+        Time.timeScale = 1.0f;
         S_BoardUIManager.Instance.UnPause();
         _optionsMenu.SetActive(false);
     }

@@ -8,7 +8,7 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
     [SerializeField] private S_EndScreen _endScreen;
     [SerializeField] private S_PauseScreen _pauseScreen;
     private int players = 0;
-    private bool paused;
+    [HideInInspector] public bool paused;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,13 +50,19 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
 
     public void PauseGame(S_InputController player)
     {
-        _pauseScreen.gameObject.SetActive(true);
-        _pauseScreen.Paused(player);
-        Time.timeScale = 0;     
+        if (!S_BoardManager.Instance._joining)
+        {
+            paused = true;
+            _pauseScreen.gameObject.SetActive(true);
+            _pauseScreen.Paused(player);
+            Time.timeScale = 0;
+            Debug.Log(Time.timeScale);
+        }    
     }
 
     public void UnPause()
     {
+        paused= false;
         _pauseScreen.gameObject.SetActive(false);
         Time.timeScale = 1;
     }

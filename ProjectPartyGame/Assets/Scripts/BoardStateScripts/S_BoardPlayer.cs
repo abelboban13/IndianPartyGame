@@ -57,7 +57,6 @@ public class S_BoardPlayer : MonoBehaviour
     void Start()
     {
         GameStart();
-        coins = 30;
     }
 
     // Update is called once per frame

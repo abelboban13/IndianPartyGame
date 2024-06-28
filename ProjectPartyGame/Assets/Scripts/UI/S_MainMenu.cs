@@ -31,6 +31,7 @@ public class S_MainMenu : MonoBehaviour
         _menu.SetActive(!_menu.activeSelf);
     }
 
+
     public void QuitGame()
     {
         Application.Quit();
