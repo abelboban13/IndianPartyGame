@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -61,8 +62,18 @@ public class S_BoardPlayer : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
-        if(_isTurn == true && S_GameManager.Instance.GameType == S_GameManager.GameMode.Board && !_paused)
+    {
+        if (S_GameManager.Instance.GameType == S_GameManager.GameMode.Board)
+        {
+            if (_inputController.IsStart)
+            {
+                if (S_BoardUIManager.Instance.paused)
+                    S_BoardUIManager.Instance.UnPause();
+                else
+                    S_BoardUIManager.Instance.PauseGame(_inputController);
+            }
+        }
+        if (_isTurn == true &&  !_paused)
         {
             IsTurn();
         }

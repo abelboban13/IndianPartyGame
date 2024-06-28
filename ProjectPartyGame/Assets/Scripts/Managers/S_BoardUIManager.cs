@@ -65,6 +65,7 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
         paused= false;
         _pauseScreen.gameObject.SetActive(false);
         Time.timeScale = 1;
+        Debug.Log(Time.timeScale);
     }
 
 

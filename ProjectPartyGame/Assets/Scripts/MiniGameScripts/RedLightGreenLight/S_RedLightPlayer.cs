@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XInput;
 
 public class S_RedLightPlayer : MonoBehaviour
 {
@@ -21,6 +22,16 @@ public class S_RedLightPlayer : MonoBehaviour
         playerCamera = GetComponentInChildren<Camera>();
     }
 
+    private void Update()
+    {
+        if (_input.IsStart)
+        {
+            if (S_BoardUIManager.Instance.paused)
+                S_BoardUIManager.Instance.UnPause();
+            else
+                S_BoardUIManager.Instance.PauseGame(_input);
+        }
+    }
     private void FixedUpdate()
     {
         if (!isOut && _miniGame.gameRunning && !_miniGame.startPhase)

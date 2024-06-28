@@ -33,7 +33,7 @@ public class S_TrafficLight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_miniGame.gameRunning && !_miniGame.startPhase)
+        if (_miniGame.gameRunning && !_miniGame.startPhase && !S_BoardUIManager.Instance.paused)
         {
             if (_state == 3)
             {

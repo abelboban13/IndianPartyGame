@@ -32,10 +32,6 @@ public class S_MiniGame : MonoBehaviour
 
     private void Update()
     {
-        if(startPhase)
-        {
-
-        }
     }
 
     public virtual void StartGame()

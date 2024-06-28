@@ -41,14 +41,6 @@ public class S_InputController : MonoBehaviour
         IsBack = _inputMap.FindAction("Back").triggered;
 
         IsStart = _inputMap.FindAction("Start").triggered;
-        if(IsStart)
-        {
-            if (S_BoardUIManager.Instance.paused)
-            
-                S_BoardUIManager.Instance.UnPause();
-            else
-                S_BoardUIManager.Instance.PauseGame(this);
-        }
     }
 
     public void RecieveInputData(InputActionAsset asset, InputActionMap map)
