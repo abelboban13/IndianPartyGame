@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class S_RedLightGame : S_MiniGame
 {
@@ -13,10 +14,18 @@ public class S_RedLightGame : S_MiniGame
 
     [SerializeField] private List<Transform> _spawns;
 
+    [SerializeField] private TextMeshProUGUI _timer;
+
+
     // var order list
 
     private int _playersOut;
     private bool _allOut = false;
+
+    private void FixedUpdate()
+    {
+        _timer.text = Mathf.RoundToInt(trafficLight._gameTimer).ToString();
+    }
 
     public override void LoadGame()
     {

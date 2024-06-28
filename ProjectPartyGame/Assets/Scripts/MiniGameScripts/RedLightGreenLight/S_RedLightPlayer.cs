@@ -23,7 +23,7 @@ public class S_RedLightPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isOut && _miniGame.gameRunning)
+        if (!isOut && _miniGame.gameRunning && !_miniGame.startPhase)
             _rb.velocity = new Vector3(_input.MoveInput.x * _speed, 0, _input.MoveInput.y * _speed);
         else
             _rb.velocity = Vector3.zero;

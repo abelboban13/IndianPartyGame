@@ -5,6 +5,11 @@ using UnityEngine;
 public class S_Space : MonoBehaviour
 {
     [SerializeField] protected SpaceType _spaceType;
+    public SpaceType spaceType { get { return _spaceType; } }
+
+    public bool isReward { get; private set; }
+
+    [HideInInspector] public GameObject mango;
 
     [SerializeField] protected int value = 3;
 
@@ -14,6 +19,8 @@ public class S_Space : MonoBehaviour
     private MeshRenderer _renderer;
 
     public List<S_BoardPlayer> _playersOnSpace = new List<S_BoardPlayer>();
+
+    public Material[] matList = new Material[6];
 
     /// <summary>
     /// returns the number of spaces connected to this one
@@ -29,8 +36,8 @@ public class S_Space : MonoBehaviour
     private void Awake()
     {
         _renderer = GetComponent<MeshRenderer>();
+        matList = Resources.LoadAll<Material>("SpaceMaterials");
         SetColorBasedOnSpaceType();
-        transform.SetParent(null);
     }
 
     // Start is called before the first frame update
@@ -40,16 +47,42 @@ public class S_Space : MonoBehaviour
         {
             S_BoardManager.Instance.startingSpace = this;
         }
-        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
     void Update()
     {
         if(S_GameManager.Instance.GameType != S_GameManager.GameMode.Board)
-            _renderer.enabled = false;
+        {
+            foreach(MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>())
+            {
+                renderer.enabled = false;
+            }
+        }
+            
         else
+        {
+            foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>())
+            {
+                _renderer.enabled = true;
+            }
+        }
+    }
+
+    public void Load()
+    {
+        foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>())
+        {
             _renderer.enabled = true;
+        }
+    }
+
+    public void UnLoad()
+    {
+        foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>())
+        {
+            renderer.enabled = false;
+        }
     }
     /// <summary>
     /// returns the next connected space
@@ -59,6 +92,26 @@ public class S_Space : MonoBehaviour
         return _nextSpace[direction];    
     }
 
+    public void SpacePassed(S_BoardPlayer player)
+    {
+        if(_spaceType == SpaceType.Reward && isReward)
+        {
+            if (player.coins >= 30)
+            {
+                player.ChangeCoins(-30);
+                player.ChangeMangos(1);
+                Debug.Log($"player{player.index} gets a mango!");
+                Destroy(mango);
+                isReward = false;
+                S_SpaceManager.Instance.ManageMangoes();
+            }
+            else
+            {
+                player.ChangeCoins(30);
+                Debug.Log($"player{player.index} gains {30} coins");
+            }     
+        }
+    }
 
 
     // triggered when player lands on the space
@@ -82,20 +135,6 @@ public class S_Space : MonoBehaviour
                 player.numberOfTraps++;
                 Debug.Log($"player{player.index} found a trap!");
                 break;
-            case SpaceType.Reward:
-                if(player.coins >= 30)
-                {
-                    player.ChangeCoins(-30);
-                    player.ChangeMangos(1);
-                    Debug.Log($"player{player.index} gets a mango!");
-                }
-                else
-                {
-                    player.ChangeCoins(30);
-                    Debug.Log($"player{player.index} gains {30} coins");
-                }
-
-                break;
             case SpaceType.Skip:
                 player.turnSkipped = true;
                 break;
@@ -115,6 +154,14 @@ public class S_Space : MonoBehaviour
         player.EndTurn();
     }
 
+    public void GenerateReward(GameObject keyObject)
+    {
+        isReward = true;
+        mango = Instantiate(keyObject);
+        mango.transform.parent = transform;
+        mango.transform.position = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
+    }
+
     // Sets the color of the space based on the space type.
     private void SetColorBasedOnSpaceType()
     {
@@ -123,39 +170,52 @@ public class S_Space : MonoBehaviour
             switch (_spaceType)
             {
                 case SpaceType.Start:
-                    _renderer.sharedMaterial.color = Color.white;
+                    _renderer.material = GetMaterial("M_Default");
                     break;
                 case SpaceType.Positive:
-                    _renderer.sharedMaterial.color = Color.blue;
+                    _renderer.material = GetMaterial("M_CoinsAdded");
                     break;
                 case SpaceType.Negative:
-                    _renderer.sharedMaterial.color = Color.red;
+                    _renderer.material = GetMaterial("M_CoinsMinus");
                     break;
                 case SpaceType.Reward:
-                    _renderer.sharedMaterial.color = Color.yellow;
+                    _renderer.material = GetMaterial("Mangoes");
                     break;
                 case SpaceType.Skip:
-                    _renderer.sharedMaterial.color = Color.gray;
+                    _renderer.material = GetMaterial("M_Default");
                     break;
                 case SpaceType.Item:
-                    _renderer.sharedMaterial.color = Color.green;
+                    _renderer.material = GetMaterial("Trap");
                     break;
                 case SpaceType.Default:
-                    _renderer.sharedMaterial.color = Color.white;
+                    _renderer.material = GetMaterial("M_Default");
                     break;
                 default:
-                    _renderer.sharedMaterial.color = Color.black;
+                    _renderer.material = GetMaterial("M_Default");
                     break;
             }
         }
     }
 
     // This method is called when the script is loaded or a value changes in the inspector (editor only)
+    
     private void OnValidate()
     {
         _renderer = GetComponent<MeshRenderer>();
+        matList = Resources.LoadAll<Material>("SpaceMaterials");
         SetColorBasedOnSpaceType();
     }
+
+    private Material GetMaterial(string name)
+    {
+        foreach (Material mat in matList)
+        {
+            if (mat.name == name)
+                return mat;
+        }
+        return null;
+    }
+ 
 }
 
 

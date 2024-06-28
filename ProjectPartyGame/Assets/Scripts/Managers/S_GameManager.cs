@@ -45,8 +45,9 @@ public class S_GameManager : S_Singleton<S_GameManager>
 
     public void LoadBoard()
     {
+        SceneManager.LoadScene("BoardSetup");
+        S_SpaceManager.Instance.LoadSpaces();
         S_BoardManager.Instance.LoadBoard();
-        SceneManager.LoadScene("SC_BoardGym");
         GameType = GameMode.Board;
     }
 

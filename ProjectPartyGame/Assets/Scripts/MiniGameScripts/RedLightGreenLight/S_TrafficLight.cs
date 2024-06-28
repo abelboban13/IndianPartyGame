@@ -7,14 +7,14 @@ public class S_TrafficLight : MonoBehaviour
 {
 
     [SerializeField] private Material _redMaterial;
-    [SerializeField] private Material _yelllowMaterial;
+    [SerializeField] private Material _yellowMaterial;
     [SerializeField] private Material _greenMaterial;
     [SerializeField] private  S_RedLightGame _miniGame;
     [SerializeField] private float _maxTime = 20;
 
-    private bool _isActive = false;
+    private int _state = 0;
     private MeshRenderer _renderer;
-    private float _gameTimer = 0;
+    public float _gameTimer { get; private set; }
     private float _switchTimer = 0;
     private void Awake()
     {
@@ -26,18 +26,17 @@ public class S_TrafficLight : MonoBehaviour
     {
         _miniGame = S_GameManager.Instance.currentMiniGame.GetComponent<S_RedLightGame>();
         _gameTimer = _maxTime;
-        _switchTimer = Random.Range(3, 5);
+        SwitchColor();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_miniGame.gameRunning)
+        if (_miniGame.gameRunning && !_miniGame.startPhase)
         {
-            if (_isActive == false)
+            if (_state == 3)
             {
-                _renderer.material = _redMaterial;
                 foreach (var player in _miniGame.players)
                 {
                     if (player.IsMoving())
@@ -50,9 +49,6 @@ public class S_TrafficLight : MonoBehaviour
                     }
                 }
             }
-            else
-                _renderer.material = _greenMaterial;
-
 
             _gameTimer -= Time.deltaTime;
 
@@ -97,7 +93,25 @@ public class S_TrafficLight : MonoBehaviour
 
     public void SwitchColor()
     {
-        _switchTimer = Random.Range(1,5);
-        _isActive = !_isActive;
+        if (_state >= 3)
+            _state = 1;
+        else
+            _state++;
+
+        switch(_state)
+        {
+            case 1:
+                _renderer.material = _greenMaterial;
+                _switchTimer = Random.Range(1, 5);
+                break;
+            case 2:
+                _renderer.material = _yellowMaterial;
+                _switchTimer = Random.Range(.5f, 3);
+                break;
+            case 3:
+                _renderer.material = _redMaterial;
+                _switchTimer = Random.Range(1, 5);
+                break;
+        }
     }
 }

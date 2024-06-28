@@ -52,6 +52,7 @@ public class S_BoardPlayer : MonoBehaviour
     void Start()
     {
         GameStart();
+        coins = 30;
     }
 
     // Update is called once per frame
@@ -88,6 +89,7 @@ public class S_BoardPlayer : MonoBehaviour
 
     public void StartTurn()
     {
+        S_BoardManager.Instance.boardCamera.FollowPLayer(this);
         if(turnSkipped)
         {
             Debug.Log($"player{index + 1}'s turn is skipped");
@@ -136,6 +138,10 @@ public class S_BoardPlayer : MonoBehaviour
         {
             RollDice();
         }
+        else if(_inputController.IsBack)
+        {
+            //use item
+        }
     }
 
     public void OnReloadBoard()
@@ -182,7 +188,6 @@ public class S_BoardPlayer : MonoBehaviour
     IEnumerator MoveToNextSpace(int spaces)
     {
         _isMove = true;
-        Debug.Log(currentSpace.GiveNextSpace(this));
         targetSpace = currentSpace.GiveNextSpace(this);
         for(int i = 0; i < spaces; i++)
         {
@@ -196,7 +201,7 @@ public class S_BoardPlayer : MonoBehaviour
             {
                 targetSpace = currentSpace.GiveNextSpace(this);
             }
-            //handles the actual movement of the player. rounded so that its not trying to get to an infinitly pricice position
+            //handles the actual movement of the player. rounded so that its not trying to get to an infinitly prisice position
             while ((Mathf.Round(transform.position.x) != Mathf.Round(targetSpace.transform.position.x)) || (Mathf.Round(transform.position.z) != Mathf.Round(targetSpace.transform.position.z)))
             {
                 yield return new WaitForFixedUpdate();
@@ -205,6 +210,7 @@ public class S_BoardPlayer : MonoBehaviour
                 //Debug.Log(targetSpace);
             }
             currentSpace = targetSpace;
+            currentSpace.SpacePassed(this);
             yield return new WaitForSeconds(_travelDelay);
         }
         currentSpace = targetSpace;

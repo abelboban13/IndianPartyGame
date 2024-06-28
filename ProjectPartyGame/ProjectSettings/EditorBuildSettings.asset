@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gyms/SC_BoardGym.unity
     guid: d4aaa956850d34d45a085a0855cd100b
+  - enabled: 1
+    path: Assets/Scenes/Gyms/BoardSetup.unity
+    guid: 14306b0711a2123449c2f81132815e92
   - enabled: 1
     path: Assets/Scenes/Gyms/SC_MiniGameGym.unity
     guid: 703428d8f490e6f49b9b1b218e2eafb6

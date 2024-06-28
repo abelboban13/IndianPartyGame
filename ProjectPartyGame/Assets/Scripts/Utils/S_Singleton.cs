@@ -28,6 +28,7 @@ public class S_Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         if (_instance == null)
         {
+            Debug.Log($"Initialized {name}");
             _instance = this as T;
             DontDestroyOnLoad(gameObject);
         }
