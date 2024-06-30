@@ -91,7 +91,7 @@ public class S_Space : MonoBehaviour
     /// <summary>
     /// returns the next connected space
     /// </summary>
-    public virtual S_Space GiveNextSpace(S_BoardPlayer player, int direction = 0)
+    public virtual S_Space GiveNextSpace(int direction = 0)
     {
         return _nextSpace[direction];    
     }

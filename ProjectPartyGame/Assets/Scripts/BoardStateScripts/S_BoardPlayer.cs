@@ -34,6 +34,8 @@ public class S_BoardPlayer : MonoBehaviour
 
     private bool _isMove = false;
 
+    public bool _isUsing;
+
     private S_Space targetSpace;
 
     private S_InputController _inputController;
@@ -209,18 +211,18 @@ public class S_BoardPlayer : MonoBehaviour
     IEnumerator MoveToNextSpace(int spaces)
     {
         _isMove = true;
-        targetSpace = currentSpace.GiveNextSpace(this);
+        targetSpace = currentSpace.GiveNextSpace();
         for(int i = 0; i < spaces; i++)
         {
             if(currentSpace.NextSpaceNum >= 2)
             {
                 Debug.Log("awaiting player input");
                 yield return new WaitUntil(() => _inputController.MoveInput.x != 0); 
-                targetSpace = currentSpace.GiveNextSpace(this, _inputController.MoveInput.x > 0 ? 1 :0);//TODO: allow forward y input to return a left choice
+                targetSpace = currentSpace.GiveNextSpace(_inputController.MoveInput.x > 0 ? 1 :0);//TODO: allow forward y input to return a left choice
             }
             else
             {
-                targetSpace = currentSpace.GiveNextSpace(this);
+                targetSpace = currentSpace.GiveNextSpace();
             }
             //handles the actual movement of the player. rounded so that its not trying to get to an infinitly prisice position
             while ((Mathf.Round(transform.position.x) != Mathf.Round(targetSpace.transform.position.x)) || (Mathf.Round(transform.position.z) != Mathf.Round(targetSpace.transform.position.z)))
