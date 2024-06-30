@@ -13,6 +13,8 @@ public class S_Space : MonoBehaviour
 
     [SerializeField] protected int value = 3;
 
+    [SerializeField] private int _trapValue = 3;
+
     [Tooltip("place the object you want to path to. a left input first")]
     [SerializeField] private S_Space[] _nextSpace = new S_Space[2];
 
@@ -21,6 +23,8 @@ public class S_Space : MonoBehaviour
     public List<S_BoardPlayer> _playersOnSpace = new List<S_BoardPlayer>();
 
     public Material[] matList = new Material[6];
+
+    public bool hasTrap;
 
     /// <summary>
     /// returns the number of spaces connected to this one
@@ -139,6 +143,14 @@ public class S_Space : MonoBehaviour
                 player.turnSkipped = true;
                 break;
         }
+
+        if(hasTrap)
+        {
+            player.ChangeCoins(_trapValue);
+            hasTrap = false;
+            Debug.Log($"trap triggered! Player{player.index} loses {_trapValue} coins!");
+        }
+
         if(_playersOnSpace.Count > 1)
         {
             // offset players so they dont overlap

@@ -156,6 +156,12 @@ public class S_BoardPlayer : MonoBehaviour
         else if(_inputController.IsBack)
         {
             //use item
+            if(numberOfTraps > 0)
+            {
+                Debug.Log("trap placed");
+                numberOfTraps -= 1;
+                currentSpace.hasTrap = true;
+            }
         }
     }
 
