@@ -199,10 +199,10 @@ public class S_BoardPlayer : MonoBehaviour
     {
         foreach(S_Item item in inventory)
         {
-            if(item.GetType() == itemToAdd.GetType())
+            if(item.itemName == itemToAdd.itemName)
             {
                 item.amount++;
-                return; ;
+                return; 
             }
         }
         inventory.Add(itemToAdd);

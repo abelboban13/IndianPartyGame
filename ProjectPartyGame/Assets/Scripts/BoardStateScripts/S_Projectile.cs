@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class S_Projectile : MonoBehaviour
 {
-    public S_Space space;
     public int range = 3;
     private S_Space targetSpace;
     private S_Space currentSpace;

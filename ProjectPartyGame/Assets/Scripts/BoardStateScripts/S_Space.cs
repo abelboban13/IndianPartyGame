@@ -18,6 +18,8 @@ public class S_Space : MonoBehaviour
     [Tooltip("place the object you want to path to. a left input first")]
     [SerializeField] private S_Space[] _nextSpace = new S_Space[2];
 
+    private S_ItemManager _itemManager;
+
     private MeshRenderer _renderer;
 
     public List<S_BoardPlayer> _playersOnSpace = new List<S_BoardPlayer>();
@@ -42,6 +44,7 @@ public class S_Space : MonoBehaviour
         _renderer = GetComponent<MeshRenderer>();
         matList = Resources.LoadAll<Material>("SpaceMaterials");
         SetColorBasedOnSpaceType();
+        _itemManager = S_ItemManager.Instance;
     }
 
     // Start is called before the first frame update
@@ -136,8 +139,16 @@ public class S_Space : MonoBehaviour
                 Debug.Log($"player{player.index} loses {value} coins");
                 break;
             case SpaceType.Item:
-                player.numberOfTraps++;
-                Debug.Log($"player{player.index} found a trap!");
+                S_Item item = _itemManager.GetRandomItem();
+                if(item == null)
+                {
+                    player.numberOfTraps++;
+                    Debug.Log($"player{player.index} found a trap!");
+                }
+                else
+                {
+                    player.AddItem(item);
+                }
                 break;
             case SpaceType.Skip:
                 player.turnSkipped = true;
