@@ -49,7 +49,7 @@ public class S_Projectile : MonoBehaviour
             currentSpace = targetSpace;
         }
         currentSpace = targetSpace;
-        Invoke("Destroy(gameObject)", 1);
+        Destroy(gameObject,1);
         yield return null;
     }
 }
