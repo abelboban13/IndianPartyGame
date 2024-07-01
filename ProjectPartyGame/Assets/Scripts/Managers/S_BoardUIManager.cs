@@ -73,6 +73,9 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
     public void OpenInventory(S_BoardPlayer boardPlayer)
     {
         _playerInventory.player = boardPlayer;
-        _playerInventory.gameObject.SetActive(!_playerInventory.gameObject.activeSelf);
+        if(_playerInventory.gameObject.activeSelf)
+            _playerInventory.gameObject.SetActive(false);
+        else
+            _playerInventory.gameObject.SetActive(true);
     }
 }

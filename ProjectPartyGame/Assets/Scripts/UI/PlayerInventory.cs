@@ -19,6 +19,7 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach(InventoryButton inventoryButton in _buttons)
         {
+            _buttons.Remove(inventoryButton);
             Destroy(inventoryButton.gameObject);
             trapButton.SetActive(false);
         }
