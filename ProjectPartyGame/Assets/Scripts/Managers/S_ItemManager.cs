@@ -27,10 +27,15 @@ public class S_ItemManager : S_Singleton<S_ItemManager>
 
     public S_Item GetRandomItem()
     {
-        int x = Random.Range(-1, items.Count);
+        int x = Random.Range(-1, items.Count - 1);
         if(x < 0)
             return null;
         else
             return items[x];
+    }
+
+    public S_Item GetItem(int itemIndex)
+    {
+        return items[itemIndex];
     }
 }

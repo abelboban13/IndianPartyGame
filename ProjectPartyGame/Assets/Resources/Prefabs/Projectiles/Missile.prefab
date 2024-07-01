@@ -150,6 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4609ae43459ed4fafba4500c253f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  space: {fileID: 0}
   range: 3
-  _speed: 6
+  player: {fileID: 0}
+  _speed: 15

@@ -7,6 +7,7 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
     [SerializeField] public S_HUD[] playerHuds;
     [SerializeField] private S_EndScreen _endScreen;
     [SerializeField] private S_PauseScreen _pauseScreen;
+    [SerializeField] private PlayerInventory _playerInventory;
     private int players = 0;
     [HideInInspector] public bool paused;
     // Start is called before the first frame update
@@ -14,6 +15,7 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
     {
         _endScreen.gameObject.SetActive(false);
         _pauseScreen.gameObject.SetActive(false);   
+        _playerInventory.gameObject.SetActive(false);
         foreach (var player in playerHuds)
         {
             player.gameObject.SetActive(false);
@@ -68,5 +70,9 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
         Debug.Log(Time.timeScale);
     }
 
-
+    public void OpenInventory(S_BoardPlayer boardPlayer)
+    {
+        _playerInventory.player = boardPlayer;
+        _playerInventory.gameObject.SetActive(!_playerInventory.gameObject.activeSelf);
+    }
 }

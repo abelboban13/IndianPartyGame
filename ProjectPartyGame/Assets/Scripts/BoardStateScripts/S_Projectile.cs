@@ -5,6 +5,7 @@ using UnityEngine;
 public class S_Projectile : MonoBehaviour
 {
     public int range = 3;
+    public S_BoardPlayer player;
     private S_Space targetSpace;
     private S_Space currentSpace;
     [SerializeField] protected float _speed = 6;
@@ -12,6 +13,7 @@ public class S_Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentSpace = player.currentSpace;
         StartCoroutine(Move());
     }
 

@@ -12,7 +12,7 @@ public class S_BoardPlayer : MonoBehaviour
 
     [SerializeField] private S_GameEvent _addEvent;
 
-    public List<S_Item> inventory {  get; private set; }
+    public List<S_Item> inventory = new List<S_Item>();
 
     public Transform cameraSocket;
 
@@ -22,7 +22,7 @@ public class S_BoardPlayer : MonoBehaviour
 
     public int mangos { get; private set; }
 
-    public int numberOfTraps = 0;
+    public int numberOfTraps;
 
     public bool turnSkipped = false;
 
@@ -34,7 +34,7 @@ public class S_BoardPlayer : MonoBehaviour
 
     private bool _isMove = false;
 
-    public bool _isUsing;
+    private bool _isUsing;
 
     private S_Space targetSpace;
 
@@ -60,6 +60,8 @@ public class S_BoardPlayer : MonoBehaviour
     void Start()
     {
         GameStart();
+        AddItem(S_ItemManager.Instance.GetItem(0));
+        numberOfTraps += 1;
     }
 
     // Update is called once per frame
@@ -104,6 +106,26 @@ public class S_BoardPlayer : MonoBehaviour
         }
     }
 
+    public void UseItem(int itemIndex)
+    {
+        _isUsing = false;
+        S_Item item = inventory[itemIndex];
+        S_Projectile proj = Instantiate(inventory[itemIndex].itemPrefab).GetComponent<S_Projectile>();
+        proj.player = this;
+        proj.transform.position = transform.position;
+
+        item.amount--;
+        if(item.amount <= 0)
+        {
+            inventory.Remove(item);
+        }
+    }
+    public void UseTrap()
+    {
+        Debug.Log("trap placed");
+        numberOfTraps--;
+        currentSpace.hasTrap = true;
+    }
     public void StartTurn()
     {
         S_BoardManager.Instance.boardCamera.FollowPLayer(this);
@@ -151,19 +173,24 @@ public class S_BoardPlayer : MonoBehaviour
     private void IsTurn()
     {
         //all player turn options go here
-        if (_inputController.IsConfirm)
+        if (_inputController.IsConfirm && !_isUsing)
         {
             RollDice();
         }
         else if(_inputController.IsBack)
         {
-            //use item
-            if(numberOfTraps > 0)
+            if(!_isMove && !_isUsing)
             {
-                Debug.Log("trap placed");
-                numberOfTraps -= 1;
-                currentSpace.hasTrap = true;
+                _isUsing = true;
+                S_BoardUIManager.Instance.OpenInventory(this);
+                Debug.Log(numberOfTraps);
             }
+            else if(_isUsing)
+            {
+                S_BoardUIManager.Instance.OpenInventory(this);
+                _isUsing = false;
+            }
+                
         }
     }
 
