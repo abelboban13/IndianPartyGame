@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class S_PauseScreen : MonoBehaviour
 {
     [SerializeField] private S_InputController controller;
-    [SerializeField] private GameObject _optionsMenu;
+    private GameObject defButton;
 
-    public void Paused(S_InputController input)
+    private void Start()
     {
-        controller = input;
-        _optionsMenu.SetActive(false);
+        defButton = GetComponentInChildren<Button>().gameObject;
+    }
+
+    private void OnEnable()
+    {
+        S_BoardUIManager.Instance.InputSetUp(defButton);
     }
 
     public void Resume()
     {
         Time.timeScale = 1.0f;
         S_BoardUIManager.Instance.UnPause();
-        _optionsMenu.SetActive(false);
-    }
-    public void Options()
-    {
-        _optionsMenu.SetActive(true);
     }
     public void MainMenu()
     {

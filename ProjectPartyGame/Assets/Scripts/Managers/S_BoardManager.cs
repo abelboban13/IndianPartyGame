@@ -75,12 +75,28 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     public void StartGame()
     {
         boardCamera.StartTracking(startingSpace.gameObject);
-        _joining = true;    
+        _joining = true;
         _playerInputManager.EnableJoining();
 
         StartCoroutine(PlayerJoin());
     }
 
+    public void PausePlayers(S_BoardPlayer pausingPlayer)
+    {
+        foreach(S_BoardPlayer player in _players)
+        {
+            if (player == pausingPlayer)
+                break;
+            else
+                player.GetComponent<PlayerInput>().DeactivateInput();
+        }
+    }
+
+    public void UnPausePlayers()
+    {
+        foreach(var player in _players)
+            player.GetComponent<PlayerInput>().ActivateInput();
+    }
     public void UnloadBoard()
     {
         foreach(S_BoardPlayer player in _players)
