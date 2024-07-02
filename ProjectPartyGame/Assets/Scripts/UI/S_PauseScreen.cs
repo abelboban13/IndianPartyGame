@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class S_PauseScreen : MonoBehaviour
 {
-    [SerializeField] private S_InputController controller;
+    [HideInInspector] public S_InputController controller;
     private GameObject defButton;
 
     private void Start()
@@ -16,7 +16,7 @@ public class S_PauseScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        S_BoardUIManager.Instance.InputSetUp(defButton);
+        S_BoardUIManager.Instance.InputSetUp(defButton,controller.GetComponent<S_BoardPlayer>());
     }
 
     public void Resume()

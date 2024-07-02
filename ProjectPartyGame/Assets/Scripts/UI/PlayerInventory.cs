@@ -16,9 +16,9 @@ public class PlayerInventory : MonoBehaviour
       //  controller = player.GetComponent<S_InputController>();
         SetUpInventory();
         if (player.numberOfTraps > 0)
-            S_BoardUIManager.Instance.InputSetUp(trapButton);
+            S_BoardUIManager.Instance.InputSetUp(trapButton, player);
         else
-            S_BoardUIManager.Instance.InputSetUp(_buttons[0].gameObject);
+            S_BoardUIManager.Instance.InputSetUp(_buttons[0].gameObject, player);
     }
     private void OnDisable()
     {

@@ -827,7 +827,7 @@ MonoBehaviour:
   m_TrackedDevicePositionAction: {fileID: 0}
   m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 2
+  m_PointerBehavior: 0
   m_CursorLockBehavior: 0
 --- !u!1001 &187277667
 PrefabInstance:

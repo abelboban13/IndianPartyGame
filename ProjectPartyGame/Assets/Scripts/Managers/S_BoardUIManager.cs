@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
 {
@@ -15,13 +17,17 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
     // Start is called before the first frame update
     void Start()
     {
-        _eventSystem = FindAnyObjectByType<EventSystem>();
+        _eventSystem = EventSystem.current;
         _endScreen.gameObject.SetActive(false);
         _pauseScreen.gameObject.SetActive(false);   
         _playerInventory.gameObject.SetActive(false);
         foreach (var player in playerHuds)
         {
             player.gameObject.SetActive(false);
+        }
+        foreach(var player in S_BoardManager.Instance._players)
+        {
+            player.GetComponent<PlayerInput>().uiInputModule = _eventSystem.GetComponent<InputSystemUIInputModule>();
         }
     }
 
@@ -58,6 +64,7 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
         if (!S_BoardManager.Instance._joining)
         {
             paused = true;
+            _pauseScreen.controller = player;
             _pauseScreen.gameObject.SetActive(true);
             if(S_GameManager.Instance.GameType == S_GameManager.GameMode.Board)
                 S_BoardManager.Instance.PausePlayers(player.GetComponent<S_BoardPlayer>());
@@ -95,8 +102,9 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
         }
     }
 
-    public void InputSetUp(GameObject button)
+    public void InputSetUp(GameObject button,S_BoardPlayer boardPlayer)
     {
+        _eventSystem.GetComponent<InputSystemUIInputModule>().actionsAsset = boardPlayer.GetComponent<PlayerInput>().actions;
         StartCoroutine(WaitAFrame(button));
     }
 

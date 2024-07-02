@@ -136,6 +136,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     {
         _playerJoinedEvent = true;
     }
+
     IEnumerator PlayerJoin()
     {
         int playerNum = 1;
