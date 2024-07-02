@@ -32,7 +32,7 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
     void Update()
     {
         //updates Hud elements coin, mango and trap counters based on number of players
-        if(players > 0 && S_GameManager.Instance.GameType == S_GameManager.GameMode.Board)
+        if(players > 0 )
         {
             for (int i = 0; i < S_BoardManager.Instance._players.Count; i++)
             {
