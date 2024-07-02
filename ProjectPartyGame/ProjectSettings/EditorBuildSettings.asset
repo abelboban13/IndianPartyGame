@@ -15,7 +15,10 @@ EditorBuildSettings:
     path: Assets/Scenes/BoardSetup.unity
     guid: 14306b0711a2123449c2f81132815e92
   - enabled: 1
-    path: Assets/Scenes/SC_MiniGameGym.unity
+    path: Assets/Scenes/MiniGames/SC_MiniGameGym.unity
     guid: 703428d8f490e6f49b9b1b218e2eafb6
+  - enabled: 1
+    path: Assets/Scenes/MiniGames/ShoreAndPond.unity
+    guid: 7724055dfa6438f449155da25e245bbe
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d6224890487da2d4cb964c81aa7f72f0, type: 2}

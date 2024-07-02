@@ -99,6 +99,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     }
     public void UnloadBoard()
     {
+        boardCamera.gameObject.SetActive(false);
         foreach(S_BoardPlayer player in _players)
         {
             player.OnUnloadBoard();
