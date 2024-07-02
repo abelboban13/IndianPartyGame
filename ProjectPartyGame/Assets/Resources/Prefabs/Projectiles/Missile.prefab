@@ -151,5 +151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
+  coinsLostOnImpact: 5
   player: {fileID: 0}
   _speed: 15

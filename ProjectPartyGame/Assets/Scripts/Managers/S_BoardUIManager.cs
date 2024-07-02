@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
 {
@@ -8,17 +11,23 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
     [SerializeField] private S_EndScreen _endScreen;
     [SerializeField] private S_PauseScreen _pauseScreen;
     [SerializeField] private PlayerInventory _playerInventory;
+    private EventSystem _eventSystem;
     private int players = 0;
     [HideInInspector] public bool paused;
     // Start is called before the first frame update
     void Start()
     {
+        _eventSystem = EventSystem.current;
         _endScreen.gameObject.SetActive(false);
         _pauseScreen.gameObject.SetActive(false);   
         _playerInventory.gameObject.SetActive(false);
         foreach (var player in playerHuds)
         {
             player.gameObject.SetActive(false);
+        }
+        foreach(var player in S_BoardManager.Instance._players)
+        {
+            player.GetComponent<PlayerInput>().uiInputModule = _eventSystem.GetComponent<InputSystemUIInputModule>();
         }
     }
 
@@ -55,10 +64,13 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
         if (!S_BoardManager.Instance._joining)
         {
             paused = true;
+            _pauseScreen.controller = player;
             _pauseScreen.gameObject.SetActive(true);
-            _pauseScreen.Paused(player);
+            if(S_GameManager.Instance.GameType == S_GameManager.GameMode.Board)
+                S_BoardManager.Instance.PausePlayers(player.GetComponent<S_BoardPlayer>());
+            
             Time.timeScale = 0;
-            Debug.Log(Time.timeScale);
+            _playerInventory.gameObject.SetActive(false);
         }    
     }
 
@@ -67,12 +79,40 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
         paused= false;
         _pauseScreen.gameObject.SetActive(false);
         Time.timeScale = 1;
-        Debug.Log(Time.timeScale);
+        S_BoardManager.Instance.UnPausePlayers();
     }
 
     public void OpenInventory(S_BoardPlayer boardPlayer)
     {
-        _playerInventory.player = boardPlayer;
-        _playerInventory.gameObject.SetActive(!_playerInventory.gameObject.activeSelf);
+        if(!paused)
+        {
+            _playerInventory.player = boardPlayer;
+            if (_playerInventory.gameObject.activeSelf)
+            {
+                _playerInventory.gameObject.SetActive(false);
+                S_BoardManager.Instance.UnPausePlayers();
+            }
+ 
+            else
+            {
+                _playerInventory.gameObject.SetActive(true);
+                S_BoardManager.Instance.PausePlayers(boardPlayer.GetComponent<S_BoardPlayer>());
+            }
+                
+        }
+    }
+
+    public void InputSetUp(GameObject button,S_BoardPlayer boardPlayer)
+    {
+        _eventSystem.GetComponent<InputSystemUIInputModule>().actionsAsset = boardPlayer.GetComponent<PlayerInput>().actions;
+        StartCoroutine(WaitAFrame(button));
+    }
+
+    public IEnumerator WaitAFrame(GameObject button)
+    {
+        _eventSystem.SetSelectedGameObject(null);
+        yield return new WaitForEndOfFrame();
+        _eventSystem.SetSelectedGameObject(button);
+        yield return null;
     }
 }

@@ -62,6 +62,7 @@ public class S_BoardPlayer : MonoBehaviour
         GameStart();
         AddItem(S_ItemManager.Instance.GetItem(0));
         numberOfTraps += 1;
+        coins = 5;
     }
 
     // Update is called once per frame
@@ -77,7 +78,7 @@ public class S_BoardPlayer : MonoBehaviour
                     S_BoardUIManager.Instance.PauseGame(_inputController);
             }
         }
-        if (_isTurn == true &&  !_paused)
+        if (_isTurn == true &&  !S_BoardUIManager.Instance.paused)
         {
             IsTurn();
         }
@@ -183,7 +184,6 @@ public class S_BoardPlayer : MonoBehaviour
             {
                 _isUsing = true;
                 S_BoardUIManager.Instance.OpenInventory(this);
-                Debug.Log(numberOfTraps);
             }
             else if(_isUsing)
             {

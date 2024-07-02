@@ -5,7 +5,8 @@ using UnityEngine;
 public class S_Projectile : MonoBehaviour
 {
     public int range = 3;
-    public S_BoardPlayer player;
+    [SerializeField] private int coinsLostOnImpact;
+    [HideInInspector] public S_BoardPlayer player;
     private S_Space targetSpace;
     private S_Space currentSpace;
     [SerializeField] protected float _speed = 6;
@@ -38,7 +39,7 @@ public class S_Projectile : MonoBehaviour
         {
             targetSpace = currentSpace.GiveNextSpace();
             
-            //handles the actual movement of the player. rounded so that its not trying to get to an infinitly prisice position
+            //handles the actual movement of the missile. rounded so that its not trying to get to an infinitly prisice position
             while ((Mathf.Round(transform.position.x) != Mathf.Round(targetSpace.transform.position.x)) || (Mathf.Round(transform.position.z) != Mathf.Round(targetSpace.transform.position.z)))
             {
                 yield return new WaitForFixedUpdate();
@@ -47,9 +48,18 @@ public class S_Projectile : MonoBehaviour
                 //Debug.Log(targetSpace);
             }
             currentSpace = targetSpace;
+            if(currentSpace._playersOnSpace.Count > 0)
+            {
+                foreach(S_BoardPlayer damaged in currentSpace._playersOnSpace)
+                {
+                    damaged.ChangeCoins(-coinsLostOnImpact);
+                    Destroy(gameObject, 1);
+                    yield return null;
+                }
+            }
         }
         currentSpace = targetSpace;
-        Invoke("Destroy(gameObject)", 1);
+        Destroy(gameObject,1);
         yield return null;
     }
 }

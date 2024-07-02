@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: df21c1ab5b88bb143b8db08f6108700a
+guid: 2a4b0d70f6ca68f4c9d67cbc345862e7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,27 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Body.001
-    second: {fileID: 2100000, guid: 4502088845296954f9d469e269e33511, type: 2}
+    second: {fileID: 2100000, guid: 29d21f652fe87c8498564a26c139278d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Ear.002
-    second: {fileID: 2100000, guid: 4502088845296954f9d469e269e33511, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Face.001
-    second: {fileID: 2100000, guid: 4502088845296954f9d469e269e33511, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Leg.001
-    second: {fileID: 2100000, guid: 4502088845296954f9d469e269e33511, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Tail.002
-    second: {fileID: 2100000, guid: 4502088845296954f9d469e269e33511, type: 2}
+      name: Cone.002
+    second: {fileID: 2100000, guid: 29d21f652fe87c8498564a26c139278d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
