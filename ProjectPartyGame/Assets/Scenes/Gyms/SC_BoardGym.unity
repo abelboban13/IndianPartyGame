@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9470bd6ec5a8f4184d4838cd9c21d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spaceType: 1
+  _spaceType: 0
   value: 10
   _nextSpace:
   - {fileID: 1545443108}
@@ -1158,7 +1158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9470bd6ec5a8f4184d4838cd9c21d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spaceType: 1
+  _spaceType: 2
   value: 10
   _nextSpace:
   - {fileID: 793780022}
