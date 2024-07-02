@@ -145,7 +145,6 @@ public class S_BoardPlayer : MonoBehaviour
     public void EndTurn()
     {
         _isTurn = false;
-        Debug.Log("endingturn");
         S_BoardManager.Instance.TurnEnd();
     }
 

@@ -27,7 +27,7 @@ public class S_Judge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_miniGame.gameRunning)
+        if(_miniGame.gameRunning && !_miniGame.startPhase)
         {
             _switchTimer -= Time.deltaTime;
 
