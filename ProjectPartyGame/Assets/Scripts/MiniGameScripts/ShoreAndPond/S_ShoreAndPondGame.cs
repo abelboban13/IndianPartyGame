@@ -70,7 +70,7 @@ public class S_ShoreAndPondGame : S_MiniGame
     {
         List<int> results = new List<int>();
         S_ShoreAndPondPlayer winner = players.Find(player => !player.isOut);
-        results.Add(winner.playerIndex);
+        results?.Add(winner.playerIndex);
         outPlayers.Reverse();
         foreach(S_ShoreAndPondPlayer player in outPlayers)
         {

@@ -11,19 +11,23 @@ public class S_ShoreAndPondPlayer : MonoBehaviour
     public bool pond = false;
     private Vector3 _shorePos;
     private Vector3 _pondPos;
+    [HideInInspector]public GameObject model;
     // Start is called before the first frame update
 
     private void Awake()
     {
-
         _miniGame = S_GameManager.Instance.currentMiniGame.GetComponent<S_ShoreAndPondGame>();
         _input = GetComponent<S_InputController>();
         _pondPos = _miniGame.pondSpots[playerIndex].transform.position;
         _miniGame.players.Add(this);
+        model = Instantiate(S_BoardManager.Instance.playerModels[playerIndex]);
+        model.transform.parent = transform;
+        model.transform.position = transform.position;
     }
     void Start()
     {
         _shorePos = transform.position;
+        transform.LookAt(_pondPos);
     }
 
     // Update is called once per frame
@@ -52,11 +56,13 @@ public class S_ShoreAndPondPlayer : MonoBehaviour
         if(shore)
         {
             transform.position = _shorePos;
+            transform.LookAt(_pondPos);
             pond = false;
         }
         else
         {
             transform.position = _pondPos;
+            transform.LookAt(_shorePos);
             pond = true;
         }
     }
