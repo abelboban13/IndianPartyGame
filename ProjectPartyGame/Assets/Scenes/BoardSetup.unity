@@ -2363,7 +2363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMiniGame: {fileID: 0}
   _minigames:
-  - {fileID: 102900000, guid: 703428d8f490e6f49b9b1b218e2eafb6, type: 3}
+  - {fileID: 102900000, guid: 7724055dfa6438f449155da25e245bbe, type: 3}
   _turnLimit: 0
 --- !u!4 &679392492
 Transform:

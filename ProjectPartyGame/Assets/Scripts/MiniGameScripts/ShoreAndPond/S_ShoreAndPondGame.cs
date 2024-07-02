@@ -9,6 +9,7 @@ public class S_ShoreAndPondGame : S_MiniGame
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private S_Judge _judge;
     public GameObject[] pondSpots = new GameObject[4];
+    [HideInInspector] public List<S_ShoreAndPondPlayer> outPlayers = new List<S_ShoreAndPondPlayer>();
 
 
 
@@ -52,11 +53,29 @@ public class S_ShoreAndPondGame : S_MiniGame
             if (player.isOut)
                 playersOut++;
         }
-        if (playersOut >= players.Count)
+        if (playersOut >= players.Count - 1)
         {
-            _allOut = true;
             gameRunning = false;
             EndGame();
         }
+    }
+    public override void EndGame()
+    {
+        gameRunning = false;
+        S_BoardManager.Instance.ChangeTurnOrder(CreatePodium());
+        base.EndGame();
+    }
+
+    private List<int> CreatePodium()
+    {
+        List<int> results = new List<int>();
+        S_ShoreAndPondPlayer winner = players.Find(player => !player.isOut);
+        results.Add(winner.playerIndex);
+        outPlayers.Reverse();
+        foreach(S_ShoreAndPondPlayer player in outPlayers)
+        {
+            results.Add(player.playerIndex);
+        }
+        return results;
     }
 }

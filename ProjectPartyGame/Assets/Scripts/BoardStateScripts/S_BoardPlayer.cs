@@ -101,7 +101,7 @@ public class S_BoardPlayer : MonoBehaviour
         if (_isTurn && !_isMove)
         {
             _isTurn = false;
-            int dieRoll = Random.Range(1, 6);
+            int dieRoll = Random.Range(1, 7);
             StartCoroutine(MoveToNextSpace(dieRoll));
             Debug.Log(dieRoll);
         }
@@ -145,6 +145,7 @@ public class S_BoardPlayer : MonoBehaviour
     public void EndTurn()
     {
         _isTurn = false;
+        Debug.Log("endingturn");
         S_BoardManager.Instance.TurnEnd();
     }
 

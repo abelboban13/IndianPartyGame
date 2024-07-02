@@ -15,14 +15,15 @@ public class S_ShoreAndPondPlayer : MonoBehaviour
 
     private void Awake()
     {
-        _shorePos = transform.position;
+
         _miniGame = S_GameManager.Instance.currentMiniGame.GetComponent<S_ShoreAndPondGame>();
         _input = GetComponent<S_InputController>();
         _pondPos = _miniGame.pondSpots[playerIndex].transform.position;
+        _miniGame.players.Add(this);
     }
     void Start()
     {
-
+        _shorePos = transform.position;
     }
 
     // Update is called once per frame
@@ -31,7 +32,6 @@ public class S_ShoreAndPondPlayer : MonoBehaviour
         //player inputs
         if(_input.IsConfirm)
         {
-            Debug.Log("press");
            if(!pond)
            {
                 SwapPlaces(false);
@@ -39,7 +39,6 @@ public class S_ShoreAndPondPlayer : MonoBehaviour
         }
         if(_input.IsBack)
         {
-            Debug.Log("press");
             if (pond)
             {
                 SwapPlaces(true);
@@ -50,7 +49,6 @@ public class S_ShoreAndPondPlayer : MonoBehaviour
     //moves player to pond if they are on the shore and vice versa
     private void SwapPlaces(bool shore)
     {
-        Debug.Log("pressed");
         if(shore)
         {
             transform.position = _shorePos;
@@ -61,5 +59,12 @@ public class S_ShoreAndPondPlayer : MonoBehaviour
             transform.position = _pondPos;
             pond = true;
         }
+    }
+
+    public void KnockOut()
+    {
+        isOut = true;
+        gameObject.SetActive(false);
+        _miniGame.outPlayers.Add(this);
     }
 }

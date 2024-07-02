@@ -279,6 +279,8 @@ MonoBehaviour:
   startingSpeed: 3
   _timerDecrease: 0.2
   detectionTime: 1
+  shoreColor: {fileID: 2100000, guid: b53d531d0aa95a747a7b93905e5bba2a, type: 2}
+  pondColor: {fileID: 2100000, guid: 3271e40207aff9344a1a3decb425d6a3, type: 2}
 --- !u!1 &518758573
 GameObject:
   m_ObjectHideFlags: 0

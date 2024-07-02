@@ -12,11 +12,16 @@ public class S_Judge : MonoBehaviour
     [SerializeField] private float _timerDecrease;
     public float detectionTime;
     private bool _isDetecting;
+    private MeshRenderer _material;
+    [SerializeField] private Material shoreColor;
+    [SerializeField] private Material pondColor;
     // Start is called before the first frame update
     void Start()
     {
         _switchTimer = startingSpeed;
         _detectionTimer = detectionTime;
+        _material = GetComponent<MeshRenderer>();
+        _material.material = shoreColor;
     }
 
     // Update is called once per frame
@@ -31,6 +36,8 @@ public class S_Judge : MonoBehaviour
                 Switch();
                 _isDetecting = true;
                 startingSpeed = startingSpeed -= _timerDecrease;
+                if (startingSpeed < detectionTime)
+                    detectionTime = startingSpeed;
                 _switchTimer = startingSpeed;
             }
 
@@ -40,15 +47,18 @@ public class S_Judge : MonoBehaviour
                 if(_detectionTimer <= 0)
                 {
                     _detectionTimer = detectionTime;
-                    foreach(S_ShoreAndPondPlayer player in _miniGame.players)
+                    Debug.Log("playerKnockerout");
+                    foreach (S_ShoreAndPondPlayer player in _miniGame.players)
                     {
                         if (player.isOut)
                             break;
                         if(player.pond != pond)
                         {
-                            player.isOut = true;
+                            player.KnockOut();
+                            _miniGame.PlayerKnockedOut();
                         }
                     }
+                    _isDetecting = false;
                 }
             }
         }
@@ -56,10 +66,18 @@ public class S_Judge : MonoBehaviour
 
     private void Switch()
     {
-        int num = Random.Range(1, 2);
+        int num = Random.Range(1, 3);
         if (num == 1)
+        {
             pond = true;
+            _material.material = pondColor;
+        }
+
         else
+        {
             pond = false;
+            _material.material = shoreColor;
+        }
+            
     }
 }
