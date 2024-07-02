@@ -762,6 +762,7 @@ GameObject:
   - component: {fileID: 162842089}
   - component: {fileID: 162842088}
   - component: {fileID: 162842090}
+  - component: {fileID: 162842091}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -829,6 +830,18 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!114 &162842091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162842086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48606dcb0473255488d1ab5bd9ca1b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &187277667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2350,7 +2363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMiniGame: {fileID: 0}
   _minigames:
-  - {fileID: 102900000, guid: 7724055dfa6438f449155da25e245bbe, type: 3}
+  - {fileID: 102900000, guid: 703428d8f490e6f49b9b1b218e2eafb6, type: 3}
   _turnLimit: 0
 --- !u!4 &679392492
 Transform:

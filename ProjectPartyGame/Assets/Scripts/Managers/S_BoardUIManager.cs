@@ -25,10 +25,7 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
         {
             player.gameObject.SetActive(false);
         }
-        foreach(var player in S_BoardManager.Instance._players)
-        {
-            player.GetComponent<PlayerInput>().uiInputModule = _eventSystem.GetComponent<InputSystemUIInputModule>();
-        }
+
     }
 
     // Update is called once per frame

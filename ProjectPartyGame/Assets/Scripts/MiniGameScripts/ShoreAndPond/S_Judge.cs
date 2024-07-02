@@ -24,7 +24,6 @@ public class S_Judge : MonoBehaviour
     {
         if(_miniGame.gameRunning)
         {
-           
             _switchTimer -= Time.deltaTime;
 
             if(_switchTimer <= 0)
@@ -53,7 +52,6 @@ public class S_Judge : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void Switch()

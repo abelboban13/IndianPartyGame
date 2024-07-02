@@ -34,6 +34,7 @@ public class S_ShoreAndPondGame : S_MiniGame
         for (int i = 0; i < S_BoardManager.Instance._players.Count; i++)
         {
             S_InputController input = S_BoardManager.Instance._players.Find(x => x.index == playerIndex).GetComponent<S_InputController>();
+            Debug.Log("player found");
             GameObject newPlayer = Instantiate(_playerPrefab);
             newPlayer.transform.position = _spawns[playerIndex].position;
             input.GiveInputData(newPlayer.GetComponent<S_InputController>());

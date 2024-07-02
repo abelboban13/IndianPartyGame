@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class S_ShoreAndPondPlayer : MonoBehaviour
 {
     private S_ShoreAndPondGame _miniGame;
