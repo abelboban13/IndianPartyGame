@@ -48,6 +48,8 @@ public class S_BoardPlayer : MonoBehaviour
 
     private Animator _animation;
 
+    private Dice die;
+
     private void Awake()
     {
         S_BoardManager.Instance._players.Add(this);
@@ -60,6 +62,8 @@ public class S_BoardPlayer : MonoBehaviour
         _meshRenderer = GetComponent<MeshRenderer>();
         _addEvent.Raise();
         _animation = GetComponent<Animator>();
+
+        die = FindAnyObjectByType<Dice>();
         
         //GetComponent<Animation>().clip = S_BoardManager.Instance.playerAnims[index];
 
@@ -110,6 +114,8 @@ public class S_BoardPlayer : MonoBehaviour
             int dieRoll = Random.Range(1, 7);
             StartCoroutine(MoveToNextSpace(dieRoll));
             Debug.Log(dieRoll);
+            die.gameObject.SetActive(true);
+            die.Roll(dieRoll);
         }
     }
 
@@ -313,6 +319,7 @@ public class S_BoardPlayer : MonoBehaviour
         }
         currentSpace = targetSpace;
         currentSpace.SpaceLandedOn(this);
+        die.gameObject.SetActive(false);
         _isMove = false;
         yield return null;
     }
