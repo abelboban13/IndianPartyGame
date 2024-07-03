@@ -3895,13 +3895,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reward: 0
   _startTime: 3
-  _startScreen: {fileID: 0}
+  _startScreen: {fileID: 692604561}
   _countDown: {fileID: 1930965203}
   gameRunning: 0
   startPhase: 0
   _playerPrefab: {fileID: 6093757875787113321, guid: 50ef6ab5b106b3d4b8726952e159896b, type: 3}
   players: []
-  trafficLight: {fileID: 0}
+  trafficLight: {fileID: 395583563}
   _spawns:
   - {fileID: 508876941}
   - {fileID: 1899718753}
