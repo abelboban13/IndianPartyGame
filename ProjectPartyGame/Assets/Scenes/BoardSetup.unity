@@ -3055,6 +3055,11 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 2234fa3cb9064a4409c1001585ed93f3, type: 3}
   - {fileID: 919132149155446097, guid: 4a172eab410554b49bed5b6ef9277521, type: 3}
   - {fileID: 919132149155446097, guid: df21c1ab5b88bb143b8db08f6108700a, type: 3}
+  playerAnims:
+  - {fileID: 7400000, guid: 2126dff038ea81e418035710b4dec21f, type: 2}
+  - {fileID: 7400000, guid: 63b4b56ffe739d34f8cadcbbc4e46f36, type: 2}
+  - {fileID: 7400000, guid: 743c52f62677fc945aa3acfc7c7406a3, type: 2}
+  - {fileID: 7400000, guid: d5be7e8503f66f04aa2837550fdcdd95, type: 2}
   _endGame: {fileID: 11400000, guid: 1a38c0c0abe60764d9d53bde1e86b07c, type: 2}
   boardStartEvent: {fileID: 11400000, guid: 4faf81a60d7be164f800a7a4b1940a96, type: 2}
   _joining: 0

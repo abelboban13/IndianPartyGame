@@ -45,6 +45,8 @@ public class S_BoardPlayer : MonoBehaviour
     private bool _paused;
     private bool _isUsingCamera;
 
+    private Animator _animation;
+
     private void Awake()
     {
         S_BoardManager.Instance._players.Add(this);
@@ -56,6 +58,10 @@ public class S_BoardPlayer : MonoBehaviour
         _inputController = GetComponent<S_InputController>();
         _meshRenderer = GetComponent<MeshRenderer>();
         _addEvent.Raise();
+        _animation = GetComponent<Animator>();
+        
+        //GetComponent<Animation>().clip = S_BoardManager.Instance.playerAnims[index];
+
     }
     // Start is called before the first frame update
     void Start()
@@ -205,6 +211,14 @@ public class S_BoardPlayer : MonoBehaviour
                 _isUsingCamera = false;
             }
         }
+        
+        if(_isMove)
+        {
+            _animation.SetBool("walking", true);
+        }
+        else
+            _animation.SetBool("walking", false);
+
     }
 
     public void OnReloadBoard()

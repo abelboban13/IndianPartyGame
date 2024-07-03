@@ -13,6 +13,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     public List<S_BoardPlayer> _players;
     public List<GameObject> playerModels;
+    public List<AnimationClip> playerAnims;
     private int _playerIndex = 0; //the player whos turn it is
     private int _turnNumber;
     private int _turnCount;

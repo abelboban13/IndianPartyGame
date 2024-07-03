@@ -8,6 +8,8 @@ public class S_MiniGame : MonoBehaviour
 
     [SerializeField] protected int _startTime = 3;
 
+    [SerializeField] private GameObject _startScreen;
+
     public bool gameRunning;
 
     [HideInInspector] public bool startPhase = false;
