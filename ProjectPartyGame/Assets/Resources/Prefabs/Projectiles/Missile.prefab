@@ -49,9 +49,10 @@ MonoBehaviour:
   range: 3
   coinsLostOnImpact: 5
   player: {fileID: 0}
-  _speed: 15
+  _speed: 30
   uiImage: {fileID: 21300000, guid: 48d5dede3a7aef44396b5a981767bd6e, type: 3}
   _deathEffect: {fileID: 5285926957207379927, guid: 224ec50ccc5058749b64c7fce3d0e513, type: 3}
+  _deathSound: {fileID: 0}
 --- !u!1001 &3099428272783047497
 PrefabInstance:
   m_ObjectHideFlags: 0

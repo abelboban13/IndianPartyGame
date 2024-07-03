@@ -88,7 +88,6 @@ public class S_BoardPlayer : MonoBehaviour
         }
         if (_isTurn == true &&  !S_BoardUIManager.Instance.paused)
         {
-            
             IsTurn();
         }
         if(S_BoardManager.Instance._joining == true)
@@ -131,9 +130,12 @@ public class S_BoardPlayer : MonoBehaviour
     }
     public void UseTrap()
     {
+        _itemUsed = false;
         Debug.Log("trap placed");
         numberOfTraps--;
-        currentSpace.hasTrap = true;
+        currentSpace.ActivateTrap();
+        _isUsing = false ;
+        
     }
     public void StartTurn()
     {

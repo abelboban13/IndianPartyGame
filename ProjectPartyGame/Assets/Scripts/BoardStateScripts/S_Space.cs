@@ -163,6 +163,7 @@ public class S_Space : MonoBehaviour
         {
             player.ChangeCoins(_trapValue);
             hasTrap = false;
+            DeactivateTrap();
             Debug.Log($"trap triggered! Player{player.index} loses {_trapValue} coins!");
             if (activeTrap != null)
             {
