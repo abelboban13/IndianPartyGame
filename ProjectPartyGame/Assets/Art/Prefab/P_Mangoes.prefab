@@ -99,3 +99,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 67309e78585b5de42b0323a3346b55ec, type: 2}
   - {fileID: 2100000, guid: 9db0e00be071ac44baed65c9464eda9b, type: 2}
   hasTrap: 0
+  trapPrefab: {fileID: 0}

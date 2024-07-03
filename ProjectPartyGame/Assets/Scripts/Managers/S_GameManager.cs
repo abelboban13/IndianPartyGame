@@ -61,7 +61,7 @@ public class S_GameManager : S_Singleton<S_GameManager>
 
     public void EndGame()
     {
-        SceneManager.LoadScene("EndSceen");
+        SceneManager.LoadScene("WinSceen");
     }
 
     public enum GameMode
