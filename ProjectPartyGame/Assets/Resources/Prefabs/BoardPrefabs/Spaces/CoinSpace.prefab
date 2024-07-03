@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: abccddd4cf73b804db37d19028054995, type: 2}
+  - {fileID: 2100000, guid: f14a48a1f8306bb46b09b14ee498cfa3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,6 +121,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spaceType: 0
+  mango: {fileID: 0}
   value: 0
+  _trapValue: 3
   _nextSpace:
   - {fileID: 0}
+  _playersOnSpace: []
+  matList:
+  - {fileID: 2100000, guid: f14a48a1f8306bb46b09b14ee498cfa3, type: 2}
+  - {fileID: 2100000, guid: 365d8f6829989db4b9dec0c9bdf5183b, type: 2}
+  - {fileID: 2100000, guid: 264e08cc318a0e5489ad8cbd026633fc, type: 2}
+  - {fileID: 2100000, guid: c5a043d6e6751f54d825de9ba02f1dba, type: 2}
+  - {fileID: 2100000, guid: bbd9d09cd7374f544b39584d1198b3c1, type: 2}
+  hasTrap: 0
