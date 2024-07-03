@@ -40,8 +40,14 @@ public class S_BoardCameraController : MonoBehaviour
     {
         if (_trackedPlayer != null && _isPanning)
         {
-            Vector3 vec = _trackedPlayer.GetComponent<S_InputController>().MoveInput ;
-            transform.Translate(new Vector3(vec.x, vec.y,0) * _cameraSpeed * Time.deltaTime);
+            if(transform.position.x > -65 && transform.position.x < 45 && transform.position.z < 16 && transform.position.z > -115)
+            {
+                Vector3 vec = _trackedPlayer.GetComponent<S_InputController>().MoveInput;
+                transform.Translate(new Vector3(vec.x, vec.y, 0) * _cameraSpeed * Time.deltaTime);
+            }
+            else
+                transform.position = new Vector3(_trackedPlayer.transform.position.x, transform.position.y , _trackedPlayer.transform.position.z);
+
         }
     }
 
