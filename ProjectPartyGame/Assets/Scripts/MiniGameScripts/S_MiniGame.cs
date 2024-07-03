@@ -23,14 +23,12 @@ public class S_MiniGame : MonoBehaviour
 
     public virtual void LoadGame()
     {
-       // gameRunning = true;
-    }
-
-    protected virtual void Start()
-    {
-        LoadGame(); //move to different function later
+        // gameRunning = true;
         StartCoroutine(StartingPhase());
     }
+
+
+    
 
     private void Update()
     {

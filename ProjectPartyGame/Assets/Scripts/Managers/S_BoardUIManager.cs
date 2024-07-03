@@ -107,9 +107,9 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
 
     public IEnumerator WaitAFrame(GameObject button)
     {
-        _eventSystem.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(null);
         yield return new WaitForEndOfFrame();
-        _eventSystem.SetSelectedGameObject(button);
+        EventSystem.current.SetSelectedGameObject(button);
         yield return null;
     }
 }
