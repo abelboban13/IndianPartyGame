@@ -28,6 +28,9 @@ public class S_RedLightPlayer : MonoBehaviour
 
     private void Update()
     {
+        model = Instantiate(S_BoardManager.Instance.playerModels[playerIndex]);
+        model.transform.parent = transform;
+        model.transform.position = transform.position;
         if (_input.IsStart)
         {
             if (S_BoardUIManager.Instance.paused)

@@ -12,12 +12,16 @@ public class S_Projectile : MonoBehaviour
     private S_Space currentSpace;
     [SerializeField] protected float _speed = 6;
     public Sprite uiImage;
+    [SerializeField] private ParticleSystem _deathEffect;
+    [SerializeField] private AudioClip _deathSound;
 
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         currentSpace = player.currentSpace;
         StartCoroutine(Move());
+        S_BoardManager.Instance.boardCamera.StartTracking(gameObject);
     }
 
     // Update is called once per frame
@@ -29,8 +33,8 @@ public class S_Projectile : MonoBehaviour
     private void Go()
     {
         var step = _speed * Time.deltaTime; // calculate distance to move
-
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetSpace.transform.position.x, transform.position.y, targetSpace.transform.position.z), step);
+        
+        transform.position = Vector3.MoveTowards(transform.position,new Vector3(targetSpace.transform.position.x , transform.position.y, targetSpace.transform.position.z), step);
         transform.LookAt(new Vector3(targetSpace.transform.position.x, transform.position.y, targetSpace.transform.position.z));
     }
 
@@ -46,7 +50,6 @@ public class S_Projectile : MonoBehaviour
             {
                 yield return new WaitForFixedUpdate();
                 Go();
-                yield return new WaitForSeconds(.1f);
                 //Debug.Log(targetSpace);
             }
             currentSpace = targetSpace;
@@ -65,11 +68,21 @@ public class S_Projectile : MonoBehaviour
         yield return null;
     }
 
-    private void OnValidate()
+
+    private void OnDestroy()
     {
-        if(GetComponent<AudioSource>() == null)
+        player._itemUsed = false;
+        S_BoardManager.Instance.boardCamera.StartTracking(player.gameObject);
+        if (_deathEffect != null)
         {
-            gameObject.AddComponent<AudioSource>();
+            var fx = Instantiate(_deathEffect, null);
+            fx.transform.position = transform.position;
         }
+        if(_deathSound != null)
+        {
+            S_GameManager.Instance.audioSource.clip = _deathSound;
+            S_GameManager.Instance.audioSource.Play();
+        }
+      
     }
 }

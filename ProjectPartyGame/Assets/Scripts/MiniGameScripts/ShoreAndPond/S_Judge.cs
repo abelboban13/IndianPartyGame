@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class S_Judge : MonoBehaviour
 {
     public bool pond = false;
@@ -15,6 +15,7 @@ public class S_Judge : MonoBehaviour
     private MeshRenderer _material;
     [SerializeField] private Material shoreColor;
     [SerializeField] private Material pondColor;
+    [SerializeField] private TextMeshProUGUI _text;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,12 +72,14 @@ public class S_Judge : MonoBehaviour
         {
             pond = true;
             _material.material = pondColor;
+            _text.text = "Pond";
         }
 
         else
         {
             pond = false;
             _material.material = shoreColor;
+            _text.text = "Shore";
         }
             
     }

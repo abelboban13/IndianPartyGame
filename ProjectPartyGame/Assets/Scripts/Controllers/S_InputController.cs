@@ -12,7 +12,7 @@ public class S_InputController : MonoBehaviour
     private PlayerInput input;
     public Vector2 MoveInput { get; private set; }
 
-    public bool IsConfirm { get; private set; } 
+    public bool IsConfirm { get;  set; } 
 
     public bool IsBack { get; private set; }
 

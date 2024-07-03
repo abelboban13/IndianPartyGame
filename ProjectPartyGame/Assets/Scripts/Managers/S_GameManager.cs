@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEditor.SearchService;
 using UnityEditor;
 
 public class S_GameManager : S_Singleton<S_GameManager>
@@ -12,13 +11,15 @@ public class S_GameManager : S_Singleton<S_GameManager>
 
     public GameMode GameType { get; private set; }
 
-    [SerializeField] private List<SceneAsset> _minigames;
+    [SerializeField] private string[] _minigames;
     [SerializeField] private int _turnLimit = 10;
     public int turnLimit { get { return _turnLimit; } }
+
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
         if(GameType == GameMode.Board)
             S_BoardManager.Instance.StartGame();
     }
@@ -41,7 +42,7 @@ public class S_GameManager : S_Singleton<S_GameManager>
     public void LoadMiniGame()
     {
         S_BoardManager.Instance.UnloadBoard();
-        SceneManager.LoadScene(_minigames[Random.Range(0,_minigames.Count)].name);
+        SceneManager.LoadScene(_minigames[Random.Range(0,_minigames.Length)]);
         GameType = GameMode.Minigame;
     }
 
@@ -57,6 +58,11 @@ public class S_GameManager : S_Singleton<S_GameManager>
     public void SetGameType(GameMode gameMode)
     {
         GameType = gameMode;
+    }
+
+    public void EndGame()
+    {
+        SceneManager.LoadScene("WinSceen");
     }
 
     public enum GameMode

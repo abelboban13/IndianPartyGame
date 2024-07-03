@@ -13,10 +13,7 @@ public class S_JumpRopeGame : S_MiniGame
 
     private bool _allOut = false;
     // Start is called before the first frame update
-    protected override void Start()
-    {
-        base.Start();
-    }
+ 
 
     // Update is called once per frame
     void Update()

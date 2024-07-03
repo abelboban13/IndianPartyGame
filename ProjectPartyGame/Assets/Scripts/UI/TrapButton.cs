@@ -24,6 +24,7 @@ public class TrapButton : MonoBehaviour
     }
     private void OnEnable()
     {
+        _text = GetComponentInChildren<TextMeshProUGUI>();
         _text.text = player.numberOfTraps.ToString();
     }
 }
