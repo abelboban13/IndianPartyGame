@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class S_Item
 {
@@ -10,10 +11,13 @@ public class S_Item
     
     public GameObject itemPrefab;
 
-    public S_Item(string name, GameObject item)
+    public Image image;
+
+    public S_Item(string name, GameObject item, Image uiImage)
     {
         _name = name;
         itemPrefab = item;
+        image = uiImage;
     }
 
     public GameObject GetPrefab()

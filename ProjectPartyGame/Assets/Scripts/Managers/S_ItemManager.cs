@@ -21,7 +21,7 @@ public class S_ItemManager : S_Singleton<S_ItemManager>
     {
         foreach(S_Projectile projectile in Resources.LoadAll<S_Projectile>("Prefabs/Projectiles"))
         {
-            items.Add(new S_Item(projectile.name,projectile.gameObject));
+            items.Add(new S_Item(projectile.name,projectile.gameObject,projectile?.uiImage));
         }
     }
 
