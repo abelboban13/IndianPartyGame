@@ -37,7 +37,7 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
             for (int i = 0; i < S_BoardManager.Instance._players.Count; i++)
             {
                 S_BoardPlayer player = S_BoardManager.Instance._players.Find(x => x.index == i);
-                playerHuds[i].coins.text = "{player.coins}";
+                playerHuds[i].coins.text = $"{player.coins}";
                 playerHuds[i].mangos.text = $"{player.mangos}";
                 playerHuds[i].traps.text = $"{player.numberOfTraps}";
             }

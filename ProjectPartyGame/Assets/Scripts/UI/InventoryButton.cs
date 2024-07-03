@@ -10,6 +10,7 @@ public class InventoryButton : MonoBehaviour
 
    [HideInInspector] public S_BoardPlayer player;
    [HideInInspector] public int itemIndex;
+   [HideInInspector] public Sprite itemIcon;
 
     private void Awake()
     {
@@ -18,7 +19,10 @@ public class InventoryButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _text.text = player.inventory[0].itemName;
+        //_text.text = player.inventory[0].itemName;
+        _text.text = player.inventory[itemIndex].amount.ToString();
+        GetComponent<Button>().image.sprite = itemIcon;
+        
     }
 
     // Update is called once per frame

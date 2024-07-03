@@ -11,9 +11,9 @@ public class S_Item
     
     public GameObject itemPrefab;
 
-    public Image image;
+    public Sprite image;
 
-    public S_Item(string name, GameObject item, Image uiImage)
+    public S_Item(string name, GameObject item, Sprite uiImage)
     {
         _name = name;
         itemPrefab = item;
