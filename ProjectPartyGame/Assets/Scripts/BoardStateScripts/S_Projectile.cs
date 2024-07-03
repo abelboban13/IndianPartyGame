@@ -79,8 +79,8 @@ public class S_Projectile : MonoBehaviour
         }
         if(_deathSound != null)
         {
-            GetComponent<AudioSource>().clip = _deathSound;
-          
+            S_GameManager.Instance.audioSource.clip = _deathSound;
+            S_GameManager.Instance.audioSource.Play();
         }
       
     }

@@ -48,10 +48,10 @@ public class S_ShoreAndPondPlayer : MonoBehaviour
            {
                 SwapPlaces(false);
            }
-            if (pond)
-            {
+           else if (pond)
+           {
                 SwapPlaces(true);
-            }
+           }
         }
 
     }
