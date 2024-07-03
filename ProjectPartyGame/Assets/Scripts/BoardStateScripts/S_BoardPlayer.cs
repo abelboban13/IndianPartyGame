@@ -90,10 +90,7 @@ public class S_BoardPlayer : MonoBehaviour
                 S_BoardManager.Instance.EndJoin();
             }
         }
-
-
     }
-
     /// <summary>
     /// rolls a "1d6" and moves the player that many spaces
     /// </summary>
@@ -272,7 +269,7 @@ public class S_BoardPlayer : MonoBehaviour
             {
                 yield return new WaitForFixedUpdate();
                 MovePlayer(targetSpace);
-                yield return new WaitForSeconds(.1f);
+                //yield return new WaitForSeconds(.1f);
                 //Debug.Log(targetSpace);
             }
             currentSpace = targetSpace;

@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _travelDelay: 0.5
-  _speed: 25
+  _speed: 15
   _addEvent: {fileID: 11400000, guid: 0dcdafad27d89c54988b8306eabf3334, type: 2}
   cameraSocket: {fileID: 6502884708573309908}
   numberOfTraps: 0
