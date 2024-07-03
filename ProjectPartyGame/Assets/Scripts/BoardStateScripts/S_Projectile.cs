@@ -77,6 +77,11 @@ public class S_Projectile : MonoBehaviour
             var fx = Instantiate(_deathEffect, null);
             fx.transform.position = transform.position;
         }
+        if(_deathSound != null)
+        {
+            GetComponent<AudioSource>().clip = _deathSound;
+          
+        }
       
     }
 }

@@ -15,10 +15,12 @@ public class S_GameManager : S_Singleton<S_GameManager>
     [SerializeField] private List<SceneAsset> _minigames;
     [SerializeField] private int _turnLimit = 10;
     public int turnLimit { get { return _turnLimit; } }
+
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
         if(GameType == GameMode.Board)
             S_BoardManager.Instance.StartGame();
     }

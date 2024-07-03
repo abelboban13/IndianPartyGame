@@ -48,14 +48,12 @@ public class S_ShoreAndPondPlayer : MonoBehaviour
            {
                 SwapPlaces(false);
            }
-        }
-        if(_input.IsBack)
-        {
             if (pond)
             {
                 SwapPlaces(true);
             }
         }
+
     }
 
     //moves player to pond if they are on the shore and vice versa
