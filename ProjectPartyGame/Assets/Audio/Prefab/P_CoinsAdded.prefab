@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2125538815259458024
+--- !u!1001 &1634189626488804998
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.8169999
+      value: 0.99600005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02699995
+      value: -0.04400003
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51,10 +51,10 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 67309e78585b5de42b0323a3346b55ec, type: 2}
+      objectReference: {fileID: 2100000, guid: f14a48a1f8306bb46b09b14ee498cfa3, type: 2}
     - target: {fileID: 919132149155446097, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_Name
-      value: P_Mangoes
+      value: P_CoinsAdded
       objectReference: {fileID: 0}
     - target: {fileID: 8414140065852599530, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -66,26 +66,26 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3751560030014385047}
+      addedObject: {fileID: 626034465040927563}
   m_SourcePrefab: {fileID: 100100000, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
---- !u!1 &1278467709001335993 stripped
+--- !u!1 &1904080495976868823 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
-  m_PrefabInstance: {fileID: 2125538815259458024}
+  m_PrefabInstance: {fileID: 1634189626488804998}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-3751560030014385047
+--- !u!114 &626034465040927563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278467709001335993}
+  m_GameObject: {fileID: 1904080495976868823}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c9470bd6ec5a8f4184d4838cd9c21d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spaceType: 2
+  _spaceType: 0
   mango: {fileID: 0}
   value: 3
   _trapValue: 3
@@ -93,10 +93,10 @@ MonoBehaviour:
   - {fileID: 0}
   _playersOnSpace: []
   matList:
-  - {fileID: 2100000, guid: 3271e40207aff9344a1a3decb425d6a3, type: 2}
-  - {fileID: 2100000, guid: e5f637dff74df674fa004a7655655a6f, type: 2}
-  - {fileID: 2100000, guid: 77779a1b97cd26e4489827b6b78a131b, type: 2}
-  - {fileID: 2100000, guid: 67309e78585b5de42b0323a3346b55ec, type: 2}
-  - {fileID: 2100000, guid: 9db0e00be071ac44baed65c9464eda9b, type: 2}
+  - {fileID: 2100000, guid: f14a48a1f8306bb46b09b14ee498cfa3, type: 2}
+  - {fileID: 2100000, guid: 365d8f6829989db4b9dec0c9bdf5183b, type: 2}
+  - {fileID: 2100000, guid: 264e08cc318a0e5489ad8cbd026633fc, type: 2}
+  - {fileID: 2100000, guid: c5a043d6e6751f54d825de9ba02f1dba, type: 2}
+  - {fileID: 2100000, guid: bbd9d09cd7374f544b39584d1198b3c1, type: 2}
   hasTrap: 0
   trapPrefab: {fileID: 0}

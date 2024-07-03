@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 77779a1b97cd26e4489827b6b78a131b, type: 2}
+      objectReference: {fileID: 2100000, guid: 264e08cc318a0e5489ad8cbd026633fc, type: 2}
     - target: {fileID: 919132149155446097, guid: 22e01ddd8c7b85a4ba74f16ca5115639, type: 3}
       propertyPath: m_Name
       value: P_DefaultSpace
@@ -93,10 +93,10 @@ MonoBehaviour:
   - {fileID: 7053608379122888159}
   _playersOnSpace: []
   matList:
-  - {fileID: 2100000, guid: 3271e40207aff9344a1a3decb425d6a3, type: 2}
-  - {fileID: 2100000, guid: e5f637dff74df674fa004a7655655a6f, type: 2}
-  - {fileID: 2100000, guid: 77779a1b97cd26e4489827b6b78a131b, type: 2}
-  - {fileID: 2100000, guid: 67309e78585b5de42b0323a3346b55ec, type: 2}
-  - {fileID: 2100000, guid: 9db0e00be071ac44baed65c9464eda9b, type: 2}
+  - {fileID: 2100000, guid: f14a48a1f8306bb46b09b14ee498cfa3, type: 2}
+  - {fileID: 2100000, guid: 365d8f6829989db4b9dec0c9bdf5183b, type: 2}
+  - {fileID: 2100000, guid: 264e08cc318a0e5489ad8cbd026633fc, type: 2}
+  - {fileID: 2100000, guid: c5a043d6e6751f54d825de9ba02f1dba, type: 2}
+  - {fileID: 2100000, guid: bbd9d09cd7374f544b39584d1198b3c1, type: 2}
   hasTrap: 0
   trapPrefab: {fileID: 0}
