@@ -8,6 +8,8 @@ public class S_MiniGame : MonoBehaviour
 
     [SerializeField] protected int _startTime = 3;
 
+    [SerializeField] private GameObject _startScreen;
+
     public bool gameRunning;
 
     [HideInInspector] public bool startPhase = false;
@@ -21,14 +23,12 @@ public class S_MiniGame : MonoBehaviour
 
     public virtual void LoadGame()
     {
-       // gameRunning = true;
-    }
-
-    protected virtual void Start()
-    {
-        LoadGame(); //move to different function later
+        // gameRunning = true;
         StartCoroutine(StartingPhase());
     }
+
+
+    
 
     private void Update()
     {

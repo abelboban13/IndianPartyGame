@@ -11,6 +11,7 @@ public class S_TrafficLight : MonoBehaviour
     [SerializeField] private Material _greenMaterial;
     [SerializeField] private  S_RedLightGame _miniGame;
     [SerializeField] private float _maxTime = 20;
+    [SerializeField] private MeshRenderer[] _lights;
 
     private int _state = 0;
     private MeshRenderer _renderer;
@@ -101,17 +102,25 @@ public class S_TrafficLight : MonoBehaviour
         switch(_state)
         {
             case 1:
-                _renderer.material = _greenMaterial;
+                MatSwap( _greenMaterial);
                 _switchTimer = Random.Range(1, 5);
                 break;
             case 2:
-                _renderer.material = _yellowMaterial;
+                MatSwap(_yellowMaterial);
                 _switchTimer = Random.Range(.5f, 3);
                 break;
             case 3:
-                _renderer.material = _redMaterial;
+                MatSwap(_redMaterial);
                 _switchTimer = Random.Range(1, 5);
                 break;
+        }
+    }
+
+    private void MatSwap(Material mat)
+    {
+        foreach(MeshRenderer renderer in _lights)
+        {
+            renderer.material = mat;
         }
     }
 }
