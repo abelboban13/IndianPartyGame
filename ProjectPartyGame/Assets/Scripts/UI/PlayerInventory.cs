@@ -57,6 +57,7 @@ public class PlayerInventory : MonoBehaviour
                 _buttons.Add(newButton);
                 newButton.player = player;
                 newButton.itemIndex = index;
+                newButton.itemIcon = item.image;
                 index++;
             }
         }

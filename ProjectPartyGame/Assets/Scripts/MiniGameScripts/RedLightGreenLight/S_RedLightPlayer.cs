@@ -11,6 +11,7 @@ public class S_RedLightPlayer : MonoBehaviour
     private S_RedLightGame _miniGame;
     public Camera playerCamera { get; private set; }
     [HideInInspector] public int playerIndex;
+    [HideInInspector] public GameObject model;
 
     [HideInInspector] public bool isOut { get; private set; }
     private void Awake()
@@ -20,6 +21,9 @@ public class S_RedLightPlayer : MonoBehaviour
         _input = GetComponent<S_InputController>();
         _rb = GetComponent<Rigidbody>();
         playerCamera = GetComponentInChildren<Camera>();
+        model = Instantiate(S_BoardManager.Instance.playerModels[playerIndex]);
+        model.transform.parent = transform;
+        model.transform.position = transform.position;
     }
 
     private void Update()
@@ -35,7 +39,11 @@ public class S_RedLightPlayer : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isOut && _miniGame.gameRunning && !_miniGame.startPhase)
+        {
             _rb.velocity = new Vector3(_input.MoveInput.x * _speed, 0, _input.MoveInput.y * _speed);
+            transform.LookAt(new Vector3((_input.MoveInput.x + transform.position.x), 0, (_input.MoveInput.y + transform.position.z)));
+        }
+            
         else
             _rb.velocity = Vector3.zero;
 

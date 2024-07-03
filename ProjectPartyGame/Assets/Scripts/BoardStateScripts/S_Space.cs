@@ -136,6 +136,7 @@ public class S_Space : MonoBehaviour
                 break;
             case SpaceType.Negative:
                 player.ChangeCoins(-value);
+                Instantiate(S_SpaceManager.Instance.loseParticle);
                 Debug.Log($"player{player.index} loses {value} coins");
                 break;
             case SpaceType.Item:

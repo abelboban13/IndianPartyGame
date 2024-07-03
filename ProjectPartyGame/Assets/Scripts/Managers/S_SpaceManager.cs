@@ -7,6 +7,7 @@ public class S_SpaceManager : S_Singleton<S_SpaceManager>
     [SerializeField] private GameObject keyObject;
     private List<S_Space> _spaceList = new List<S_Space>();
     private List<S_Space> _mangoSpaces = new List<S_Space>();
+    public ParticleSystem loseParticle;
 
     private int _currentRewardIndex = -1;
     // Start is called before the first frame update
@@ -49,7 +50,5 @@ public class S_SpaceManager : S_Singleton<S_SpaceManager>
         foreach (S_Space space in _spaceList)
             space.UnLoad();
     }
-
-
 
 }

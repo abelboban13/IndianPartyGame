@@ -43,6 +43,7 @@ public class S_BoardPlayer : MonoBehaviour
     private MeshRenderer _meshRenderer;
 
     private bool _paused;
+    private bool _isUsingCamera;
 
     private void Awake()
     {
@@ -89,10 +90,7 @@ public class S_BoardPlayer : MonoBehaviour
                 S_BoardManager.Instance.EndJoin();
             }
         }
-
-
     }
-
     /// <summary>
     /// rolls a "1d6" and moves the player that many spaces
     /// </summary>
@@ -101,7 +99,7 @@ public class S_BoardPlayer : MonoBehaviour
         if (_isTurn && !_isMove)
         {
             _isTurn = false;
-            int dieRoll = Random.Range(1, 6);
+            int dieRoll = Random.Range(1, 7);
             StartCoroutine(MoveToNextSpace(dieRoll));
             Debug.Log(dieRoll);
         }
@@ -174,13 +172,13 @@ public class S_BoardPlayer : MonoBehaviour
     private void IsTurn()
     {
         //all player turn options go here
-        if (_inputController.IsConfirm && !_isUsing)
+        if (_inputController.IsConfirm && !_isUsing && !_isUsingCamera)
         {
             RollDice();
         }
         else if(_inputController.IsBack)
         {
-            if(!_isMove && !_isUsing)
+            if(!_isMove && !_isUsing && !_isUsingCamera)
             {
                 _isUsing = true;
                 S_BoardUIManager.Instance.OpenInventory(this);
@@ -189,8 +187,23 @@ public class S_BoardPlayer : MonoBehaviour
             {
                 S_BoardUIManager.Instance.OpenInventory(this);
                 _isUsing = false;
+            }   
+        }
+        else if(!_isMove && !_isUsingCamera && !_isUsing)
+        {
+            if(_inputController.MoveInput != Vector2.zero)
+            {
+                S_BoardManager.Instance.boardCamera.Pan();
+                _isUsingCamera = true;
             }
-                
+        }
+        else if(_isUsingCamera)
+        {
+            if(_inputController.IsConfirm || _inputController.IsBack)
+            {
+                S_BoardManager.Instance.boardCamera.StopPan();
+                _isUsingCamera = false;
+            }
         }
     }
 
@@ -256,7 +269,7 @@ public class S_BoardPlayer : MonoBehaviour
             {
                 yield return new WaitForFixedUpdate();
                 MovePlayer(targetSpace);
-                yield return new WaitForSeconds(.1f);
+                //yield return new WaitForSeconds(.1f);
                 //Debug.Log(targetSpace);
             }
             currentSpace = targetSpace;

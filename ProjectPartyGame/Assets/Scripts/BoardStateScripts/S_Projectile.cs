@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class S_Projectile : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class S_Projectile : MonoBehaviour
     private S_Space targetSpace;
     private S_Space currentSpace;
     [SerializeField] protected float _speed = 6;
+    public Sprite uiImage;
 
     // Start is called before the first frame update
     void Start()
@@ -61,5 +63,13 @@ public class S_Projectile : MonoBehaviour
         currentSpace = targetSpace;
         Destroy(gameObject,1);
         yield return null;
+    }
+
+    private void OnValidate()
+    {
+        if(GetComponent<AudioSource>() == null)
+        {
+            gameObject.AddComponent<AudioSource>();
+        }
     }
 }

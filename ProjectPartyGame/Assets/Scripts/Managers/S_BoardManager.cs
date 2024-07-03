@@ -61,6 +61,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         {
             _playerIndex = 0;
             S_GameManager.Instance.LoadMiniGame();
+            return;
         }
         else
             _playerIndex++;
@@ -99,6 +100,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     }
     public void UnloadBoard()
     {
+        boardCamera.gameObject.SetActive(false);
         foreach(S_BoardPlayer player in _players)
         {
             player.OnUnloadBoard();
@@ -107,6 +109,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     public void LoadBoard()
     {
+        boardCamera.gameObject.SetActive(true);
         foreach (S_BoardPlayer player in _players)
         {
             player.OnReloadBoard();

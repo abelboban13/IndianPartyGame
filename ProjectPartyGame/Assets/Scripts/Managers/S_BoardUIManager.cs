@@ -25,24 +25,21 @@ public class S_BoardUIManager : S_Singleton<S_BoardUIManager>
         {
             player.gameObject.SetActive(false);
         }
-        foreach(var player in S_BoardManager.Instance._players)
-        {
-            player.GetComponent<PlayerInput>().uiInputModule = _eventSystem.GetComponent<InputSystemUIInputModule>();
-        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //updates Hud elements coin, mango and trap counters based on number of players
-        if(players > 0 && S_GameManager.Instance.GameType == S_GameManager.GameMode.Board)
+        if(players > 0 )
         {
             for (int i = 0; i < S_BoardManager.Instance._players.Count; i++)
             {
                 S_BoardPlayer player = S_BoardManager.Instance._players.Find(x => x.index == i);
-                playerHuds[i].coins.text = $"Coins: {player.coins}";
-                playerHuds[i].mangos.text = $"Mangos: {player.mangos}";
-                playerHuds[i].traps.text = $"Traps: {player.numberOfTraps}";
+                playerHuds[i].coins.text = $"{player.coins}";
+                playerHuds[i].mangos.text = $"{player.mangos}";
+                playerHuds[i].traps.text = $"{player.numberOfTraps}";
             }
         }
     }

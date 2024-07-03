@@ -43,12 +43,16 @@ public class S_InputController : MonoBehaviour
         IsStart = _inputMap.FindAction("Start").triggered;
     }
 
+
+    //script recieves input data from other inputcontroller
     public void RecieveInputData(InputActionAsset asset, InputActionMap map)
     {
         _inputActions = asset;
         _inputMap = map;
+        Debug.Log(_inputMap);
     }
 
+    //script gives data from other inputController
     public void GiveInputData(S_InputController controller)
     {
         controller.RecieveInputData(_inputActions, _inputMap);
