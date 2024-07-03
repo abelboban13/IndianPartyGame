@@ -42,6 +42,7 @@ public class S_Rope : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("???");
         if (collision.gameObject.GetComponent<S_JumpRopePlayer>() != null)
         {
             collision.gameObject.GetComponent<S_JumpRopePlayer>().KnockOut();

@@ -20,12 +20,13 @@ public class S_JumpRopePlayer : MonoBehaviour
         _input = GetComponent<S_InputController>();
         _miniGame.players.Add(this);
         _rb = GetComponent<Rigidbody>();
-        model = Instantiate(S_BoardManager.Instance.playerModels[playerIndex]);
-        model.transform.parent = transform;
-        model.transform.position = transform.position;
+
     }
     void Start()
     {
+        model = Instantiate(S_BoardManager.Instance.playerModels[playerIndex]);
+        model.transform.parent = transform;
+        model.transform.position = transform.position;
         _grounded = true;
         transform.LookAt(new Vector3(transform.position.x,transform.position.y,-5));
     }
@@ -33,7 +34,14 @@ public class S_JumpRopePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_input.IsConfirm && _grounded)
+        if (_input.IsStart)
+        {
+            if (S_BoardUIManager.Instance.paused)
+                S_BoardUIManager.Instance.UnPause();
+            else
+                S_BoardUIManager.Instance.PauseGame(_input);
+        }
+        if (_input.IsConfirm && _grounded)
         {
             Jump();
         }
