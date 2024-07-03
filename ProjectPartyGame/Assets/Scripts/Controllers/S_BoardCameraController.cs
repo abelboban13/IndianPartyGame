@@ -7,7 +7,7 @@ public class S_BoardCameraController : MonoBehaviour
 
     [Tooltip("the distance the camera stays away from the tracked player on the z axis")][SerializeField] private float _zOffSet = 5f;
     [SerializeField] private float _cameraSpeed;
-    private S_BoardPlayer _trackedPlayer;
+    private GameObject _trackedPlayer;
     private bool _isPanning = false;
     private Quaternion _cameraRotation;
     private float _beseHeight;
@@ -27,6 +27,7 @@ public class S_BoardCameraController : MonoBehaviour
     public void StartTracking(GameObject trackedObject)
     {
         transform.position = new Vector3(trackedObject.transform.position.x, _beseHeight, trackedObject.transform.position.z + _zOffSet);
+        _trackedPlayer = trackedObject;
     }
 
     // Update is called once per frame
@@ -54,7 +55,7 @@ public class S_BoardCameraController : MonoBehaviour
     public void FollowPLayer(S_BoardPlayer player)
     {
         //center camera on player
-        _trackedPlayer = player;
+        _trackedPlayer = player.gameObject;
     }
 
     public void Pan()

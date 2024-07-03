@@ -3748,7 +3748,6 @@ GameObject:
   - component: {fileID: 936030734}
   - component: {fileID: 936030737}
   - component: {fileID: 936030736}
-  - component: {fileID: 936030735}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -3775,26 +3774,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &936030735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936030733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d6079a23e75fa449adc9c3a59ddcdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  die:
-  - {fileID: 21300000, guid: 34580d27bb1eb50438a1863e3f29c94e, type: 3}
-  - {fileID: 21300000, guid: 6b42778441d441a4ea8c01fdc3ddd8cc, type: 3}
-  - {fileID: 21300000, guid: b7c2134ee0ed09848aa31024b038b340, type: 3}
-  - {fileID: 21300000, guid: 28f6cad6805b7534490bb8a2b93b9b99, type: 3}
-  - {fileID: 21300000, guid: 0a996a69332105045b34b5e68f5f763f, type: 3}
-  - {fileID: 21300000, guid: b44b3ad797c99444f9f27049291d613c, type: 3}
-  pic: {fileID: 0}
 --- !u!114 &936030736
 MonoBehaviour:
   m_ObjectHideFlags: 0

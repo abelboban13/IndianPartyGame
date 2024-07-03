@@ -21,6 +21,7 @@ public class S_Projectile : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         currentSpace = player.currentSpace;
         StartCoroutine(Move());
+        S_BoardManager.Instance.boardCamera.StartTracking(gameObject);
     }
 
     // Update is called once per frame
@@ -32,8 +33,8 @@ public class S_Projectile : MonoBehaviour
     private void Go()
     {
         var step = _speed * Time.deltaTime; // calculate distance to move
-
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetSpace.transform.position.x, transform.position.y, targetSpace.transform.position.z), step);
+        
+        transform.position = Vector3.MoveTowards(transform.position,new Vector3(targetSpace.transform.position.x , transform.position.y, targetSpace.transform.position.z), step);
         transform.LookAt(new Vector3(targetSpace.transform.position.x, transform.position.y, targetSpace.transform.position.z));
     }
 
@@ -49,7 +50,6 @@ public class S_Projectile : MonoBehaviour
             {
                 yield return new WaitForFixedUpdate();
                 Go();
-                yield return new WaitForSeconds(.1f);
                 //Debug.Log(targetSpace);
             }
             currentSpace = targetSpace;
@@ -72,7 +72,8 @@ public class S_Projectile : MonoBehaviour
     private void OnDestroy()
     {
         player._itemUsed = false;
-        if(_deathEffect != null)
+        S_BoardManager.Instance.boardCamera.StartTracking(player.gameObject);
+        if (_deathEffect != null)
         {
             var fx = Instantiate(_deathEffect, null);
             fx.transform.position = transform.position;
