@@ -598,7 +598,7 @@ MonoBehaviour:
   _miniGame: {fileID: 518758575}
   startingSpeed: 3
   _timerDecrease: 0.2
-  detectionTime: 1
+  detectionTime: 1.5
   shoreColor: {fileID: -6478536213147159724, guid: 9cd8eda02f8c84540b65f4960b2527d2, type: 3}
   pondColor: {fileID: 2100000, guid: b53d531d0aa95a747a7b93905e5bba2a, type: 2}
   _text: {fileID: 1514601021}
@@ -1041,7 +1041,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
