@@ -34,7 +34,7 @@ public class S_BoardPlayer : MonoBehaviour
 
     private bool _isMove = false;
 
-    private bool _isUsing;
+    private bool _isUsing = false;
 
     private S_Space targetSpace;
 
@@ -44,6 +44,7 @@ public class S_BoardPlayer : MonoBehaviour
 
     private bool _paused;
     private bool _isUsingCamera;
+    [HideInInspector]public bool _itemUsed;
 
     private Animator _animation;
 
@@ -87,6 +88,7 @@ public class S_BoardPlayer : MonoBehaviour
         }
         if (_isTurn == true &&  !S_BoardUIManager.Instance.paused)
         {
+            
             IsTurn();
         }
         if(S_BoardManager.Instance._joining == true)
@@ -113,7 +115,8 @@ public class S_BoardPlayer : MonoBehaviour
 
     public void UseItem(int itemIndex)
     {
-        _isUsing = false;
+        _itemUsed = true;
+        _inputController.IsConfirm = false;
         S_Item item = inventory[itemIndex];
         S_Projectile proj = Instantiate(inventory[itemIndex].itemPrefab).GetComponent<S_Projectile>();
         proj.player = this;
@@ -124,6 +127,7 @@ public class S_BoardPlayer : MonoBehaviour
         {
             inventory.Remove(item);
         }
+        _isUsing = false;
     }
     public void UseTrap()
     {
@@ -177,12 +181,29 @@ public class S_BoardPlayer : MonoBehaviour
     //handles the players turn
     private void IsTurn()
     {
-        //all player turn options go here
-        if (_inputController.IsConfirm && !_isUsing && !_isUsingCamera)
+        if (!_isMove && !_isUsingCamera && !_isUsing)
         {
-            RollDice();
+            if (_inputController.MoveInput != Vector2.zero)
+            {
+                S_BoardManager.Instance.boardCamera.Pan();
+                _isUsingCamera = true;
+            }
         }
-        else if(_inputController.IsBack)
+        else if (_isUsingCamera)
+        {
+            if (_inputController.IsConfirm || _inputController.IsBack)
+            {
+                S_BoardManager.Instance.boardCamera.StopPan();
+                _isUsingCamera = false;
+            }
+        }
+        if (_itemUsed)
+        {
+            _inputController.IsConfirm = false;
+            return;
+        }
+        //all player turn options go here
+        else if (_inputController.IsBack)
         {
             if(!_isMove && !_isUsing && !_isUsingCamera)
             {
@@ -195,20 +216,12 @@ public class S_BoardPlayer : MonoBehaviour
                 _isUsing = false;
             }   
         }
-        else if(!_isMove && !_isUsingCamera && !_isUsing)
+        if(!_isMove && !_isUsingCamera && !_isUsing)
         {
             if(_inputController.MoveInput != Vector2.zero)
             {
                 S_BoardManager.Instance.boardCamera.Pan();
                 _isUsingCamera = true;
-            }
-        }
-        else if(_isUsingCamera)
-        {
-            if(_inputController.IsConfirm || _inputController.IsBack)
-            {
-                S_BoardManager.Instance.boardCamera.StopPan();
-                _isUsingCamera = false;
             }
         }
         
@@ -218,6 +231,11 @@ public class S_BoardPlayer : MonoBehaviour
         }
         else
             _animation.SetBool("walking", false);
+        
+        if (_inputController.IsConfirm && !_isUsing && !_isUsingCamera)
+        {
+            RollDice();
+        }
 
     }
 

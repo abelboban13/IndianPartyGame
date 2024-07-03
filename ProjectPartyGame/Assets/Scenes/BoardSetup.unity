@@ -382,7 +382,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 1, g: 0.972549, b: 0, a: 1}
+    m_SelectedColor: {r: 0, g: 1, b: 0.97520113, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2389,7 +2389,9 @@ MonoBehaviour:
   currentMiniGame: {fileID: 0}
   _minigames:
   - {fileID: 102900000, guid: eecb17719046342478c4974a31f24798, type: 3}
-  _turnLimit: 0
+  - {fileID: 102900000, guid: 7770f6d69bd07834fb6b9e57b0134b9c, type: 3}
+  - {fileID: 102900000, guid: 703428d8f490e6f49b9b1b218e2eafb6, type: 3}
+  _turnLimit: 10
 --- !u!4 &679392492
 Transform:
   m_ObjectHideFlags: 0

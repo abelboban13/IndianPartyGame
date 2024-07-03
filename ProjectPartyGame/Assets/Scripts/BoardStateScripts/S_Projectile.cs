@@ -12,10 +12,13 @@ public class S_Projectile : MonoBehaviour
     private S_Space currentSpace;
     [SerializeField] protected float _speed = 6;
     public Sprite uiImage;
+    [SerializeField] private ParticleSystem _deathEffect;
+    [SerializeField] private AudioClip _deathSound;
 
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         currentSpace = player.currentSpace;
         StartCoroutine(Move());
     }
@@ -65,11 +68,15 @@ public class S_Projectile : MonoBehaviour
         yield return null;
     }
 
-    private void OnValidate()
+
+    private void OnDestroy()
     {
-        if(GetComponent<AudioSource>() == null)
+        player._itemUsed = false;
+        if(_deathEffect != null)
         {
-            gameObject.AddComponent<AudioSource>();
+            var fx = Instantiate(_deathEffect, null);
+            fx.transform.position = transform.position;
         }
+      
     }
 }
