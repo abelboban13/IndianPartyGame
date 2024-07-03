@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MiniGames/JumpRope.unity
     guid: eecb17719046342478c4974a31f24798
+  - enabled: 1
+    path: Assets/Scenes/UI_Scenes/WinScreen.unity
+    guid: 4535a71647da58e4482a5a0ad6f1e323
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d6224890487da2d4cb964c81aa7f72f0, type: 2}

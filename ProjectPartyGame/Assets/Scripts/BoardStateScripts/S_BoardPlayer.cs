@@ -73,8 +73,6 @@ public class S_BoardPlayer : MonoBehaviour
     {
         GameStart();
         AddItem(S_ItemManager.Instance.GetItem(0));
-        numberOfTraps += 1;
-        coins = 5;
         transform.position = new Vector3(transform.position.x - (index+.5f), transform.position.y, transform.position.z);
     }
 
