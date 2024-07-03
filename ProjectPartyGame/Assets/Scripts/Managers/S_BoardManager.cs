@@ -8,6 +8,7 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     [SerializeField] private float _playerSpeed = 5f;
     [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _arrows;
     
     [HideInInspector] public S_BoardCameraController boardCamera;
 
@@ -41,13 +42,17 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
     private bool _playerJoinedEvent = false;
 
     
- 
+    public void ShowArrows()
+    {
+        _arrows.SetActive(!_arrows.activeSelf);
+    }
     
     // Start is called before the first frame update
     void Start()
     {
         // StartGame();
         _playerInputManager = GetComponent<PlayerInputManager>();
+        _arrows.SetActive(false);
     }
 
     // Update is called once per frame

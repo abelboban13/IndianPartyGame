@@ -296,8 +296,10 @@ public class S_BoardPlayer : MonoBehaviour
             if(currentSpace.NextSpaceNum >= 2)
             {
                 Debug.Log("awaiting player input");
+                S_BoardManager.Instance.ShowArrows();
                 yield return new WaitUntil(() => _inputController.MoveInput.x != 0); 
                 targetSpace = currentSpace.GiveNextSpace(_inputController.MoveInput.x > 0 ? 1 :0);//TODO: allow forward y input to return a left choice
+                S_BoardManager.Instance.ShowArrows();
             }
             else
             {
