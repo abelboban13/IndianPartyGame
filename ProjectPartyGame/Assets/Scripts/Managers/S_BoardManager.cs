@@ -110,6 +110,10 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
 
     public void LoadBoard()
     {
+        if(_turnCount > S_GameManager.Instance.turnLimit)
+        {
+            S_GameManager.Instance.EndGame();
+        }
         boardCamera.gameObject.SetActive(true);
         foreach (S_BoardPlayer player in _players)
         {
@@ -171,6 +175,29 @@ public class S_BoardManager : S_Singleton<S_BoardManager>
         boardStartEvent.Raise();
         _players[0].StartTurn();
         boardCamera.FollowPLayer(_players[0]);
+    }
+
+    public int GiveHighestPlayer()
+    {
+        int highest = 0;
+        int highestIndex = 0;
+        foreach(S_BoardPlayer man in _players)
+        {
+            if(man.mangos > highest)
+            {
+                highest = man.mangos;
+                highestIndex = man.index;
+            }
+            if(man.mangos == highest)
+            {
+                if (_players[highestIndex].coins < man.coins)
+                {
+                    highestIndex = man.index;
+                }
+            }
+        }
+      
+        return highestIndex;
     }
 
 

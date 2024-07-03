@@ -59,6 +59,11 @@ public class S_GameManager : S_Singleton<S_GameManager>
         GameType = gameMode;
     }
 
+    public void EndGame()
+    {
+        SceneManager.LoadScene("EndSceen");
+    }
+
     public enum GameMode
     {
         Board,
